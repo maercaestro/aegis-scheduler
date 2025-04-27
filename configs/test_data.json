@@ -1,0 +1,81 @@
+{
+  "tanks": {
+    "T1": {"capacity": 250.0},
+    "T2": {"capacity": 250.0},
+    "T3": {"capacity": 250.0},
+    "T4": {"capacity": 250.0},
+    "T5": {"capacity": 180.0}
+  },
+  "initial_tank_allocation": {
+    "T1": {"crude": "Base", "level": 350.0},
+    "T2": {"crude": "B", "level": 150.0},
+    "T3": {"crude": "C", "level": 150.0},
+    "T4": {"crude": "D", "level": 100.0},
+    "T5": {"crude": "F", "level": 300.0}
+  },
+  "deliveries": [
+    {"day": 1, "crude": "Base", "volume": 400.0},
+    {"day": 1, "crude": "A", "volume": 150.0},
+    {"day": 5, "crude": "E", "volume": 250.0},
+    {"day": 5, "crude": "F", "volume": 320.0},
+    {"day": 8, "crude": "B", "volume": 150.0},
+    {"day": 10, "crude": "E", "volume": 550.0},
+    {"day": 17, "crude": "Base", "volume": 360.0},
+    {"day": 17, "crude": "C", "volume": 200.0},
+    {"day": 19, "crude": "F", "volume": 280.0},
+    {"day": 23, "crude": "D", "volume": 150.0},
+    {"day": 23, "crude": "E", "volume": 100.0}
+  ],
+  "pairing_and_blending": [
+    {
+      "name": "Base",
+      "ratio": {"Base": 1.0},
+      "capacity_bpd": 87000.0
+    },
+    {
+      "name": "A-Base",
+      "ratio": {"A": 0.27, "Base": 0.73},
+      "capacity_bpd": 96000.0
+    },
+    {
+      "name": "B-Base",
+      "ratio": {"B": 0.27, "Base": 0.73},
+      "capacity_bpd": 95000.0
+    },
+    {
+      "name": "B-D",
+      "ratio": {"B": 0.6, "D": 0.4},
+      "capacity_bpd": 96000.0
+    },
+    {
+      "name": "C-Base",
+      "ratio": {"C": 0.27, "Base": 0.73},
+      "capacity_bpd": 95000.0
+    },
+    {
+      "name": "E",
+      "ratio": {"E": 1.0},
+      "capacity_bpd": 95000.0
+    },
+    {
+      "name": "F",
+      "ratio": {"F": 1.0},
+      "capacity_bpd": 95000.0
+    }
+  ],
+  "planning_horizon_days": 31,
+  "look_ahead_days": 7,
+  "smoothing_factor": 0.85,
+  "critical_coverage_days": 8,
+  "final_days_threshold": 10,
+  "absolute_min_daily_processing_kb": 15.0,
+  "min_daily_processing_kb": 50.0,
+  "processing_increment_kb": 5.0,
+  "daily_capacity_kb": 100.0,
+  "max_free_voyages": 5,
+  "vessel_penalty": 600,
+  "slack_penalty": 10,
+  "lead_time": 5,
+  "vessel_capacity_1_2_grades": 700,
+  "vessel_capacity_3_grades": 650
+}

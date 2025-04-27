@@ -1,0 +1,179 @@
+{
+  "status": "Optimal",
+  "objective_value": 5.0,
+  "voyages_used": 5,
+  "slack_voyages": 0,
+  "voyages": [
+    {
+      "voyage_id": 0,
+      "departure_day": 17,
+      "approx_arrival": 24.0,
+      "total_load": 560,
+      "grades": [
+        "Base",
+        "C"
+      ]
+    },
+    {
+      "voyage_id": 1,
+      "departure_day": 8,
+      "approx_arrival": 15.0,
+      "total_load": 150,
+      "grades": [
+        "B"
+      ]
+    },
+    {
+      "voyage_id": 5,
+      "departure_day": 23,
+      "approx_arrival": 31.5,
+      "total_load": 450,
+      "grades": [
+        "D",
+        "E"
+      ]
+    },
+    {
+      "voyage_id": 6,
+      "departure_day": 19,
+      "approx_arrival": 27.0,
+      "total_load": 560,
+      "grades": [
+        "F"
+      ]
+    },
+    {
+      "voyage_id": 10,
+      "departure_day": 1,
+      "approx_arrival": 8.0,
+      "total_load": 550,
+      "grades": [
+        "A",
+        "Base"
+      ]
+    }
+  ],
+  "parcels": [
+    {
+      "parcel_id": "P_Base_2",
+      "voyage_id": 0,
+      "volume": 360,
+      "loading_window_start": 17,
+      "loading_window_end": 19,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "PM",
+      "crude": "Base"
+    },
+    {
+      "parcel_id": "P_C",
+      "voyage_id": 0,
+      "volume": 200,
+      "loading_window_start": 17,
+      "loading_window_end": 19,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "PM",
+      "crude": "C"
+    },
+    {
+      "parcel_id": "P_B",
+      "voyage_id": 1,
+      "volume": 150,
+      "loading_window_start": 8,
+      "loading_window_end": 10,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "PM",
+      "crude": "B"
+    },
+    {
+      "parcel_id": "P_D",
+      "voyage_id": 5,
+      "volume": 150,
+      "loading_window_start": 23,
+      "loading_window_end": 24,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "Sabah",
+      "crude": "D"
+    },
+    {
+      "parcel_id": "P_E",
+      "voyage_id": 5,
+      "volume": 100,
+      "loading_window_start": 23,
+      "loading_window_end": 24,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "Sabah",
+      "crude": "E"
+    },
+    {
+      "parcel_id": "P_E",
+      "voyage_id": 5,
+      "volume": 100,
+      "loading_window_start": 23,
+      "loading_window_end": 24,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "Sabah",
+      "crude": "E"
+    },
+    {
+      "parcel_id": "P_E",
+      "voyage_id": 5,
+      "volume": 100,
+      "loading_window_start": 23,
+      "loading_window_end": 24,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "Sabah",
+      "crude": "E"
+    },
+    {
+      "parcel_id": "P_F",
+      "voyage_id": 6,
+      "volume": 280,
+      "loading_window_start": 19,
+      "loading_window_end": 22,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "Sarawak",
+      "crude": "F"
+    },
+    {
+      "parcel_id": "P_F",
+      "voyage_id": 6,
+      "volume": 280,
+      "loading_window_start": 19,
+      "loading_window_end": 22,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "Sarawak",
+      "crude": "F"
+    },
+    {
+      "parcel_id": "P_Base_1",
+      "voyage_id": 10,
+      "volume": 400,
+      "loading_window_start": 1,
+      "loading_window_end": 3,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "PM",
+      "crude": "Base"
+    },
+    {
+      "parcel_id": "P_A",
+      "voyage_id": 10,
+      "volume": 150,
+      "loading_window_start": 1,
+      "loading_window_end": 3,
+      "slack_early": 0.0,
+      "slack_late": 0.0,
+      "origin": "PM",
+      "crude": "A"
+    }
+  ]
+}

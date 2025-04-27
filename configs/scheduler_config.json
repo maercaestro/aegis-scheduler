@@ -1,0 +1,101 @@
+{
+  "planning_horizon_days": 31,
+  "scheduler_params": {
+    "planning_horizon": 31,
+    "lookahead": 7,
+    "smoothing": 0.85,
+    "critical": 8,
+    "final_days": 10,
+    "absolute_min": 15.0,
+    "min_daily": 50.0,
+    "increment": 5.0,
+    "daily_capacity": 100.0
+  },
+  
+  "vessel_params": {
+    "max_free_voyages": 5,
+    "vessel_penalty": 600,
+    "slack_penalty": 10,
+    "lead_time": 5,
+    "vessel_capacity_1_2_grades": 700,
+    "vessel_capacity_3_grades": 650
+  },
+  
+  "optimizer_params": {
+    "min_daily_processed": 50.0,
+    "max_daily_processed": 100.0,
+    "increment": 5.0,
+    "smoothing_factor": 0.9,
+    "max_zero_days": 3,
+    "penalize_zero_days": true,
+    "zero_day_penalty": 50.0,
+    "use_crude_substitution": true,
+    "optimization_iterations": 100
+  },
+  
+  "tanks": {
+    "T1": {"capacity": 250.0},
+    "T2": {"capacity": 250.0},
+    "T3": {"capacity": 250.0},
+    "T4": {"capacity": 250.0},
+    "T5": {"capacity": 250.0}
+  },
+  
+  "initial_tank_allocation": {
+    "T1": {"crude": "Base", "level": 350.0},
+    "T2": {"crude": "B", "level": 150.0},
+    "T3": {"crude": "C", "level": 150.0},
+    "T4": {"crude": "D", "level": 100.0},
+    "T5": {"crude": "F", "level": 300.0}
+  },
+  
+  "max_inventory_kb": 1180,
+  
+  "pairing_and_blending": [
+    {
+      "name": "Base",
+      "ratio": {"Base": 1.0},
+      "capacity_bpd": 87000.0
+    },
+    {
+      "name": "A-Base",
+      "ratio": {"A": 0.27, "Base": 0.73},
+      "capacity_bpd": 96000.0
+    },
+    {
+      "name": "B-Base",
+      "ratio": {"B": 0.27, "Base": 0.73},
+      "capacity_bpd": 95000.0
+    },
+    {
+      "name": "B-D",
+      "ratio": {"B": 0.6, "D": 0.4},
+      "capacity_bpd": 96000.0
+    },
+    {
+      "name": "C-Base",
+      "ratio": {"C": 0.27, "Base": 0.73},
+      "capacity_bpd": 95000.0
+    },
+    {
+      "name": "E",
+      "ratio": {"E": 1.0},
+      "capacity_bpd": 95000.0
+    },
+    {
+      "name": "F",
+      "ratio": {"F": 1.0},
+      "capacity_bpd": 95000.0
+    }
+  ],
+  
+  "margins_usd_per_bbl": {
+    "Base": 15.85,
+    "A": 18.47,
+    "B": 15.71,
+    "C": 19.24,
+    "D": 11.19,
+    "E": 9.98,
+    "F": 9.97
+  }
+}

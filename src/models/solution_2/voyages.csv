@@ -1,0 +1,6 @@
+voyage_id,departure_day,approx_arrival,total_load,grades
+0,19,26.0,560,"['Base', 'C']"
+3,7,15.5,570,"['E', 'F']"
+5,23,31.5,530,"['D', 'E', 'F']"
+9,3,10.0,550,"['A', 'Base']"
+10,10,17.0,700,"['B', 'E']"

@@ -1,0 +1,19 @@
+{
+  "tanks": {
+    "T1": {"capacity": 250.0},
+    "T2": {"capacity": 250.0},
+    "T3": {"capacity": 250.0},
+    "T4": {"capacity": 250.0},
+    "T5": {"capacity": 250.0}
+
+  },
+  "initial_tank_allocation": {
+    "T1": {"crude": "Base", "level": 350.0},
+    "T2": {"crude": "B", "level": 150.0},
+    "T3": {"crude": "C", "level": 150.0},
+    "T4": {"crude": "D", "level": 100.0},
+    "T5": {"crude": "F", "level": 300.0}
+
+  },
+  "max_inventory_kb": 1180
+}

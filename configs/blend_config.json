@@ -1,0 +1,48 @@
+{
+  "pairing_and_blending": [
+    {
+      "name": "Base",
+      "ratio": {"Base": 1.0},
+      "capacity_bpd": 87000.0
+    },
+    {
+      "name": "A-Base",
+      "ratio": {"A": 0.27, "Base": 0.73},
+      "capacity_bpd": 96000.0
+    },
+    {
+      "name": "B-Base",
+      "ratio": {"B": 0.27, "Base": 0.73},
+      "capacity_bpd": 95000.0
+    },
+    {
+      "name": "B-D",
+      "ratio": {"B": 0.6, "D": 0.4},
+      "capacity_bpd": 96000.0
+    },
+    {
+      "name": "C-Base",
+      "ratio": {"C": 0.27, "Base": 0.73},
+      "capacity_bpd": 95000.0
+    },
+    {
+      "name": "E",
+      "ratio": {"E": 1.0},
+      "capacity_bpd": 95000.0
+    },
+    {
+      "name": "F",
+      "ratio": {"F": 1.0},
+      "capacity_bpd": 95000.0
+    }
+  ],
+  "margins_usd_per_bbl": {
+    "Base": 15.85,
+    "A": 18.47,
+    "B": 15.71,
+    "C": 19.24,
+    "D": 11.19,
+    "E": 9.98,
+    "F": 9.97
+  }
+}
