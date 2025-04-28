@@ -1,551 +1,1049 @@
-2025-04-28 12:08:07,750 - INFO - Running scheduler with config: configs/scheduler_config.json
-2025-04-28 12:08:07,750 - INFO - Output directory: results
-2025-04-28 12:08:07,750 - INFO - Vessel optimization: True
-2025-04-28 12:08:07,750 - INFO - Starting scheduler with config: configs/scheduler_config.json
-2025-04-28 12:08:07,751 - INFO - Loading data before running scheduler
-2025-04-28 12:08:07,751 - INFO - Loading data...
-2025-04-28 12:08:07,751 - WARNING - Tank T1 allocation exceeds capacity: requested 350.0 kb of Base, but capacity is 250.0 kb. Excess 100.0 kb split into deliveries for days 1-2.
-2025-04-28 12:08:07,751 - WARNING - Tank T5 allocation exceeds capacity: requested 300.0 kb of F, but capacity is 250.0 kb. Excess 50.0 kb split into deliveries for days 1-2.
-2025-04-28 12:08:07,751 - INFO - Added 4 excess deliveries for days 1-2
-2025-04-28 12:08:07,751 - INFO - Loaded 5 tanks
-2025-04-28 12:08:07,751 - INFO - Loaded inventory with 5 crude types
-2025-04-28 12:08:07,751 - INFO - Loaded 15 current deliveries and 15 future deliveries
-2025-04-28 12:08:07,751 - INFO - Loaded 7 blend recipes
-2025-04-28 12:08:07,751 - INFO - Loaded configuration parameters
-2025-04-28 12:08:43,449 - INFO - ===== Starting daily scheduling process =====
-2025-04-28 12:08:43,449 - INFO - Planning horizon: 31 days
-2025-04-28 12:08:43,449 - INFO - Initial inventory: {'Base': 250.0, 'B': 150.0, 'C': 150.0, 'D': 100.0, 'F': 250.0}
-2025-04-28 12:08:43,449 - INFO - ==== Processing Day 1 ====
-2025-04-28 12:08:43,449 - INFO - Day 1: No upcoming deliveries in next 7 days
-2025-04-28 12:08:43,449 - INFO - Day 1: Current inventory levels:
-2025-04-28 12:08:43,449 - INFO -   - Base: 250.00 kb
-2025-04-28 12:08:43,449 - INFO -   - B: 150.00 kb
-2025-04-28 12:08:43,449 - INFO -   - C: 150.00 kb
-2025-04-28 12:08:43,449 - INFO -   - D: 100.00 kb
-2025-04-28 12:08:43,449 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,449 - INFO - Day 1: Selecting processing strategy...
-2025-04-28 12:08:43,450 - INFO - Day 1: Selected strategy 'standard' with blend recipe 3 at rate 96.00 kb
-2025-04-28 12:08:43,450 - INFO - Day 1: Blend recipe ratios: {'B': 0.6, 'D': 0.4}
-2025-04-28 12:08:43,450 - INFO - Day 1: Checking availability of B: Need 57.60 kb (ratio 0.60)
-2025-04-28 12:08:43,450 - INFO - Day 1: Checking availability of D: Need 38.40 kb (ratio 0.40)
-2025-04-28 12:08:43,450 - INFO - Day 1: Processing at rate 96.00 kb
-2025-04-28 12:08:43,450 - INFO - Day 1: Using 57.60 kb of B
-2025-04-28 12:08:43,450 - INFO - Day 1: Using 38.40 kb of D
-2025-04-28 12:08:43,450 - INFO - Day 1: Updated inventory levels after processing:
-2025-04-28 12:08:43,450 - INFO -   - Base: 250.00 kb
-2025-04-28 12:08:43,450 - INFO -   - B: 92.40 kb
-2025-04-28 12:08:43,450 - INFO -   - C: 150.00 kb
-2025-04-28 12:08:43,450 - INFO -   - D: 61.60 kb
-2025-04-28 12:08:43,450 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,450 - INFO - Day 1: Tank levels after deliveries:
-2025-04-28 12:08:43,450 - INFO -   - Tank T1 (Base): 250.00/250.00 kb
-2025-04-28 12:08:43,450 - INFO -   - Tank T2 (B): 150.00/250.00 kb
-2025-04-28 12:08:43,450 - INFO -   - Tank T3 (C): 150.00/250.00 kb
-2025-04-28 12:08:43,450 - INFO -   - Tank T4 (D): 100.00/250.00 kb
-2025-04-28 12:08:43,450 - INFO -   - Tank T5 (F): 250.00/250.00 kb
-2025-04-28 12:08:43,450 - INFO - Day 1: Updated inventory levels after all operations:
-2025-04-28 12:08:43,450 - INFO -   - Base: 250.00 kb
-2025-04-28 12:08:43,450 - INFO -   - B: 92.40 kb
-2025-04-28 12:08:43,450 - INFO -   - C: 150.00 kb
-2025-04-28 12:08:43,450 - INFO -   - D: 61.60 kb
-2025-04-28 12:08:43,450 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,450 - INFO - Day 1: Processing complete
-2025-04-28 12:08:43,450 - INFO - ==== Processing Day 2 ====
-2025-04-28 12:08:43,450 - INFO - Day 2: No upcoming deliveries in next 7 days
-2025-04-28 12:08:43,450 - INFO - Day 2: Current inventory levels:
-2025-04-28 12:08:43,451 - INFO -   - Base: 250.00 kb
-2025-04-28 12:08:43,451 - INFO -   - B: 92.40 kb
-2025-04-28 12:08:43,451 - INFO -   - C: 150.00 kb
-2025-04-28 12:08:43,451 - INFO -   - D: 61.60 kb
-2025-04-28 12:08:43,451 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,451 - INFO - Day 2: Selecting processing strategy...
-2025-04-28 12:08:43,451 - INFO - Day 2: Selected strategy 'standard' with blend recipe 3 at rate 96.00 kb
-2025-04-28 12:08:43,451 - INFO - Day 2: Blend recipe ratios: {'B': 0.6, 'D': 0.4}
-2025-04-28 12:08:43,451 - INFO - Day 2: Checking availability of B: Need 57.60 kb (ratio 0.60)
-2025-04-28 12:08:43,451 - INFO - Day 2: Checking availability of D: Need 38.40 kb (ratio 0.40)
-2025-04-28 12:08:43,451 - INFO - Day 2: Processing at rate 96.00 kb
-2025-04-28 12:08:43,451 - INFO - Day 2: Using 57.60 kb of B
-2025-04-28 12:08:43,451 - INFO - Day 2: Using 38.40 kb of D
-2025-04-28 12:08:43,451 - INFO - Day 2: Updated inventory levels after processing:
-2025-04-28 12:08:43,451 - INFO -   - Base: 250.00 kb
-2025-04-28 12:08:43,451 - INFO -   - B: 34.80 kb
-2025-04-28 12:08:43,451 - INFO -   - C: 150.00 kb
-2025-04-28 12:08:43,451 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,451 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,451 - INFO - Day 2: Tank levels after deliveries:
-2025-04-28 12:08:43,451 - INFO -   - Tank T1 (Base): 250.00/250.00 kb
-2025-04-28 12:08:43,451 - INFO -   - Tank T2 (B): 150.00/250.00 kb
-2025-04-28 12:08:43,451 - INFO -   - Tank T3 (C): 150.00/250.00 kb
-2025-04-28 12:08:43,451 - INFO -   - Tank T4 (D): 100.00/250.00 kb
-2025-04-28 12:08:43,451 - INFO -   - Tank T5 (F): 250.00/250.00 kb
-2025-04-28 12:08:43,451 - INFO - Day 2: Updated inventory levels after all operations:
-2025-04-28 12:08:43,451 - INFO -   - Base: 250.00 kb
-2025-04-28 12:08:43,451 - INFO -   - B: 34.80 kb
-2025-04-28 12:08:43,451 - INFO -   - C: 150.00 kb
-2025-04-28 12:08:43,451 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,451 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,451 - INFO - Day 2: Processing complete
-2025-04-28 12:08:43,451 - INFO - ==== Processing Day 3 ====
-2025-04-28 12:08:43,452 - INFO - Day 3: No upcoming deliveries in next 7 days
-2025-04-28 12:08:43,452 - INFO - Day 3: Current inventory levels:
-2025-04-28 12:08:43,452 - INFO -   - Base: 250.00 kb
-2025-04-28 12:08:43,452 - INFO -   - B: 34.80 kb
-2025-04-28 12:08:43,452 - INFO -   - C: 150.00 kb
-2025-04-28 12:08:43,452 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,452 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,452 - INFO - Day 3: Selecting processing strategy...
-2025-04-28 12:08:43,452 - INFO - Day 3: Selected strategy 'standard' with blend recipe 2 at rate 95.00 kb
-2025-04-28 12:08:43,452 - INFO - Day 3: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
-2025-04-28 12:08:43,452 - INFO - Day 3: Checking availability of B: Need 25.65 kb (ratio 0.27)
-2025-04-28 12:08:43,452 - INFO - Day 3: Checking availability of Base: Need 69.35 kb (ratio 0.73)
-2025-04-28 12:08:43,452 - INFO - Day 3: Processing at rate 95.00 kb
-2025-04-28 12:08:43,452 - INFO - Day 3: Using 25.65 kb of B
-2025-04-28 12:08:43,452 - INFO - Day 3: Using 69.35 kb of Base
-2025-04-28 12:08:43,452 - INFO - Day 3: Updated inventory levels after processing:
-2025-04-28 12:08:43,452 - INFO -   - Base: 180.65 kb
-2025-04-28 12:08:43,452 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,452 - INFO -   - C: 150.00 kb
-2025-04-28 12:08:43,452 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,452 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,452 - INFO - Day 3: Tank levels after deliveries:
-2025-04-28 12:08:43,452 - INFO -   - Tank T1 (Base): 250.00/250.00 kb
-2025-04-28 12:08:43,452 - INFO -   - Tank T2 (B): 150.00/250.00 kb
-2025-04-28 12:08:43,452 - INFO -   - Tank T3 (C): 150.00/250.00 kb
-2025-04-28 12:08:43,452 - INFO -   - Tank T4 (D): 100.00/250.00 kb
-2025-04-28 12:08:43,452 - INFO -   - Tank T5 (F): 250.00/250.00 kb
-2025-04-28 12:08:43,452 - INFO - Day 3: Updated inventory levels after all operations:
-2025-04-28 12:08:43,452 - INFO -   - Base: 180.65 kb
-2025-04-28 12:08:43,452 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,452 - INFO -   - C: 150.00 kb
-2025-04-28 12:08:43,452 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,452 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,453 - INFO - Day 3: Processing complete
-2025-04-28 12:08:43,453 - INFO - ==== Processing Day 4 ====
-2025-04-28 12:08:43,453 - INFO - Day 4: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,453 - INFO -   - Day 10.0: Base = 400.00 kb
-2025-04-28 12:08:43,453 - INFO -   - Day 10.0: A = 150.00 kb
-2025-04-28 12:08:43,453 - INFO - Day 4: Current inventory levels:
-2025-04-28 12:08:43,453 - INFO -   - Base: 180.65 kb
-2025-04-28 12:08:43,453 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,453 - INFO -   - C: 150.00 kb
-2025-04-28 12:08:43,453 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,453 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,453 - INFO - Day 4: Selecting processing strategy...
-2025-04-28 12:08:43,453 - INFO - Day 4: Selected strategy 'standard' with blend recipe 4 at rate 95.00 kb
-2025-04-28 12:08:43,453 - INFO - Day 4: Blend recipe ratios: {'C': 0.27, 'Base': 0.73}
-2025-04-28 12:08:43,453 - INFO - Day 4: Checking availability of C: Need 25.65 kb (ratio 0.27)
-2025-04-28 12:08:43,453 - INFO - Day 4: Checking availability of Base: Need 69.35 kb (ratio 0.73)
-2025-04-28 12:08:43,453 - INFO - Day 4: Processing at rate 95.00 kb
-2025-04-28 12:08:43,453 - INFO - Day 4: Using 25.65 kb of C
-2025-04-28 12:08:43,453 - INFO - Day 4: Using 69.35 kb of Base
-2025-04-28 12:08:43,453 - INFO - Day 4: Updated inventory levels after processing:
-2025-04-28 12:08:43,453 - INFO -   - Base: 111.30 kb
-2025-04-28 12:08:43,453 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,453 - INFO -   - C: 124.35 kb
-2025-04-28 12:08:43,453 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,453 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,453 - INFO - Day 4: Tank levels after deliveries:
-2025-04-28 12:08:43,453 - INFO -   - Tank T1 (Base): 250.00/250.00 kb
-2025-04-28 12:08:43,453 - INFO -   - Tank T2 (B): 150.00/250.00 kb
-2025-04-28 12:08:43,453 - INFO -   - Tank T3 (C): 150.00/250.00 kb
-2025-04-28 12:08:43,453 - INFO -   - Tank T4 (D): 100.00/250.00 kb
-2025-04-28 12:08:43,453 - INFO -   - Tank T5 (F): 250.00/250.00 kb
-2025-04-28 12:08:43,453 - INFO - Day 4: Updated inventory levels after all operations:
-2025-04-28 12:08:43,454 - INFO -   - Base: 111.30 kb
-2025-04-28 12:08:43,454 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,454 - INFO -   - C: 124.35 kb
-2025-04-28 12:08:43,454 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,454 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,454 - INFO - Day 4: Processing complete
-2025-04-28 12:08:43,454 - INFO - ==== Processing Day 5 ====
-2025-04-28 12:08:43,454 - INFO - Day 5: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,454 - INFO -   - Day 10.0: Base = 400.00 kb
-2025-04-28 12:08:43,454 - INFO -   - Day 10.0: A = 150.00 kb
-2025-04-28 12:08:43,454 - INFO - Day 5: Current inventory levels:
-2025-04-28 12:08:43,454 - INFO -   - Base: 111.30 kb
-2025-04-28 12:08:43,454 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,454 - INFO -   - C: 124.35 kb
-2025-04-28 12:08:43,454 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,454 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,454 - INFO - Day 5: Selecting processing strategy...
-2025-04-28 12:08:43,454 - INFO - Day 5: Selected strategy 'standard' with blend recipe 4 at rate 95.00 kb
-2025-04-28 12:08:43,454 - INFO - Day 5: Blend recipe ratios: {'C': 0.27, 'Base': 0.73}
-2025-04-28 12:08:43,454 - INFO - Day 5: Checking availability of C: Need 25.65 kb (ratio 0.27)
-2025-04-28 12:08:43,454 - INFO - Day 5: Checking availability of Base: Need 69.35 kb (ratio 0.73)
-2025-04-28 12:08:43,454 - INFO - Day 5: Processing at rate 95.00 kb
-2025-04-28 12:08:43,454 - INFO - Day 5: Using 25.65 kb of C
-2025-04-28 12:08:43,454 - INFO - Day 5: Using 69.35 kb of Base
-2025-04-28 12:08:43,454 - INFO - Day 5: Updated inventory levels after processing:
-2025-04-28 12:08:43,454 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,454 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,454 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,454 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,455 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,455 - INFO - Day 5: Tank levels after deliveries:
-2025-04-28 12:08:43,455 - INFO -   - Tank T1 (Base): 250.00/250.00 kb
-2025-04-28 12:08:43,455 - INFO -   - Tank T2 (B): 150.00/250.00 kb
-2025-04-28 12:08:43,455 - INFO -   - Tank T3 (C): 150.00/250.00 kb
-2025-04-28 12:08:43,455 - INFO -   - Tank T4 (D): 100.00/250.00 kb
-2025-04-28 12:08:43,455 - INFO -   - Tank T5 (F): 250.00/250.00 kb
-2025-04-28 12:08:43,455 - INFO - Day 5: Updated inventory levels after all operations:
-2025-04-28 12:08:43,455 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,455 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,455 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,455 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,455 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,455 - INFO - Day 5: Processing complete
-2025-04-28 12:08:43,455 - INFO - ==== Processing Day 6 ====
-2025-04-28 12:08:43,455 - INFO - Day 6: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,455 - INFO -   - Day 10.0: Base = 400.00 kb
-2025-04-28 12:08:43,455 - INFO -   - Day 10.0: A = 150.00 kb
-2025-04-28 12:08:43,455 - INFO - Day 6: Current inventory levels:
-2025-04-28 12:08:43,455 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,455 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,455 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,455 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,455 - INFO -   - F: 250.00 kb
-2025-04-28 12:08:43,455 - INFO - Day 6: Selecting processing strategy...
-2025-04-28 12:08:43,455 - INFO - Day 6: Selected strategy 'standard' with blend recipe 6 at rate 95.00 kb
-2025-04-28 12:08:43,456 - INFO - Day 6: Blend recipe ratios: {'F': 1.0}
-2025-04-28 12:08:43,456 - INFO - Day 6: Checking availability of F: Need 95.00 kb (ratio 1.00)
-2025-04-28 12:08:43,456 - INFO - Day 6: Processing at rate 95.00 kb
-2025-04-28 12:08:43,456 - INFO - Day 6: Using 95.00 kb of F
-2025-04-28 12:08:43,456 - INFO - Day 6: Updated inventory levels after processing:
-2025-04-28 12:08:43,456 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,456 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,456 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,456 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,456 - INFO -   - F: 155.00 kb
-2025-04-28 12:08:43,456 - INFO - Day 6: Tank levels after deliveries:
-2025-04-28 12:08:43,456 - INFO -   - Tank T1 (Base): 250.00/250.00 kb
-2025-04-28 12:08:43,456 - INFO -   - Tank T2 (B): 150.00/250.00 kb
-2025-04-28 12:08:43,456 - INFO -   - Tank T3 (C): 150.00/250.00 kb
-2025-04-28 12:08:43,456 - INFO -   - Tank T4 (D): 100.00/250.00 kb
-2025-04-28 12:08:43,456 - INFO -   - Tank T5 (F): 250.00/250.00 kb
-2025-04-28 12:08:43,456 - INFO - Day 6: Updated inventory levels after all operations:
-2025-04-28 12:08:43,456 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,456 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,456 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,456 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,456 - INFO -   - F: 155.00 kb
-2025-04-28 12:08:43,456 - INFO - Day 6: Processing complete
-2025-04-28 12:08:43,456 - INFO - ==== Processing Day 7 ====
-2025-04-28 12:08:43,456 - INFO - Day 7: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,456 - INFO -   - Day 10.0: Base = 400.00 kb
-2025-04-28 12:08:43,456 - INFO -   - Day 10.0: A = 150.00 kb
-2025-04-28 12:08:43,456 - INFO - Day 7: Current inventory levels:
-2025-04-28 12:08:43,456 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,456 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,456 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,456 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,456 - INFO -   - F: 155.00 kb
-2025-04-28 12:08:43,457 - INFO - Day 7: Selecting processing strategy...
-2025-04-28 12:08:43,457 - INFO - Day 7: Selected strategy 'standard' with blend recipe 6 at rate 95.00 kb
-2025-04-28 12:08:43,457 - INFO - Day 7: Blend recipe ratios: {'F': 1.0}
-2025-04-28 12:08:43,457 - INFO - Day 7: Checking availability of F: Need 95.00 kb (ratio 1.00)
-2025-04-28 12:08:43,457 - INFO - Day 7: Processing at rate 95.00 kb
-2025-04-28 12:08:43,457 - INFO - Day 7: Using 95.00 kb of F
-2025-04-28 12:08:43,457 - INFO - Day 7: Updated inventory levels after processing:
-2025-04-28 12:08:43,457 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,457 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,457 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,457 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,457 - INFO -   - F: 60.00 kb
-2025-04-28 12:08:43,457 - INFO - Day 7: Tank levels after deliveries:
-2025-04-28 12:08:43,457 - INFO -   - Tank T1 (Base): 250.00/250.00 kb
-2025-04-28 12:08:43,457 - INFO -   - Tank T2 (B): 150.00/250.00 kb
-2025-04-28 12:08:43,457 - INFO -   - Tank T3 (C): 150.00/250.00 kb
-2025-04-28 12:08:43,457 - INFO -   - Tank T4 (D): 100.00/250.00 kb
-2025-04-28 12:08:43,457 - INFO -   - Tank T5 (F): 250.00/250.00 kb
-2025-04-28 12:08:43,457 - INFO - Day 7: Updated inventory levels after all operations:
-2025-04-28 12:08:43,457 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,457 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,458 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,458 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,458 - INFO -   - F: 60.00 kb
-2025-04-28 12:08:43,458 - INFO - Day 7: Processing complete
-2025-04-28 12:08:43,458 - INFO - ==== Processing Day 8 ====
-2025-04-28 12:08:43,458 - INFO - Day 8: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,458 - INFO -   - Day 10.0: Base = 400.00 kb
-2025-04-28 12:08:43,458 - INFO -   - Day 10.0: A = 150.00 kb
-2025-04-28 12:08:43,458 - INFO - Day 8: Current inventory levels:
-2025-04-28 12:08:43,458 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,458 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,458 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,458 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,458 - INFO -   - F: 60.00 kb
-2025-04-28 12:08:43,458 - INFO - Day 8: Selecting processing strategy...
-2025-04-28 12:08:43,458 - INFO - Day 8: Selected strategy 'standard' with blend recipe 6 at rate 60.00 kb
-2025-04-28 12:08:43,458 - INFO - Day 8: Blend recipe ratios: {'F': 1.0}
-2025-04-28 12:08:43,458 - INFO - Day 8: Checking availability of F: Need 60.00 kb (ratio 1.00)
-2025-04-28 12:08:43,458 - INFO - Day 8: Processing at rate 60.00 kb
-2025-04-28 12:08:43,458 - INFO - Day 8: Using 60.00 kb of F
-2025-04-28 12:08:43,458 - INFO - Day 8: Updated inventory levels after processing:
-2025-04-28 12:08:43,458 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,458 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,458 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,458 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,458 - INFO - Day 8: Tank levels after deliveries:
-2025-04-28 12:08:43,458 - INFO -   - Tank T1 (Base): 250.00/250.00 kb
-2025-04-28 12:08:43,458 - INFO -   - Tank T2 (B): 150.00/250.00 kb
-2025-04-28 12:08:43,458 - INFO -   - Tank T3 (C): 150.00/250.00 kb
-2025-04-28 12:08:43,458 - INFO -   - Tank T4 (D): 100.00/250.00 kb
-2025-04-28 12:08:43,458 - INFO -   - Tank T5 (F): 250.00/250.00 kb
-2025-04-28 12:08:43,459 - INFO - Day 8: Updated inventory levels after all operations:
-2025-04-28 12:08:43,459 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,459 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,459 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,459 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,459 - INFO - Day 8: Processing complete
-2025-04-28 12:08:43,459 - INFO - ==== Processing Day 9 ====
-2025-04-28 12:08:43,459 - INFO - Day 9: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,459 - INFO -   - Day 10.0: Base = 400.00 kb
-2025-04-28 12:08:43,459 - INFO -   - Day 10.0: A = 150.00 kb
-2025-04-28 12:08:43,459 - INFO - Day 9: Current inventory levels:
-2025-04-28 12:08:43,459 - INFO -   - Base: 41.95 kb
-2025-04-28 12:08:43,459 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,459 - INFO -   - C: 98.70 kb
-2025-04-28 12:08:43,459 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,459 - INFO - Day 9: Selecting processing strategy...
-2025-04-28 12:08:43,459 - INFO - Day 9: Selected strategy 'standard' with blend recipe 4 at rate 57.47 kb
-2025-04-28 12:08:43,459 - INFO - Day 9: Blend recipe ratios: {'C': 0.27, 'Base': 0.73}
-2025-04-28 12:08:43,459 - INFO - Day 9: Checking availability of C: Need 15.52 kb (ratio 0.27)
-2025-04-28 12:08:43,459 - INFO - Day 9: Checking availability of Base: Need 41.95 kb (ratio 0.73)
-2025-04-28 12:08:43,459 - INFO - Day 9: Processing at rate 57.47 kb
-2025-04-28 12:08:43,459 - INFO - Day 9: Using 15.52 kb of C
-2025-04-28 12:08:43,459 - INFO - Day 9: Using 41.95 kb of Base
-2025-04-28 12:08:43,459 - INFO - Day 9: Updated inventory levels after processing:
-2025-04-28 12:08:43,459 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,459 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,459 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,459 - INFO - Day 9: Tank levels after deliveries:
-2025-04-28 12:08:43,459 - INFO -   - Tank T1 (Base): 250.00/250.00 kb
-2025-04-28 12:08:43,459 - INFO -   - Tank T2 (B): 150.00/250.00 kb
-2025-04-28 12:08:43,460 - INFO -   - Tank T3 (C): 150.00/250.00 kb
-2025-04-28 12:08:43,460 - INFO -   - Tank T4 (D): 100.00/250.00 kb
-2025-04-28 12:08:43,460 - INFO -   - Tank T5 (F): 250.00/250.00 kb
-2025-04-28 12:08:43,460 - INFO - Day 9: Updated inventory levels after all operations:
-2025-04-28 12:08:43,460 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,460 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,460 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,460 - INFO - Day 9: Processing complete
-2025-04-28 12:08:43,460 - INFO - ==== Processing Day 10 ====
-2025-04-28 12:08:43,460 - INFO - Day 10: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,460 - INFO -   - Day 10.0: Base = 400.00 kb
-2025-04-28 12:08:43,460 - INFO -   - Day 10.0: A = 150.00 kb
-2025-04-28 12:08:43,460 - INFO - Day 10: Current inventory levels:
-2025-04-28 12:08:43,460 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,460 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,460 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,460 - INFO - Day 10: Selecting processing strategy...
-2025-04-28 12:08:43,460 - INFO - Day 10: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,460 - INFO - ==== Processing Day 11 ====
-2025-04-28 12:08:43,460 - INFO - Day 11: Upcoming deliveries in next 7 days: 1
-2025-04-28 12:08:43,460 - INFO -   - Day 17.0: B = 150.00 kb
-2025-04-28 12:08:43,460 - INFO - Day 11: Current inventory levels:
-2025-04-28 12:08:43,460 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,460 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,460 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,460 - INFO - Day 11: Selecting processing strategy...
-2025-04-28 12:08:43,460 - INFO - Day 11: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,460 - INFO - ==== Processing Day 12 ====
-2025-04-28 12:08:43,460 - INFO - Day 12: Upcoming deliveries in next 7 days: 1
-2025-04-28 12:08:43,460 - INFO -   - Day 17.0: B = 150.00 kb
-2025-04-28 12:08:43,460 - INFO - Day 12: Current inventory levels:
-2025-04-28 12:08:43,460 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,460 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,460 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,461 - INFO - Day 12: Selecting processing strategy...
-2025-04-28 12:08:43,461 - INFO - Day 12: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,461 - INFO - ==== Processing Day 13 ====
-2025-04-28 12:08:43,461 - INFO - Day 13: Upcoming deliveries in next 7 days: 1
-2025-04-28 12:08:43,461 - INFO -   - Day 17.0: B = 150.00 kb
-2025-04-28 12:08:43,461 - INFO - Day 13: Current inventory levels:
-2025-04-28 12:08:43,461 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,461 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,461 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,461 - INFO - Day 13: Selecting processing strategy...
-2025-04-28 12:08:43,461 - INFO - Day 13: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,461 - INFO - ==== Processing Day 14 ====
-2025-04-28 12:08:43,461 - INFO - Day 14: Upcoming deliveries in next 7 days: 1
-2025-04-28 12:08:43,461 - INFO -   - Day 17.0: B = 150.00 kb
-2025-04-28 12:08:43,461 - INFO - Day 14: Current inventory levels:
-2025-04-28 12:08:43,461 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,461 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,461 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,461 - INFO - Day 14: Selecting processing strategy...
-2025-04-28 12:08:43,461 - INFO - Day 14: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,461 - INFO - ==== Processing Day 15 ====
-2025-04-28 12:08:43,461 - INFO - Day 15: Upcoming deliveries in next 7 days: 1
-2025-04-28 12:08:43,461 - INFO -   - Day 17.0: B = 150.00 kb
-2025-04-28 12:08:43,461 - INFO - Day 15: Current inventory levels:
-2025-04-28 12:08:43,461 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,461 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,461 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,461 - INFO - Day 15: Selecting processing strategy...
-2025-04-28 12:08:43,461 - INFO - Day 15: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,461 - INFO - ==== Processing Day 16 ====
-2025-04-28 12:08:43,461 - INFO - Day 16: Upcoming deliveries in next 7 days: 1
-2025-04-28 12:08:43,461 - INFO -   - Day 17.0: B = 150.00 kb
-2025-04-28 12:08:43,461 - INFO - Day 16: Current inventory levels:
-2025-04-28 12:08:43,462 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,462 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,462 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,462 - INFO - Day 16: Selecting processing strategy...
-2025-04-28 12:08:43,462 - INFO - Day 16: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,462 - INFO - ==== Processing Day 17 ====
-2025-04-28 12:08:43,462 - INFO - Day 17: Upcoming deliveries in next 7 days: 1
-2025-04-28 12:08:43,462 - INFO -   - Day 17.0: B = 150.00 kb
-2025-04-28 12:08:43,462 - INFO - Day 17: Current inventory levels:
-2025-04-28 12:08:43,462 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,462 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,462 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,462 - INFO - Day 17: Selecting processing strategy...
-2025-04-28 12:08:43,462 - INFO - Day 17: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,462 - INFO - ==== Processing Day 18 ====
-2025-04-28 12:08:43,462 - INFO - Day 18: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,462 - INFO -   - Day 24.0: Base = 360.00 kb
-2025-04-28 12:08:43,462 - INFO -   - Day 24.0: C = 200.00 kb
-2025-04-28 12:08:43,462 - INFO - Day 18: Current inventory levels:
-2025-04-28 12:08:43,462 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,462 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,462 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,462 - INFO - Day 18: Selecting processing strategy...
-2025-04-28 12:08:43,462 - INFO - Day 18: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,462 - INFO - ==== Processing Day 19 ====
-2025-04-28 12:08:43,462 - INFO - Day 19: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,462 - INFO -   - Day 24.0: Base = 360.00 kb
-2025-04-28 12:08:43,462 - INFO -   - Day 24.0: C = 200.00 kb
-2025-04-28 12:08:43,462 - INFO - Day 19: Current inventory levels:
-2025-04-28 12:08:43,462 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,462 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,462 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,463 - INFO - Day 19: Selecting processing strategy...
-2025-04-28 12:08:43,463 - INFO - Day 19: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,463 - INFO - ==== Processing Day 20 ====
-2025-04-28 12:08:43,463 - INFO - Day 20: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,463 - INFO -   - Day 24.0: Base = 360.00 kb
-2025-04-28 12:08:43,463 - INFO -   - Day 24.0: C = 200.00 kb
-2025-04-28 12:08:43,463 - INFO - Day 20: Current inventory levels:
-2025-04-28 12:08:43,463 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,463 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,463 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,463 - INFO - Day 20: Selecting processing strategy...
-2025-04-28 12:08:43,463 - INFO - Day 20: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,463 - INFO - ==== Processing Day 21 ====
-2025-04-28 12:08:43,463 - INFO - Day 21: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,463 - INFO -   - Day 24.0: Base = 360.00 kb
-2025-04-28 12:08:43,463 - INFO -   - Day 24.0: C = 200.00 kb
-2025-04-28 12:08:43,463 - INFO - Day 21: Current inventory levels:
-2025-04-28 12:08:43,463 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,463 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,463 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,463 - INFO - Day 21: Selecting processing strategy...
-2025-04-28 12:08:43,463 - INFO - Day 21: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,463 - INFO - ==== Processing Day 22 ====
-2025-04-28 12:08:43,463 - INFO - Day 22: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,463 - INFO -   - Day 24.0: Base = 360.00 kb
-2025-04-28 12:08:43,463 - INFO -   - Day 24.0: C = 200.00 kb
-2025-04-28 12:08:43,463 - INFO - Day 22: Current inventory levels:
-2025-04-28 12:08:43,463 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,463 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,463 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,463 - INFO - Day 22: Selecting processing strategy...
-2025-04-28 12:08:43,463 - INFO - Day 22: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,463 - INFO - ==== Processing Day 23 ====
-2025-04-28 12:08:43,463 - INFO - Day 23: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,464 - INFO -   - Day 24.0: Base = 360.00 kb
-2025-04-28 12:08:43,464 - INFO -   - Day 24.0: C = 200.00 kb
-2025-04-28 12:08:43,464 - INFO - Day 23: Current inventory levels:
-2025-04-28 12:08:43,464 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,464 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,464 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,464 - INFO - Day 23: Selecting processing strategy...
-2025-04-28 12:08:43,464 - INFO - Day 23: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,464 - INFO - ==== Processing Day 24 ====
-2025-04-28 12:08:43,464 - INFO - Day 24: Upcoming deliveries in next 7 days: 4
-2025-04-28 12:08:43,464 - INFO -   - Day 24.0: Base = 360.00 kb
-2025-04-28 12:08:43,464 - INFO -   - Day 24.0: C = 200.00 kb
-2025-04-28 12:08:43,464 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,464 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,464 - INFO - Day 24: Current inventory levels:
-2025-04-28 12:08:43,464 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,464 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,464 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,464 - INFO - Day 24: Selecting processing strategy...
-2025-04-28 12:08:43,464 - INFO - Day 24: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,464 - INFO - ==== Processing Day 25 ====
-2025-04-28 12:08:43,464 - INFO - Day 25: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,464 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,464 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,464 - INFO - Day 25: Current inventory levels:
-2025-04-28 12:08:43,464 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,464 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,464 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,464 - INFO - Day 25: Selecting processing strategy...
-2025-04-28 12:08:43,464 - INFO - Day 25: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,464 - INFO - ==== Processing Day 26 ====
-2025-04-28 12:08:43,464 - INFO - Day 26: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,464 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,465 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,465 - INFO - Day 26: Current inventory levels:
-2025-04-28 12:08:43,465 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,465 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,465 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,465 - INFO - Day 26: Selecting processing strategy...
-2025-04-28 12:08:43,465 - INFO - Day 26: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,465 - INFO - ==== Processing Day 27 ====
-2025-04-28 12:08:43,465 - INFO - Day 27: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,465 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,465 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,465 - INFO - Day 27: Current inventory levels:
-2025-04-28 12:08:43,465 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,465 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,465 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,465 - INFO - Day 27: Selecting processing strategy...
-2025-04-28 12:08:43,465 - INFO - Day 27: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,465 - INFO - ==== Processing Day 28 ====
-2025-04-28 12:08:43,465 - INFO - Day 28: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,465 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,465 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,465 - INFO - Day 28: Current inventory levels:
-2025-04-28 12:08:43,465 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,465 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,465 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,465 - INFO - Day 28: Selecting processing strategy...
-2025-04-28 12:08:43,465 - INFO - Day 28: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,465 - INFO - ==== Processing Day 29 ====
-2025-04-28 12:08:43,465 - INFO - Day 29: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,465 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,465 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,466 - INFO - Day 29: Current inventory levels:
-2025-04-28 12:08:43,466 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,466 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,466 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,466 - INFO - Day 29: Selecting processing strategy...
-2025-04-28 12:08:43,466 - INFO - Day 29: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,466 - INFO - ==== Processing Day 30 ====
-2025-04-28 12:08:43,466 - INFO - Day 30: Upcoming deliveries in next 7 days: 2
-2025-04-28 12:08:43,466 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,466 - INFO -   - Day 30.0: F = 280.00 kb
-2025-04-28 12:08:43,466 - INFO - Day 30: Current inventory levels:
-2025-04-28 12:08:43,466 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,466 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,466 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,466 - INFO - Day 30: Selecting processing strategy...
-2025-04-28 12:08:43,466 - INFO - Day 30: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,466 - INFO - ==== Processing Day 31 ====
-2025-04-28 12:08:43,466 - INFO - Day 31: No upcoming deliveries in next 7 days
-2025-04-28 12:08:43,466 - INFO - Day 31: Current inventory levels:
-2025-04-28 12:08:43,466 - INFO -   - B: 9.15 kb
-2025-04-28 12:08:43,466 - INFO -   - C: 83.18 kb
-2025-04-28 12:08:43,466 - INFO -   - D: 23.20 kb
-2025-04-28 12:08:43,466 - INFO - Day 31: Selecting processing strategy...
-2025-04-28 12:08:43,466 - INFO - Day 31: No feasible processing strategy found, skipping day
-2025-04-28 12:08:43,466 - INFO - ===== Completed daily scheduling process =====
-2025-04-28 12:08:43,466 - INFO - Total days scheduled: 31
-2025-04-28 12:08:43,466 - INFO - Total volume processed: 784.47 kb
-2025-04-28 12:08:43,466 - INFO - Saving results to results
-2025-04-28 12:08:43,469 - ERROR - Error generating reports: 'list' object has no attribute 'to_csv'
-2025-04-28 12:08:43,470 - INFO - Saved 3 result files
-2025-04-28 12:08:43,470 - INFO - Scheduling completed with status: success
+2025-04-28 12:40:25,420 - INFO - Running scheduler with config: configs/scheduler_config.json
+2025-04-28 12:40:25,420 - INFO - Output directory: results
+2025-04-28 12:40:25,420 - INFO - Vessel optimization: True
+2025-04-28 12:40:25,420 - INFO - Starting scheduler with config: configs/scheduler_config.json
+2025-04-28 12:40:25,420 - INFO - Loading data before running scheduler
+2025-04-28 12:40:25,420 - INFO - Loading data...
+2025-04-28 12:40:25,420 - WARNING - Tank T1 allocation exceeds capacity: requested 350.0 kb of Base, but capacity is 250.0 kb. Excess 100.0 kb split into deliveries for days 1-2.
+2025-04-28 12:40:25,420 - WARNING - Tank T5 allocation exceeds capacity: requested 300.0 kb of F, but capacity is 250.0 kb. Excess 50.0 kb split into deliveries for days 1-2.
+2025-04-28 12:40:25,420 - INFO - Added 4 excess deliveries for days 1-2
+2025-04-28 12:40:25,420 - INFO - Loaded 5 tanks
+2025-04-28 12:40:25,420 - INFO - Loaded inventory with 5 crude types
+2025-04-28 12:40:25,420 - INFO - Loaded 15 current deliveries and 15 future deliveries
+2025-04-28 12:40:25,420 - INFO - Loaded 7 blend recipes
+2025-04-28 12:40:25,420 - INFO - Loaded configuration parameters
+2025-04-28 12:41:02,611 - INFO - ===== Starting daily scheduling process =====
+2025-04-28 12:41:02,612 - INFO - Planning horizon: 31 days
+2025-04-28 12:41:02,612 - INFO - Initial inventory: {'Base': 250.0, 'B': 150.0, 'C': 150.0, 'D': 100.0, 'F': 250.0}
+2025-04-28 12:41:02,612 - INFO - ==== Processing Day 1 ====
+2025-04-28 12:41:02,612 - INFO - Day 1: No upcoming deliveries in next 7 days
+2025-04-28 12:41:02,612 - INFO - Day 1: Current inventory levels:
+2025-04-28 12:41:02,612 - INFO -   - Base: 250.00 kb
+2025-04-28 12:41:02,612 - INFO -   - B: 150.00 kb
+2025-04-28 12:41:02,612 - INFO -   - C: 150.00 kb
+2025-04-28 12:41:02,612 - INFO -   - D: 100.00 kb
+2025-04-28 12:41:02,612 - INFO -   - F: 250.00 kb
+2025-04-28 12:41:02,612 - INFO - Day 1: Transferring 250.00 kb of Base from tank T1 to inventory
+2025-04-28 12:41:02,612 - INFO - Day 1: Transferring 150.00 kb of B from tank T2 to inventory
+2025-04-28 12:41:02,612 - INFO - Day 1: Transferring 150.00 kb of C from tank T3 to inventory
+2025-04-28 12:41:02,612 - INFO - Day 1: Transferring 100.00 kb of D from tank T4 to inventory
+2025-04-28 12:41:02,612 - INFO - Day 1: Transferring 250.00 kb of F from tank T5 to inventory
+2025-04-28 12:41:02,612 - INFO - Day 1: Tank levels after deliveries:
+2025-04-28 12:41:02,612 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,612 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,612 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,612 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,612 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,612 - INFO - Day 1: Selecting processing strategy...
+2025-04-28 12:41:02,613 - INFO - Day 1: Selected strategy 'standard' with blend recipe 3 at rate 96.00 kb
+2025-04-28 12:41:02,613 - INFO - Day 1: Blend recipe ratios: {'B': 0.6, 'D': 0.4}
+2025-04-28 12:41:02,613 - INFO - Day 1: Checking availability of B: Need 57.60 kb (ratio 0.60)
+2025-04-28 12:41:02,613 - INFO - Day 1: Checking availability of D: Need 38.40 kb (ratio 0.40)
+2025-04-28 12:41:02,613 - INFO - Day 1: Processing at rate 96.00 kb
+2025-04-28 12:41:02,613 - INFO - Day 1: Using 57.60 kb of B
+2025-04-28 12:41:02,613 - INFO - Day 1: Using 38.40 kb of D
+2025-04-28 12:41:02,613 - INFO - Day 1: Updated inventory levels after processing:
+2025-04-28 12:41:02,613 - INFO -   - Base: 500.00 kb
+2025-04-28 12:41:02,613 - INFO -   - B: 242.40 kb
+2025-04-28 12:41:02,613 - INFO -   - C: 300.00 kb
+2025-04-28 12:41:02,613 - INFO -   - D: 161.60 kb
+2025-04-28 12:41:02,613 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,613 - INFO - Day 1: Processing complete
+2025-04-28 12:41:02,613 - INFO - ==== Processing Day 2 ====
+2025-04-28 12:41:02,613 - INFO - Day 2: No upcoming deliveries in next 7 days
+2025-04-28 12:41:02,613 - INFO - Day 2: Current inventory levels:
+2025-04-28 12:41:02,613 - INFO -   - Base: 500.00 kb
+2025-04-28 12:41:02,613 - INFO -   - B: 242.40 kb
+2025-04-28 12:41:02,613 - INFO -   - C: 300.00 kb
+2025-04-28 12:41:02,613 - INFO -   - D: 161.60 kb
+2025-04-28 12:41:02,613 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,613 - INFO - Day 2: Tank levels after deliveries:
+2025-04-28 12:41:02,613 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,613 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,613 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,613 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,613 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,613 - INFO - Day 2: Selecting processing strategy...
+2025-04-28 12:41:02,614 - INFO - Day 2: Selected strategy 'standard' with blend recipe 3 at rate 96.00 kb
+2025-04-28 12:41:02,614 - INFO - Day 2: Blend recipe ratios: {'B': 0.6, 'D': 0.4}
+2025-04-28 12:41:02,614 - INFO - Day 2: Checking availability of B: Need 57.60 kb (ratio 0.60)
+2025-04-28 12:41:02,614 - INFO - Day 2: Checking availability of D: Need 38.40 kb (ratio 0.40)
+2025-04-28 12:41:02,614 - INFO - Day 2: Processing at rate 96.00 kb
+2025-04-28 12:41:02,614 - INFO - Day 2: Using 57.60 kb of B
+2025-04-28 12:41:02,614 - INFO - Day 2: Using 38.40 kb of D
+2025-04-28 12:41:02,614 - INFO - Day 2: Updated inventory levels after processing:
+2025-04-28 12:41:02,614 - INFO -   - Base: 500.00 kb
+2025-04-28 12:41:02,614 - INFO -   - B: 184.80 kb
+2025-04-28 12:41:02,614 - INFO -   - C: 300.00 kb
+2025-04-28 12:41:02,614 - INFO -   - D: 123.20 kb
+2025-04-28 12:41:02,614 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,614 - INFO - Day 2: Processing complete
+2025-04-28 12:41:02,614 - INFO - ==== Processing Day 3 ====
+2025-04-28 12:41:02,614 - INFO - Day 3: No upcoming deliveries in next 7 days
+2025-04-28 12:41:02,614 - INFO - Day 3: Current inventory levels:
+2025-04-28 12:41:02,614 - INFO -   - Base: 500.00 kb
+2025-04-28 12:41:02,614 - INFO -   - B: 184.80 kb
+2025-04-28 12:41:02,614 - INFO -   - C: 300.00 kb
+2025-04-28 12:41:02,614 - INFO -   - D: 123.20 kb
+2025-04-28 12:41:02,614 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,614 - INFO - Day 3: Tank levels after deliveries:
+2025-04-28 12:41:02,614 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,614 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,614 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,614 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,614 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,614 - INFO - Day 3: Selecting processing strategy...
+2025-04-28 12:41:02,614 - INFO - Day 3: Selected strategy 'standard' with blend recipe 3 at rate 96.00 kb
+2025-04-28 12:41:02,615 - INFO - Day 3: Blend recipe ratios: {'B': 0.6, 'D': 0.4}
+2025-04-28 12:41:02,615 - INFO - Day 3: Checking availability of B: Need 57.60 kb (ratio 0.60)
+2025-04-28 12:41:02,615 - INFO - Day 3: Checking availability of D: Need 38.40 kb (ratio 0.40)
+2025-04-28 12:41:02,615 - INFO - Day 3: Processing at rate 96.00 kb
+2025-04-28 12:41:02,615 - INFO - Day 3: Using 57.60 kb of B
+2025-04-28 12:41:02,615 - INFO - Day 3: Using 38.40 kb of D
+2025-04-28 12:41:02,615 - INFO - Day 3: Updated inventory levels after processing:
+2025-04-28 12:41:02,615 - INFO -   - Base: 500.00 kb
+2025-04-28 12:41:02,615 - INFO -   - B: 127.20 kb
+2025-04-28 12:41:02,615 - INFO -   - C: 300.00 kb
+2025-04-28 12:41:02,615 - INFO -   - D: 84.80 kb
+2025-04-28 12:41:02,615 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,615 - INFO - Day 3: Processing complete
+2025-04-28 12:41:02,615 - INFO - ==== Processing Day 4 ====
+2025-04-28 12:41:02,615 - INFO - Day 4: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,615 - INFO -   - Day 10.0: Base = 400.00 kb
+2025-04-28 12:41:02,615 - INFO -   - Day 10.0: A = 150.00 kb
+2025-04-28 12:41:02,615 - INFO - Day 4: Current inventory levels:
+2025-04-28 12:41:02,615 - INFO -   - Base: 500.00 kb
+2025-04-28 12:41:02,615 - INFO -   - B: 127.20 kb
+2025-04-28 12:41:02,615 - INFO -   - C: 300.00 kb
+2025-04-28 12:41:02,615 - INFO -   - D: 84.80 kb
+2025-04-28 12:41:02,615 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,615 - INFO - Day 4: Tank levels after deliveries:
+2025-04-28 12:41:02,615 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,615 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,615 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,615 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,615 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,615 - INFO - Day 4: Selecting processing strategy...
+2025-04-28 12:41:02,615 - INFO - Day 4: Selected strategy 'standard' with blend recipe 3 at rate 96.00 kb
+2025-04-28 12:41:02,615 - INFO - Day 4: Blend recipe ratios: {'B': 0.6, 'D': 0.4}
+2025-04-28 12:41:02,616 - INFO - Day 4: Checking availability of B: Need 57.60 kb (ratio 0.60)
+2025-04-28 12:41:02,616 - INFO - Day 4: Checking availability of D: Need 38.40 kb (ratio 0.40)
+2025-04-28 12:41:02,616 - INFO - Day 4: Processing at rate 96.00 kb
+2025-04-28 12:41:02,616 - INFO - Day 4: Using 57.60 kb of B
+2025-04-28 12:41:02,616 - INFO - Day 4: Using 38.40 kb of D
+2025-04-28 12:41:02,616 - INFO - Day 4: Updated inventory levels after processing:
+2025-04-28 12:41:02,616 - INFO -   - Base: 500.00 kb
+2025-04-28 12:41:02,616 - INFO -   - B: 69.60 kb
+2025-04-28 12:41:02,616 - INFO -   - C: 300.00 kb
+2025-04-28 12:41:02,616 - INFO -   - D: 46.40 kb
+2025-04-28 12:41:02,616 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,616 - INFO - Day 4: Processing complete
+2025-04-28 12:41:02,616 - INFO - ==== Processing Day 5 ====
+2025-04-28 12:41:02,616 - INFO - Day 5: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,616 - INFO -   - Day 10.0: Base = 400.00 kb
+2025-04-28 12:41:02,616 - INFO -   - Day 10.0: A = 150.00 kb
+2025-04-28 12:41:02,616 - INFO - Day 5: Current inventory levels:
+2025-04-28 12:41:02,616 - INFO -   - Base: 500.00 kb
+2025-04-28 12:41:02,616 - INFO -   - B: 69.60 kb
+2025-04-28 12:41:02,616 - INFO -   - C: 300.00 kb
+2025-04-28 12:41:02,616 - INFO -   - D: 46.40 kb
+2025-04-28 12:41:02,616 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,616 - INFO - Day 5: Tank levels after deliveries:
+2025-04-28 12:41:02,616 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,616 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,616 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,616 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,616 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,616 - INFO - Day 5: Selecting processing strategy...
+2025-04-28 12:41:02,616 - INFO - Day 5: Selected strategy 'standard' with blend recipe 3 at rate 96.00 kb
+2025-04-28 12:41:02,616 - INFO - Day 5: Blend recipe ratios: {'B': 0.6, 'D': 0.4}
+2025-04-28 12:41:02,616 - INFO - Day 5: Checking availability of B: Need 57.60 kb (ratio 0.60)
+2025-04-28 12:41:02,617 - INFO - Day 5: Checking availability of D: Need 38.40 kb (ratio 0.40)
+2025-04-28 12:41:02,617 - INFO - Day 5: Processing at rate 96.00 kb
+2025-04-28 12:41:02,617 - INFO - Day 5: Using 57.60 kb of B
+2025-04-28 12:41:02,617 - INFO - Day 5: Using 38.40 kb of D
+2025-04-28 12:41:02,617 - INFO - Day 5: Updated inventory levels after processing:
+2025-04-28 12:41:02,617 - INFO -   - Base: 500.00 kb
+2025-04-28 12:41:02,617 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,617 - INFO -   - C: 300.00 kb
+2025-04-28 12:41:02,617 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,617 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,617 - INFO - Day 5: Processing complete
+2025-04-28 12:41:02,617 - INFO - ==== Processing Day 6 ====
+2025-04-28 12:41:02,617 - INFO - Day 6: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,617 - INFO -   - Day 10.0: Base = 400.00 kb
+2025-04-28 12:41:02,617 - INFO -   - Day 10.0: A = 150.00 kb
+2025-04-28 12:41:02,617 - INFO - Day 6: Current inventory levels:
+2025-04-28 12:41:02,617 - INFO -   - Base: 500.00 kb
+2025-04-28 12:41:02,617 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,617 - INFO -   - C: 300.00 kb
+2025-04-28 12:41:02,617 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,617 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,617 - INFO - Day 6: Tank levels after deliveries:
+2025-04-28 12:41:02,617 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,617 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,617 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,617 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,617 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,617 - INFO - Day 6: Selecting processing strategy...
+2025-04-28 12:41:02,618 - INFO - Day 6: Selected strategy 'standard' with blend recipe 4 at rate 95.00 kb
+2025-04-28 12:41:02,618 - INFO - Day 6: Blend recipe ratios: {'C': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,618 - INFO - Day 6: Checking availability of C: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,618 - INFO - Day 6: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,618 - INFO - Day 6: Processing at rate 95.00 kb
+2025-04-28 12:41:02,618 - INFO - Day 6: Using 25.65 kb of C
+2025-04-28 12:41:02,618 - INFO - Day 6: Using 69.35 kb of Base
+2025-04-28 12:41:02,618 - INFO - Day 6: Updated inventory levels after processing:
+2025-04-28 12:41:02,618 - INFO -   - Base: 430.65 kb
+2025-04-28 12:41:02,618 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,618 - INFO -   - C: 274.35 kb
+2025-04-28 12:41:02,618 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,618 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,618 - INFO - Day 6: Processing complete
+2025-04-28 12:41:02,618 - INFO - ==== Processing Day 7 ====
+2025-04-28 12:41:02,618 - INFO - Day 7: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,618 - INFO -   - Day 10.0: Base = 400.00 kb
+2025-04-28 12:41:02,618 - INFO -   - Day 10.0: A = 150.00 kb
+2025-04-28 12:41:02,619 - INFO - Day 7: Current inventory levels:
+2025-04-28 12:41:02,619 - INFO -   - Base: 430.65 kb
+2025-04-28 12:41:02,619 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,619 - INFO -   - C: 274.35 kb
+2025-04-28 12:41:02,619 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,619 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,619 - INFO - Day 7: Tank levels after deliveries:
+2025-04-28 12:41:02,619 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,619 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,619 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,619 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,619 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,619 - INFO - Day 7: Selecting processing strategy...
+2025-04-28 12:41:02,619 - INFO - Day 7: Selected strategy 'standard' with blend recipe 4 at rate 95.00 kb
+2025-04-28 12:41:02,619 - INFO - Day 7: Blend recipe ratios: {'C': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,619 - INFO - Day 7: Checking availability of C: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,619 - INFO - Day 7: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,619 - INFO - Day 7: Processing at rate 95.00 kb
+2025-04-28 12:41:02,619 - INFO - Day 7: Using 25.65 kb of C
+2025-04-28 12:41:02,619 - INFO - Day 7: Using 69.35 kb of Base
+2025-04-28 12:41:02,619 - INFO - Day 7: Updated inventory levels after processing:
+2025-04-28 12:41:02,619 - INFO -   - Base: 361.30 kb
+2025-04-28 12:41:02,619 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,619 - INFO -   - C: 248.70 kb
+2025-04-28 12:41:02,619 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,619 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,619 - INFO - Day 7: Processing complete
+2025-04-28 12:41:02,619 - INFO - ==== Processing Day 8 ====
+2025-04-28 12:41:02,619 - INFO - Day 8: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,619 - INFO -   - Day 10.0: Base = 400.00 kb
+2025-04-28 12:41:02,620 - INFO -   - Day 10.0: A = 150.00 kb
+2025-04-28 12:41:02,620 - INFO - Day 8: Current inventory levels:
+2025-04-28 12:41:02,620 - INFO -   - Base: 361.30 kb
+2025-04-28 12:41:02,620 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,620 - INFO -   - C: 248.70 kb
+2025-04-28 12:41:02,620 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,620 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,620 - INFO - Day 8: Tank levels after deliveries:
+2025-04-28 12:41:02,620 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,620 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,620 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,620 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,620 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,620 - INFO - Day 8: Selecting processing strategy...
+2025-04-28 12:41:02,620 - INFO - Day 8: Selected strategy 'standard' with blend recipe 4 at rate 95.00 kb
+2025-04-28 12:41:02,620 - INFO - Day 8: Blend recipe ratios: {'C': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,620 - INFO - Day 8: Checking availability of C: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,620 - INFO - Day 8: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,620 - INFO - Day 8: Processing at rate 95.00 kb
+2025-04-28 12:41:02,620 - INFO - Day 8: Using 25.65 kb of C
+2025-04-28 12:41:02,620 - INFO - Day 8: Using 69.35 kb of Base
+2025-04-28 12:41:02,620 - INFO - Day 8: Updated inventory levels after processing:
+2025-04-28 12:41:02,620 - INFO -   - Base: 291.95 kb
+2025-04-28 12:41:02,620 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,620 - INFO -   - C: 223.05 kb
+2025-04-28 12:41:02,620 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,620 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,620 - INFO - Day 8: Processing complete
+2025-04-28 12:41:02,620 - INFO - ==== Processing Day 9 ====
+2025-04-28 12:41:02,620 - INFO - Day 9: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,620 - INFO -   - Day 10.0: Base = 400.00 kb
+2025-04-28 12:41:02,621 - INFO -   - Day 10.0: A = 150.00 kb
+2025-04-28 12:41:02,621 - INFO - Day 9: Current inventory levels:
+2025-04-28 12:41:02,621 - INFO -   - Base: 291.95 kb
+2025-04-28 12:41:02,621 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,621 - INFO -   - C: 223.05 kb
+2025-04-28 12:41:02,621 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,621 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,621 - INFO - Day 9: Tank levels after deliveries:
+2025-04-28 12:41:02,621 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,621 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,621 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,621 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,621 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,621 - INFO - Day 9: Selecting processing strategy...
+2025-04-28 12:41:02,621 - INFO - Day 9: Selected strategy 'standard' with blend recipe 4 at rate 95.00 kb
+2025-04-28 12:41:02,621 - INFO - Day 9: Blend recipe ratios: {'C': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,621 - INFO - Day 9: Checking availability of C: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,621 - INFO - Day 9: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,621 - INFO - Day 9: Processing at rate 95.00 kb
+2025-04-28 12:41:02,621 - INFO - Day 9: Using 25.65 kb of C
+2025-04-28 12:41:02,621 - INFO - Day 9: Using 69.35 kb of Base
+2025-04-28 12:41:02,621 - INFO - Day 9: Updated inventory levels after processing:
+2025-04-28 12:41:02,621 - INFO -   - Base: 222.60 kb
+2025-04-28 12:41:02,621 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,621 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,621 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,621 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,621 - INFO - Day 9: Processing complete
+2025-04-28 12:41:02,621 - INFO - ==== Processing Day 10 ====
+2025-04-28 12:41:02,621 - INFO - Day 10: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,621 - INFO -   - Day 10.0: Base = 400.00 kb
+2025-04-28 12:41:02,621 - INFO -   - Day 10.0: A = 150.00 kb
+2025-04-28 12:41:02,622 - INFO - Day 10: Current inventory levels:
+2025-04-28 12:41:02,622 - INFO -   - Base: 222.60 kb
+2025-04-28 12:41:02,622 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,622 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,622 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,622 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,622 - INFO - Day 10: Processing 2 deliveries:
+2025-04-28 12:41:02,622 - INFO - Day 10: Starting to receive 400.00 kb of Base
+2025-04-28 12:41:02,622 - INFO - Day 10: Unloaded 400.00 kb of Base on first day
+2025-04-28 12:41:02,622 - INFO - Day 10: Starting to receive 150.00 kb of A
+2025-04-28 12:41:02,622 - INFO - Day 10: Unloaded 150.00 kb of A on first day
+2025-04-28 12:41:02,622 - INFO - Day 10: Transferring 250.00 kb of Base from tank T1 to inventory
+2025-04-28 12:41:02,622 - INFO - Day 10: Transferring 150.00 kb of Base from tank T2 to inventory
+2025-04-28 12:41:02,622 - INFO - Day 10: Transferring 150.00 kb of A from tank T3 to inventory
+2025-04-28 12:41:02,622 - INFO - Day 10: Tank levels after deliveries:
+2025-04-28 12:41:02,622 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,622 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,622 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,622 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,622 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,622 - INFO - Day 10: Selecting processing strategy...
+2025-04-28 12:41:02,622 - INFO - Day 10: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,622 - INFO - Day 10: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,622 - INFO - Day 10: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,622 - INFO - Day 10: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,623 - INFO - Day 10: Processing at rate 96.00 kb
+2025-04-28 12:41:02,623 - INFO - Day 10: Using 25.92 kb of A
+2025-04-28 12:41:02,623 - INFO - Day 10: Using 70.08 kb of Base
+2025-04-28 12:41:02,623 - INFO - Day 10: Updated inventory levels after processing:
+2025-04-28 12:41:02,623 - INFO -   - Base: 952.52 kb
+2025-04-28 12:41:02,623 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,623 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,623 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,623 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,623 - INFO -   - A: 274.08 kb
+2025-04-28 12:41:02,623 - INFO - Day 10: Processing complete
+2025-04-28 12:41:02,623 - INFO - ==== Processing Day 11 ====
+2025-04-28 12:41:02,623 - INFO - Day 11: Upcoming deliveries in next 7 days: 1
+2025-04-28 12:41:02,623 - INFO -   - Day 17.0: B = 150.00 kb
+2025-04-28 12:41:02,623 - INFO - Day 11: Current inventory levels:
+2025-04-28 12:41:02,623 - INFO -   - Base: 952.52 kb
+2025-04-28 12:41:02,623 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,623 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,623 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,623 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,623 - INFO -   - A: 274.08 kb
+2025-04-28 12:41:02,623 - INFO - Day 11: Tank levels after deliveries:
+2025-04-28 12:41:02,623 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,623 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,623 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,623 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,623 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,623 - INFO - Day 11: Selecting processing strategy...
+2025-04-28 12:41:02,623 - INFO - Day 11: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,623 - INFO - Day 11: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,623 - INFO - Day 11: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,624 - INFO - Day 11: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,624 - INFO - Day 11: Processing at rate 96.00 kb
+2025-04-28 12:41:02,624 - INFO - Day 11: Using 25.92 kb of A
+2025-04-28 12:41:02,624 - INFO - Day 11: Using 70.08 kb of Base
+2025-04-28 12:41:02,624 - INFO - Day 11: Updated inventory levels after processing:
+2025-04-28 12:41:02,624 - INFO -   - Base: 882.44 kb
+2025-04-28 12:41:02,624 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,624 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,624 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,624 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,624 - INFO -   - A: 248.16 kb
+2025-04-28 12:41:02,624 - INFO - Day 11: Processing complete
+2025-04-28 12:41:02,624 - INFO - ==== Processing Day 12 ====
+2025-04-28 12:41:02,624 - INFO - Day 12: Upcoming deliveries in next 7 days: 1
+2025-04-28 12:41:02,624 - INFO -   - Day 17.0: B = 150.00 kb
+2025-04-28 12:41:02,624 - INFO - Day 12: Current inventory levels:
+2025-04-28 12:41:02,624 - INFO -   - Base: 882.44 kb
+2025-04-28 12:41:02,624 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,624 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,624 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,624 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,624 - INFO -   - A: 248.16 kb
+2025-04-28 12:41:02,624 - INFO - Day 12: Tank levels after deliveries:
+2025-04-28 12:41:02,624 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,624 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,624 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,624 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,624 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,624 - INFO - Day 12: Selecting processing strategy...
+2025-04-28 12:41:02,624 - INFO - Day 12: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,624 - INFO - Day 12: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,625 - INFO - Day 12: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,625 - INFO - Day 12: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,625 - INFO - Day 12: Processing at rate 96.00 kb
+2025-04-28 12:41:02,625 - INFO - Day 12: Using 25.92 kb of A
+2025-04-28 12:41:02,625 - INFO - Day 12: Using 70.08 kb of Base
+2025-04-28 12:41:02,625 - INFO - Day 12: Updated inventory levels after processing:
+2025-04-28 12:41:02,625 - INFO -   - Base: 812.36 kb
+2025-04-28 12:41:02,625 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,625 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,625 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,625 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,625 - INFO -   - A: 222.24 kb
+2025-04-28 12:41:02,625 - INFO - Day 12: Processing complete
+2025-04-28 12:41:02,625 - INFO - ==== Processing Day 13 ====
+2025-04-28 12:41:02,625 - INFO - Day 13: Upcoming deliveries in next 7 days: 1
+2025-04-28 12:41:02,625 - INFO -   - Day 17.0: B = 150.00 kb
+2025-04-28 12:41:02,625 - INFO - Day 13: Current inventory levels:
+2025-04-28 12:41:02,625 - INFO -   - Base: 812.36 kb
+2025-04-28 12:41:02,625 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,625 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,625 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,625 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,625 - INFO -   - A: 222.24 kb
+2025-04-28 12:41:02,625 - INFO - Day 13: Tank levels after deliveries:
+2025-04-28 12:41:02,625 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,625 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,625 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,625 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,625 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,625 - INFO - Day 13: Selecting processing strategy...
+2025-04-28 12:41:02,625 - INFO - Day 13: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,625 - INFO - Day 13: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,626 - INFO - Day 13: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,626 - INFO - Day 13: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,626 - INFO - Day 13: Processing at rate 96.00 kb
+2025-04-28 12:41:02,626 - INFO - Day 13: Using 25.92 kb of A
+2025-04-28 12:41:02,626 - INFO - Day 13: Using 70.08 kb of Base
+2025-04-28 12:41:02,626 - INFO - Day 13: Updated inventory levels after processing:
+2025-04-28 12:41:02,626 - INFO -   - Base: 742.28 kb
+2025-04-28 12:41:02,626 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,626 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,626 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,626 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,626 - INFO -   - A: 196.32 kb
+2025-04-28 12:41:02,626 - INFO - Day 13: Processing complete
+2025-04-28 12:41:02,626 - INFO - ==== Processing Day 14 ====
+2025-04-28 12:41:02,626 - INFO - Day 14: Upcoming deliveries in next 7 days: 1
+2025-04-28 12:41:02,626 - INFO -   - Day 17.0: B = 150.00 kb
+2025-04-28 12:41:02,626 - INFO - Day 14: Current inventory levels:
+2025-04-28 12:41:02,626 - INFO -   - Base: 742.28 kb
+2025-04-28 12:41:02,626 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,626 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,626 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,626 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,626 - INFO -   - A: 196.32 kb
+2025-04-28 12:41:02,626 - INFO - Day 14: Tank levels after deliveries:
+2025-04-28 12:41:02,626 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,626 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,626 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,626 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,626 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,626 - INFO - Day 14: Selecting processing strategy...
+2025-04-28 12:41:02,627 - INFO - Day 14: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,627 - INFO - Day 14: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,627 - INFO - Day 14: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,627 - INFO - Day 14: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,627 - INFO - Day 14: Processing at rate 96.00 kb
+2025-04-28 12:41:02,627 - INFO - Day 14: Using 25.92 kb of A
+2025-04-28 12:41:02,627 - INFO - Day 14: Using 70.08 kb of Base
+2025-04-28 12:41:02,627 - INFO - Day 14: Updated inventory levels after processing:
+2025-04-28 12:41:02,627 - INFO -   - Base: 672.20 kb
+2025-04-28 12:41:02,627 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,627 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,627 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,627 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,627 - INFO -   - A: 170.40 kb
+2025-04-28 12:41:02,627 - INFO - Day 14: Processing complete
+2025-04-28 12:41:02,627 - INFO - ==== Processing Day 15 ====
+2025-04-28 12:41:02,627 - INFO - Day 15: Upcoming deliveries in next 7 days: 1
+2025-04-28 12:41:02,627 - INFO -   - Day 17.0: B = 150.00 kb
+2025-04-28 12:41:02,627 - INFO - Day 15: Current inventory levels:
+2025-04-28 12:41:02,627 - INFO -   - Base: 672.20 kb
+2025-04-28 12:41:02,627 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,627 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,627 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,627 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,627 - INFO -   - A: 170.40 kb
+2025-04-28 12:41:02,627 - INFO - Day 15: Tank levels after deliveries:
+2025-04-28 12:41:02,627 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,627 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,627 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,628 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,628 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,628 - INFO - Day 15: Selecting processing strategy...
+2025-04-28 12:41:02,628 - INFO - Day 15: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,628 - INFO - Day 15: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,628 - INFO - Day 15: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,628 - INFO - Day 15: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,628 - INFO - Day 15: Processing at rate 96.00 kb
+2025-04-28 12:41:02,628 - INFO - Day 15: Using 25.92 kb of A
+2025-04-28 12:41:02,628 - INFO - Day 15: Using 70.08 kb of Base
+2025-04-28 12:41:02,628 - INFO - Day 15: Updated inventory levels after processing:
+2025-04-28 12:41:02,628 - INFO -   - Base: 602.12 kb
+2025-04-28 12:41:02,628 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,628 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,628 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,628 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,628 - INFO -   - A: 144.48 kb
+2025-04-28 12:41:02,628 - INFO - Day 15: Processing complete
+2025-04-28 12:41:02,628 - INFO - ==== Processing Day 16 ====
+2025-04-28 12:41:02,628 - INFO - Day 16: Upcoming deliveries in next 7 days: 1
+2025-04-28 12:41:02,628 - INFO -   - Day 17.0: B = 150.00 kb
+2025-04-28 12:41:02,628 - INFO - Day 16: Current inventory levels:
+2025-04-28 12:41:02,628 - INFO -   - Base: 602.12 kb
+2025-04-28 12:41:02,628 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,628 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,628 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,628 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,628 - INFO -   - A: 144.48 kb
+2025-04-28 12:41:02,628 - INFO - Day 16: Tank levels after deliveries:
+2025-04-28 12:41:02,628 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,629 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,629 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,629 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,629 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,629 - INFO - Day 16: Selecting processing strategy...
+2025-04-28 12:41:02,629 - INFO - Day 16: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,629 - INFO - Day 16: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,629 - INFO - Day 16: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,629 - INFO - Day 16: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,629 - INFO - Day 16: Processing at rate 96.00 kb
+2025-04-28 12:41:02,629 - INFO - Day 16: Using 25.92 kb of A
+2025-04-28 12:41:02,629 - INFO - Day 16: Using 70.08 kb of Base
+2025-04-28 12:41:02,629 - INFO - Day 16: Updated inventory levels after processing:
+2025-04-28 12:41:02,629 - INFO -   - Base: 532.04 kb
+2025-04-28 12:41:02,629 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,629 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,629 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,629 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,629 - INFO -   - A: 118.56 kb
+2025-04-28 12:41:02,629 - INFO - Day 16: Processing complete
+2025-04-28 12:41:02,629 - INFO - ==== Processing Day 17 ====
+2025-04-28 12:41:02,629 - INFO - Day 17: Upcoming deliveries in next 7 days: 1
+2025-04-28 12:41:02,629 - INFO -   - Day 17.0: B = 150.00 kb
+2025-04-28 12:41:02,629 - INFO - Day 17: Current inventory levels:
+2025-04-28 12:41:02,629 - INFO -   - Base: 532.04 kb
+2025-04-28 12:41:02,629 - INFO -   - B: 12.00 kb
+2025-04-28 12:41:02,629 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,629 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,629 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,629 - INFO -   - A: 118.56 kb
+2025-04-28 12:41:02,629 - INFO - Day 17: Processing 1 deliveries:
+2025-04-28 12:41:02,629 - INFO - Day 17: Starting to receive 150.00 kb of B
+2025-04-28 12:41:02,630 - INFO - Day 17: Unloaded 150.00 kb of B on first day
+2025-04-28 12:41:02,630 - INFO - Day 17: Transferring 150.00 kb of B from tank T1 to inventory
+2025-04-28 12:41:02,630 - INFO - Day 17: Tank levels after deliveries:
+2025-04-28 12:41:02,630 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,630 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,630 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,630 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,630 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,630 - INFO - Day 17: Selecting processing strategy...
+2025-04-28 12:41:02,630 - INFO - Day 17: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,630 - INFO - Day 17: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,630 - INFO - Day 17: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,630 - INFO - Day 17: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,630 - INFO - Day 17: Processing at rate 96.00 kb
+2025-04-28 12:41:02,630 - INFO - Day 17: Using 25.92 kb of A
+2025-04-28 12:41:02,630 - INFO - Day 17: Using 70.08 kb of Base
+2025-04-28 12:41:02,630 - INFO - Day 17: Updated inventory levels after processing:
+2025-04-28 12:41:02,630 - INFO -   - Base: 461.96 kb
+2025-04-28 12:41:02,630 - INFO -   - B: 312.00 kb
+2025-04-28 12:41:02,630 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,630 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,630 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,630 - INFO -   - A: 92.64 kb
+2025-04-28 12:41:02,630 - INFO - Day 17: Processing complete
+2025-04-28 12:41:02,630 - INFO - ==== Processing Day 18 ====
+2025-04-28 12:41:02,630 - INFO - Day 18: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,630 - INFO -   - Day 24.0: Base = 360.00 kb
+2025-04-28 12:41:02,630 - INFO -   - Day 24.0: C = 200.00 kb
+2025-04-28 12:41:02,630 - INFO - Day 18: Current inventory levels:
+2025-04-28 12:41:02,630 - INFO -   - Base: 461.96 kb
+2025-04-28 12:41:02,630 - INFO -   - B: 312.00 kb
+2025-04-28 12:41:02,631 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,631 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,631 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,631 - INFO -   - A: 92.64 kb
+2025-04-28 12:41:02,631 - INFO - Day 18: Tank levels after deliveries:
+2025-04-28 12:41:02,631 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,631 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,631 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,631 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,631 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,631 - INFO - Day 18: Selecting processing strategy...
+2025-04-28 12:41:02,631 - INFO - Day 18: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,631 - INFO - Day 18: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,631 - INFO - Day 18: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,631 - INFO - Day 18: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,631 - INFO - Day 18: Processing at rate 96.00 kb
+2025-04-28 12:41:02,631 - INFO - Day 18: Using 25.92 kb of A
+2025-04-28 12:41:02,631 - INFO - Day 18: Using 70.08 kb of Base
+2025-04-28 12:41:02,631 - INFO - Day 18: Updated inventory levels after processing:
+2025-04-28 12:41:02,631 - INFO -   - Base: 391.88 kb
+2025-04-28 12:41:02,631 - INFO -   - B: 312.00 kb
+2025-04-28 12:41:02,631 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,631 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,631 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,631 - INFO -   - A: 66.72 kb
+2025-04-28 12:41:02,631 - INFO - Day 18: Processing complete
+2025-04-28 12:41:02,631 - INFO - ==== Processing Day 19 ====
+2025-04-28 12:41:02,631 - INFO - Day 19: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,631 - INFO -   - Day 24.0: Base = 360.00 kb
+2025-04-28 12:41:02,631 - INFO -   - Day 24.0: C = 200.00 kb
+2025-04-28 12:41:02,631 - INFO - Day 19: Current inventory levels:
+2025-04-28 12:41:02,631 - INFO -   - Base: 391.88 kb
+2025-04-28 12:41:02,632 - INFO -   - B: 312.00 kb
+2025-04-28 12:41:02,632 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,632 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,632 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,632 - INFO -   - A: 66.72 kb
+2025-04-28 12:41:02,632 - INFO - Day 19: Tank levels after deliveries:
+2025-04-28 12:41:02,632 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,632 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,632 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,632 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,632 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,632 - INFO - Day 19: Selecting processing strategy...
+2025-04-28 12:41:02,632 - INFO - Day 19: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,632 - INFO - Day 19: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,632 - INFO - Day 19: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,632 - INFO - Day 19: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,632 - INFO - Day 19: Processing at rate 96.00 kb
+2025-04-28 12:41:02,632 - INFO - Day 19: Using 25.92 kb of A
+2025-04-28 12:41:02,632 - INFO - Day 19: Using 70.08 kb of Base
+2025-04-28 12:41:02,632 - INFO - Day 19: Updated inventory levels after processing:
+2025-04-28 12:41:02,632 - INFO -   - Base: 321.80 kb
+2025-04-28 12:41:02,632 - INFO -   - B: 312.00 kb
+2025-04-28 12:41:02,632 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,632 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,632 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,633 - INFO -   - A: 40.80 kb
+2025-04-28 12:41:02,633 - INFO - Day 19: Processing complete
+2025-04-28 12:41:02,633 - INFO - ==== Processing Day 20 ====
+2025-04-28 12:41:02,633 - INFO - Day 20: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,633 - INFO -   - Day 24.0: Base = 360.00 kb
+2025-04-28 12:41:02,633 - INFO -   - Day 24.0: C = 200.00 kb
+2025-04-28 12:41:02,633 - INFO - Day 20: Current inventory levels:
+2025-04-28 12:41:02,633 - INFO -   - Base: 321.80 kb
+2025-04-28 12:41:02,633 - INFO -   - B: 312.00 kb
+2025-04-28 12:41:02,633 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,633 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,633 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,633 - INFO -   - A: 40.80 kb
+2025-04-28 12:41:02,633 - INFO - Day 20: Tank levels after deliveries:
+2025-04-28 12:41:02,633 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,633 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,633 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,633 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,633 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,633 - INFO - Day 20: Selecting processing strategy...
+2025-04-28 12:41:02,633 - INFO - Day 20: Selected strategy 'standard' with blend recipe 1 at rate 96.00 kb
+2025-04-28 12:41:02,633 - INFO - Day 20: Blend recipe ratios: {'A': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,633 - INFO - Day 20: Checking availability of A: Need 25.92 kb (ratio 0.27)
+2025-04-28 12:41:02,633 - INFO - Day 20: Checking availability of Base: Need 70.08 kb (ratio 0.73)
+2025-04-28 12:41:02,634 - INFO - Day 20: Processing at rate 96.00 kb
+2025-04-28 12:41:02,634 - INFO - Day 20: Using 25.92 kb of A
+2025-04-28 12:41:02,634 - INFO - Day 20: Using 70.08 kb of Base
+2025-04-28 12:41:02,634 - INFO - Day 20: Updated inventory levels after processing:
+2025-04-28 12:41:02,634 - INFO -   - Base: 251.72 kb
+2025-04-28 12:41:02,634 - INFO -   - B: 312.00 kb
+2025-04-28 12:41:02,634 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,634 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,634 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,634 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,634 - INFO - Day 20: Processing complete
+2025-04-28 12:41:02,634 - INFO - ==== Processing Day 21 ====
+2025-04-28 12:41:02,634 - INFO - Day 21: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,634 - INFO -   - Day 24.0: Base = 360.00 kb
+2025-04-28 12:41:02,634 - INFO -   - Day 24.0: C = 200.00 kb
+2025-04-28 12:41:02,634 - INFO - Day 21: Current inventory levels:
+2025-04-28 12:41:02,634 - INFO -   - Base: 251.72 kb
+2025-04-28 12:41:02,634 - INFO -   - B: 312.00 kb
+2025-04-28 12:41:02,634 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,634 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,634 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,634 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,634 - INFO - Day 21: Tank levels after deliveries:
+2025-04-28 12:41:02,634 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,634 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,634 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,634 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,634 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,634 - INFO - Day 21: Selecting processing strategy...
+2025-04-28 12:41:02,635 - INFO - Day 21: Selected strategy 'standard' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,635 - INFO - Day 21: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,635 - INFO - Day 21: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,635 - INFO - Day 21: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,635 - INFO - Day 21: Processing at rate 95.00 kb
+2025-04-28 12:41:02,635 - INFO - Day 21: Using 25.65 kb of B
+2025-04-28 12:41:02,635 - INFO - Day 21: Using 69.35 kb of Base
+2025-04-28 12:41:02,635 - INFO - Day 21: Updated inventory levels after processing:
+2025-04-28 12:41:02,635 - INFO -   - Base: 182.37 kb
+2025-04-28 12:41:02,635 - INFO -   - B: 286.35 kb
+2025-04-28 12:41:02,635 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,635 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,635 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,635 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,635 - INFO - Day 21: Processing complete
+2025-04-28 12:41:02,635 - INFO - ==== Processing Day 22 ====
+2025-04-28 12:41:02,635 - INFO - Day 22: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,635 - INFO -   - Day 24.0: Base = 360.00 kb
+2025-04-28 12:41:02,635 - INFO -   - Day 24.0: C = 200.00 kb
+2025-04-28 12:41:02,635 - INFO - Day 22: Current inventory levels:
+2025-04-28 12:41:02,635 - INFO -   - Base: 182.37 kb
+2025-04-28 12:41:02,635 - INFO -   - B: 286.35 kb
+2025-04-28 12:41:02,635 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,635 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,635 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,635 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,635 - INFO - Day 22: Tank levels after deliveries:
+2025-04-28 12:41:02,635 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,635 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,635 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,635 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,635 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,635 - INFO - Day 22: Selecting processing strategy...
+2025-04-28 12:41:02,636 - INFO - Day 22: Selected strategy 'final_days' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,636 - INFO - Day 22: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,636 - INFO - Day 22: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,636 - INFO - Day 22: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,636 - INFO - Day 22: Processing at rate 95.00 kb
+2025-04-28 12:41:02,636 - INFO - Day 22: Using 25.65 kb of B
+2025-04-28 12:41:02,636 - INFO - Day 22: Using 69.35 kb of Base
+2025-04-28 12:41:02,636 - INFO - Day 22: Updated inventory levels after processing:
+2025-04-28 12:41:02,636 - INFO -   - Base: 113.02 kb
+2025-04-28 12:41:02,636 - INFO -   - B: 260.70 kb
+2025-04-28 12:41:02,636 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,636 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,636 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,636 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,636 - INFO - Day 22: Processing complete
+2025-04-28 12:41:02,636 - INFO - ==== Processing Day 23 ====
+2025-04-28 12:41:02,636 - INFO - Day 23: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,636 - INFO -   - Day 24.0: Base = 360.00 kb
+2025-04-28 12:41:02,636 - INFO -   - Day 24.0: C = 200.00 kb
+2025-04-28 12:41:02,636 - INFO - Day 23: Current inventory levels:
+2025-04-28 12:41:02,636 - INFO -   - Base: 113.02 kb
+2025-04-28 12:41:02,636 - INFO -   - B: 260.70 kb
+2025-04-28 12:41:02,636 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,636 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,636 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,636 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,636 - INFO - Day 23: Tank levels after deliveries:
+2025-04-28 12:41:02,636 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,636 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,636 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,636 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,636 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,637 - INFO - Day 23: Selecting processing strategy...
+2025-04-28 12:41:02,637 - INFO - Day 23: Selected strategy 'final_days' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,637 - INFO - Day 23: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,637 - INFO - Day 23: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,637 - INFO - Day 23: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,637 - INFO - Day 23: Processing at rate 95.00 kb
+2025-04-28 12:41:02,637 - INFO - Day 23: Using 25.65 kb of B
+2025-04-28 12:41:02,637 - INFO - Day 23: Using 69.35 kb of Base
+2025-04-28 12:41:02,637 - INFO - Day 23: Updated inventory levels after processing:
+2025-04-28 12:41:02,637 - INFO -   - Base: 43.67 kb
+2025-04-28 12:41:02,637 - INFO -   - B: 235.05 kb
+2025-04-28 12:41:02,637 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,637 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,637 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,637 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,637 - INFO - Day 23: Processing complete
+2025-04-28 12:41:02,637 - INFO - ==== Processing Day 24 ====
+2025-04-28 12:41:02,637 - INFO - Day 24: Upcoming deliveries in next 7 days: 4
+2025-04-28 12:41:02,637 - INFO -   - Day 24.0: Base = 360.00 kb
+2025-04-28 12:41:02,637 - INFO -   - Day 24.0: C = 200.00 kb
+2025-04-28 12:41:02,637 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,637 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,637 - INFO - Day 24: Current inventory levels:
+2025-04-28 12:41:02,637 - INFO -   - Base: 43.67 kb
+2025-04-28 12:41:02,637 - INFO -   - B: 235.05 kb
+2025-04-28 12:41:02,637 - INFO -   - C: 197.40 kb
+2025-04-28 12:41:02,637 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,637 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,637 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,637 - INFO - Day 24: Processing 2 deliveries:
+2025-04-28 12:41:02,637 - INFO - Day 24: Starting to receive 360.00 kb of Base
+2025-04-28 12:41:02,638 - INFO - Day 24: Unloaded 360.00 kb of Base on first day
+2025-04-28 12:41:02,638 - INFO - Day 24: Starting to receive 200.00 kb of C
+2025-04-28 12:41:02,638 - INFO - Day 24: Unloaded 200.00 kb of C on first day
+2025-04-28 12:41:02,638 - INFO - Day 24: Transferring 250.00 kb of Base from tank T1 to inventory
+2025-04-28 12:41:02,638 - INFO - Day 24: Transferring 110.00 kb of Base from tank T2 to inventory
+2025-04-28 12:41:02,638 - INFO - Day 24: Transferring 200.00 kb of C from tank T3 to inventory
+2025-04-28 12:41:02,638 - INFO - Day 24: Tank levels after deliveries:
+2025-04-28 12:41:02,638 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,638 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,638 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,638 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,638 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,638 - INFO - Day 24: Selecting processing strategy...
+2025-04-28 12:41:02,638 - INFO - Day 24: Selected strategy 'final_days' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,638 - INFO - Day 24: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,638 - INFO - Day 24: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,638 - INFO - Day 24: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,638 - INFO - Day 24: Processing at rate 95.00 kb
+2025-04-28 12:41:02,638 - INFO - Day 24: Using 25.65 kb of B
+2025-04-28 12:41:02,638 - INFO - Day 24: Using 69.35 kb of Base
+2025-04-28 12:41:02,638 - INFO - Day 24: Updated inventory levels after processing:
+2025-04-28 12:41:02,638 - INFO -   - Base: 694.32 kb
+2025-04-28 12:41:02,638 - INFO -   - B: 209.40 kb
+2025-04-28 12:41:02,638 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,638 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,638 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,638 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,638 - INFO - Day 24: Processing complete
+2025-04-28 12:41:02,638 - INFO - ==== Processing Day 25 ====
+2025-04-28 12:41:02,639 - INFO - Day 25: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,639 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,639 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,639 - INFO - Day 25: Current inventory levels:
+2025-04-28 12:41:02,639 - INFO -   - Base: 694.32 kb
+2025-04-28 12:41:02,639 - INFO -   - B: 209.40 kb
+2025-04-28 12:41:02,639 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,639 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,639 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,639 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,639 - INFO - Day 25: Tank levels after deliveries:
+2025-04-28 12:41:02,639 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,639 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,639 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,639 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,639 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,639 - INFO - Day 25: Selecting processing strategy...
+2025-04-28 12:41:02,639 - INFO - Day 25: Selected strategy 'final_days' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,639 - INFO - Day 25: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,639 - INFO - Day 25: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,639 - INFO - Day 25: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,639 - INFO - Day 25: Processing at rate 95.00 kb
+2025-04-28 12:41:02,639 - INFO - Day 25: Using 25.65 kb of B
+2025-04-28 12:41:02,639 - INFO - Day 25: Using 69.35 kb of Base
+2025-04-28 12:41:02,639 - INFO - Day 25: Updated inventory levels after processing:
+2025-04-28 12:41:02,639 - INFO -   - Base: 624.97 kb
+2025-04-28 12:41:02,639 - INFO -   - B: 183.75 kb
+2025-04-28 12:41:02,639 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,639 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,639 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,639 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,639 - INFO - Day 25: Processing complete
+2025-04-28 12:41:02,640 - INFO - ==== Processing Day 26 ====
+2025-04-28 12:41:02,640 - INFO - Day 26: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,640 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,640 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,640 - INFO - Day 26: Current inventory levels:
+2025-04-28 12:41:02,640 - INFO -   - Base: 624.97 kb
+2025-04-28 12:41:02,640 - INFO -   - B: 183.75 kb
+2025-04-28 12:41:02,640 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,640 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,640 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,640 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,640 - INFO - Day 26: Tank levels after deliveries:
+2025-04-28 12:41:02,640 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,640 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,640 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,640 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,640 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,640 - INFO - Day 26: Selecting processing strategy...
+2025-04-28 12:41:02,640 - INFO - Day 26: Selected strategy 'final_days' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,640 - INFO - Day 26: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,640 - INFO - Day 26: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,640 - INFO - Day 26: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,640 - INFO - Day 26: Processing at rate 95.00 kb
+2025-04-28 12:41:02,640 - INFO - Day 26: Using 25.65 kb of B
+2025-04-28 12:41:02,640 - INFO - Day 26: Using 69.35 kb of Base
+2025-04-28 12:41:02,640 - INFO - Day 26: Updated inventory levels after processing:
+2025-04-28 12:41:02,640 - INFO -   - Base: 555.62 kb
+2025-04-28 12:41:02,640 - INFO -   - B: 158.10 kb
+2025-04-28 12:41:02,640 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,640 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,640 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,640 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,641 - INFO - Day 26: Processing complete
+2025-04-28 12:41:02,641 - INFO - ==== Processing Day 27 ====
+2025-04-28 12:41:02,641 - INFO - Day 27: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,641 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,641 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,641 - INFO - Day 27: Current inventory levels:
+2025-04-28 12:41:02,641 - INFO -   - Base: 555.62 kb
+2025-04-28 12:41:02,641 - INFO -   - B: 158.10 kb
+2025-04-28 12:41:02,641 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,641 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,641 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,641 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,641 - INFO - Day 27: Tank levels after deliveries:
+2025-04-28 12:41:02,641 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,641 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,641 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,641 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,641 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,641 - INFO - Day 27: Selecting processing strategy...
+2025-04-28 12:41:02,641 - INFO - Day 27: Selected strategy 'final_days' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,641 - INFO - Day 27: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,641 - INFO - Day 27: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,641 - INFO - Day 27: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,641 - INFO - Day 27: Processing at rate 95.00 kb
+2025-04-28 12:41:02,641 - INFO - Day 27: Using 25.65 kb of B
+2025-04-28 12:41:02,641 - INFO - Day 27: Using 69.35 kb of Base
+2025-04-28 12:41:02,641 - INFO - Day 27: Updated inventory levels after processing:
+2025-04-28 12:41:02,641 - INFO -   - Base: 486.27 kb
+2025-04-28 12:41:02,641 - INFO -   - B: 132.45 kb
+2025-04-28 12:41:02,641 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,641 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,641 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,642 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,642 - INFO - Day 27: Processing complete
+2025-04-28 12:41:02,642 - INFO - ==== Processing Day 28 ====
+2025-04-28 12:41:02,642 - INFO - Day 28: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,642 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,642 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,642 - INFO - Day 28: Current inventory levels:
+2025-04-28 12:41:02,642 - INFO -   - Base: 486.27 kb
+2025-04-28 12:41:02,642 - INFO -   - B: 132.45 kb
+2025-04-28 12:41:02,642 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,642 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,642 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,642 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,642 - INFO - Day 28: Tank levels after deliveries:
+2025-04-28 12:41:02,642 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,642 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,642 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,642 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,642 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,642 - INFO - Day 28: Selecting processing strategy...
+2025-04-28 12:41:02,642 - INFO - Day 28: Selected strategy 'final_days' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,642 - INFO - Day 28: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,642 - INFO - Day 28: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,642 - INFO - Day 28: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,642 - INFO - Day 28: Processing at rate 95.00 kb
+2025-04-28 12:41:02,642 - INFO - Day 28: Using 25.65 kb of B
+2025-04-28 12:41:02,642 - INFO - Day 28: Using 69.35 kb of Base
+2025-04-28 12:41:02,642 - INFO - Day 28: Updated inventory levels after processing:
+2025-04-28 12:41:02,642 - INFO -   - Base: 416.92 kb
+2025-04-28 12:41:02,642 - INFO -   - B: 106.80 kb
+2025-04-28 12:41:02,642 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,643 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,643 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,643 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,643 - INFO - Day 28: Processing complete
+2025-04-28 12:41:02,643 - INFO - ==== Processing Day 29 ====
+2025-04-28 12:41:02,643 - INFO - Day 29: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,643 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,643 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,643 - INFO - Day 29: Current inventory levels:
+2025-04-28 12:41:02,643 - INFO -   - Base: 416.92 kb
+2025-04-28 12:41:02,643 - INFO -   - B: 106.80 kb
+2025-04-28 12:41:02,643 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,643 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,643 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,643 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,643 - INFO - Day 29: Tank levels after deliveries:
+2025-04-28 12:41:02,643 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,643 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,643 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,643 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,643 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,643 - INFO - Day 29: Selecting processing strategy...
+2025-04-28 12:41:02,643 - INFO - Day 29: Selected strategy 'final_days' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,643 - INFO - Day 29: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,643 - INFO - Day 29: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,643 - INFO - Day 29: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,643 - INFO - Day 29: Processing at rate 95.00 kb
+2025-04-28 12:41:02,643 - INFO - Day 29: Using 25.65 kb of B
+2025-04-28 12:41:02,643 - INFO - Day 29: Using 69.35 kb of Base
+2025-04-28 12:41:02,643 - INFO - Day 29: Updated inventory levels after processing:
+2025-04-28 12:41:02,643 - INFO -   - Base: 347.57 kb
+2025-04-28 12:41:02,643 - INFO -   - B: 81.15 kb
+2025-04-28 12:41:02,644 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,644 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,644 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,644 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,644 - INFO - Day 29: Processing complete
+2025-04-28 12:41:02,644 - INFO - ==== Processing Day 30 ====
+2025-04-28 12:41:02,644 - INFO - Day 30: Upcoming deliveries in next 7 days: 2
+2025-04-28 12:41:02,644 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,644 - INFO -   - Day 30.0: F = 280.00 kb
+2025-04-28 12:41:02,644 - INFO - Day 30: Current inventory levels:
+2025-04-28 12:41:02,644 - INFO -   - Base: 347.57 kb
+2025-04-28 12:41:02,644 - INFO -   - B: 81.15 kb
+2025-04-28 12:41:02,644 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,644 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,644 - INFO -   - F: 500.00 kb
+2025-04-28 12:41:02,644 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,644 - INFO - Day 30: Processing 2 deliveries:
+2025-04-28 12:41:02,644 - INFO - Day 30: Starting to receive 280.00 kb of F
+2025-04-28 12:41:02,644 - INFO - Day 30: Unloaded 280.00 kb of F on first day
+2025-04-28 12:41:02,644 - INFO - Day 30: Starting to receive 280.00 kb of F
+2025-04-28 12:41:02,644 - INFO - Day 30: Unloaded 280.00 kb of F on first day
+2025-04-28 12:41:02,644 - INFO - Day 30: Transferring 250.00 kb of F from tank T1 to inventory
+2025-04-28 12:41:02,644 - INFO - Day 30: Transferring 30.00 kb of F from tank T2 to inventory
+2025-04-28 12:41:02,644 - INFO - Day 30: Transferring 250.00 kb of F from tank T3 to inventory
+2025-04-28 12:41:02,644 - INFO - Day 30: Transferring 30.00 kb of F from tank T4 to inventory
+2025-04-28 12:41:02,644 - INFO - Day 30: Tank levels after deliveries:
+2025-04-28 12:41:02,644 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,644 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,644 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,644 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,644 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,644 - INFO - Day 30: Selecting processing strategy...
+2025-04-28 12:41:02,645 - INFO - Day 30: Selected strategy 'final_days' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,645 - INFO - Day 30: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,645 - INFO - Day 30: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,645 - INFO - Day 30: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,645 - INFO - Day 30: Processing at rate 95.00 kb
+2025-04-28 12:41:02,645 - INFO - Day 30: Using 25.65 kb of B
+2025-04-28 12:41:02,645 - INFO - Day 30: Using 69.35 kb of Base
+2025-04-28 12:41:02,645 - INFO - Day 30: Updated inventory levels after processing:
+2025-04-28 12:41:02,645 - INFO -   - Base: 278.22 kb
+2025-04-28 12:41:02,645 - INFO -   - B: 55.50 kb
+2025-04-28 12:41:02,645 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,645 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,645 - INFO -   - F: 1620.00 kb
+2025-04-28 12:41:02,645 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,645 - INFO - Day 30: Processing complete
+2025-04-28 12:41:02,645 - INFO - ==== Processing Day 31 ====
+2025-04-28 12:41:02,645 - INFO - Day 31: No upcoming deliveries in next 7 days
+2025-04-28 12:41:02,645 - INFO - Day 31: Current inventory levels:
+2025-04-28 12:41:02,645 - INFO -   - Base: 278.22 kb
+2025-04-28 12:41:02,645 - INFO -   - B: 55.50 kb
+2025-04-28 12:41:02,645 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,645 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,645 - INFO -   - F: 1620.00 kb
+2025-04-28 12:41:02,645 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,645 - INFO - Day 31: Tank levels after deliveries:
+2025-04-28 12:41:02,645 - INFO -   - Tank T1 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,645 - INFO -   - Tank T2 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,645 - INFO -   - Tank T3 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,645 - INFO -   - Tank T4 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,645 - INFO -   - Tank T5 (empty): 0.00/250.00 kb
+2025-04-28 12:41:02,645 - INFO - Day 31: Selecting processing strategy...
+2025-04-28 12:41:02,646 - INFO - Day 31: Selected strategy 'final_days' with blend recipe 2 at rate 95.00 kb
+2025-04-28 12:41:02,646 - INFO - Day 31: Blend recipe ratios: {'B': 0.27, 'Base': 0.73}
+2025-04-28 12:41:02,646 - INFO - Day 31: Checking availability of B: Need 25.65 kb (ratio 0.27)
+2025-04-28 12:41:02,646 - INFO - Day 31: Checking availability of Base: Need 69.35 kb (ratio 0.73)
+2025-04-28 12:41:02,646 - INFO - Day 31: Processing at rate 95.00 kb
+2025-04-28 12:41:02,646 - INFO - Day 31: Using 25.65 kb of B
+2025-04-28 12:41:02,646 - INFO - Day 31: Using 69.35 kb of Base
+2025-04-28 12:41:02,646 - INFO - Day 31: Updated inventory levels after processing:
+2025-04-28 12:41:02,646 - INFO -   - Base: 208.87 kb
+2025-04-28 12:41:02,646 - INFO -   - B: 29.85 kb
+2025-04-28 12:41:02,646 - INFO -   - C: 597.40 kb
+2025-04-28 12:41:02,646 - INFO -   - D: 8.00 kb
+2025-04-28 12:41:02,646 - INFO -   - F: 1620.00 kb
+2025-04-28 12:41:02,646 - INFO -   - A: 14.88 kb
+2025-04-28 12:41:02,646 - INFO - Day 31: Processing complete
+2025-04-28 12:41:02,646 - INFO - ===== Completed daily scheduling process =====
+2025-04-28 12:41:02,646 - INFO - Total days scheduled: 31
+2025-04-28 12:41:02,646 - INFO - Total volume processed: 2961.00 kb
+2025-04-28 12:41:02,646 - INFO - Saving results to results
+2025-04-28 12:41:02,651 - ERROR - Error generating reports: 'list' object has no attribute 'to_csv'
+2025-04-28 12:41:02,651 - INFO - Saved 3 result files
+2025-04-28 12:41:02,651 - INFO - Scheduling completed with status: success

@@ -216,10 +216,6 @@ class Scheduler:
         # Initialize daily records
         records = []
         
-        # Initialize tracking for active deliveries
-        active_deliveries = []
-        delayed_deliveries = {}
-        
         logger.info("===== Starting daily scheduling process =====")
         logger.info(f"Planning horizon: {planning_horizon} days")
         logger.info(f"Initial inventory: {inventory.to_dict()}")
@@ -252,14 +248,115 @@ class Scheduler:
             for crude in inventory.get_all_crudes():
                 logger.info(f"  - {crude}: {inventory.get(crude):.2f} kb")
             
-            # Process deliveries BEFORE selecting processing strategy
-            # This ensures new deliveries are available for processing
+            # Get the processing strategy for today
+            logger.info(f"Day {current_day}: Selecting processing strategy...")
+            strategy, processing_rate, blend_idx = choose_strategy(
+                day=current_day,
+                inventory=inventory,
+                upcoming_deliveries=upcoming,
+                blend_recipes=self.blends,
+                params=self.params
+            )
+            
+            # Try to follow the chosen strategy
+            record["Strategy"] = strategy
+            record["Blend_Index"] = blend_idx
+            
+            # If no feasible strategy, record zero processing and continue
+            if strategy == "none" or blend_idx is None:
+                logger.info(f"Day {current_day}: No feasible processing strategy found, skipping day")
+                records.append(record)
+                continue
+                
+            # Get the blend recipe
+            blend = self.blends[blend_idx]
+            logger.info(f"Day {current_day}: Selected strategy '{strategy}' with blend recipe {blend_idx} at rate {processing_rate:.2f} kb")
+            logger.info(f"Day {current_day}: Blend recipe ratios: {blend.ratios}")
+            
+            # Record the planned processing rate
+            record[processed_key] = processing_rate
+            
+            # Process each crude according to blend ratio
+            try:
+                # First check if we have enough inventory for each crude
+                enough_inventory = True
+                limited_crude = None
+                available_fraction = 1.0
+                
+                # Check each crude required by the blend
+                for crude, ratio in blend.ratios.items():
+                    qty = processing_rate * ratio
+                    logger.info(f"Day {current_day}: Checking availability of {crude}: Need {qty:.2f} kb (ratio {ratio:.2f})")
+                    if not inventory.available(crude, qty):
+                        enough_inventory = False
+                        available = inventory.get(crude)
+                        logger.warning(f"Day {current_day}: Not enough {crude}. Have {available:.2f} kb, need {qty:.2f} kb")
+                        # Calculate what fraction of the desired rate we can actually process
+                        if ratio > 0:
+                            fraction = available / (processing_rate * ratio)
+                            if fraction < available_fraction:
+                                available_fraction = fraction
+                                limited_crude = crude
+                        
+                # If we don't have enough inventory, adjust the processing rate
+                if not enough_inventory:
+                    original_rate = processing_rate
+                    # Adjust processing rate to use what's available
+                    processing_rate = processing_rate * available_fraction
+                    logger.warning(f"Day {current_day}: Not enough {limited_crude}. Adjusting processing from {original_rate:.2f} to {processing_rate:.2f}")
+                    # Update the record with adjusted rate
+                    record[processed_key] = processing_rate
+                    
+                # Now process each crude with adjusted rate
+                logger.info(f"Day {current_day}: Processing at rate {processing_rate:.2f} kb")
+                for crude, ratio in blend.ratios.items():
+                    qty = processing_rate * ratio
+                    if qty > 0:
+                        # Try to remove the crude, but handle potential errors
+                        try:
+                            if inventory.available(crude, qty):
+                                logger.info(f"Day {current_day}: Using {qty:.2f} kb of {crude}")
+                                inventory.remove(crude, qty)
+                                # Record usage
+                                record["Crude_Usage"][crude] = qty
+                            else:
+                                # Use what's available
+                                available = inventory.get(crude)
+                                if available > 0:
+                                    inventory.remove(crude, available)
+                                    record["Crude_Usage"][crude] = available
+                                    logger.warning(f"Day {current_day}: Used remaining {available:.2f} of {crude}")
+                                else:
+                                    logger.warning(f"Day {current_day}: No {crude} available")
+                        except ValueError as e:
+                            # This shouldn't happen since we checked availability, but just in case
+                            logger.error(f"Day {current_day}: Error processing {crude}: {str(e)}")
+                            # Set processing to zero for this crude
+                            record["Crude_Usage"][crude] = 0
+                    else:
+                        logger.info(f"Day {current_day}: {crude} not used (ratio: {ratio:.2f})")
+                    
+                # Record remaining inventory
+                logger.info(f"Day {current_day}: Updated inventory levels after processing:")
+                for crude in inventory.get_all_crudes():
+                    remaining = inventory.get(crude)
+                    record["Remaining"][crude] = remaining
+                    logger.info(f"  - {crude}: {remaining:.2f} kb")
+                    
+            except Exception as e:
+                logger.error(f"Error on day {current_day}: {str(e)}", exc_info=True)
+                # Continue with the next day instead of failing
+                record[processed_key] = 0.0
+                record["Strategy"] = "error"
+                record["Error"] = str(e)
+            
+            # Check for daily deliveries and continue processing active deliveries
+            active_deliveries = getattr(self, 'active_deliveries', [])
+            delayed_deliveries = getattr(self, 'delayed_deliveries', {})
+            day_deliveries = self.future_deliveries.get(current_day, [])
             
             # Track tank objects for loading operations
             tanks_dict = {tank.id: tank for tank in self.tanks}
-            
-            # Check for daily deliveries and continue processing active deliveries
-            day_deliveries = self.future_deliveries.get(current_day, [])
             
             # First check if we have capacity for today's deliveries
             total_tank_space_available = 0
@@ -383,135 +480,18 @@ class Scheduler:
                         logger.info(f"Day {current_day}: Will continue unloading {delivery.unloaded_volume:.2f} kb "
                                    f"of {delivery.crude} on day {current_day + 1}")
             
-            # Transfer crude from tanks to inventory for processing
-            # This is the key fix: ensure tank contents are synchronized with inventory
-            for tank_id, tank in tanks_dict.items():
-                for crude_type, amount in tank.composition.items():
-                    # Only add if tank has a significant amount
-                    if amount > 0.01:  # More than 0.01 kb
-                        if crude_type not in inventory.get_all_crudes():
-                            inventory.add(crude_type, 0)  # Initialize if needed
-                        
-                        # Log the transfer
-                        logger.info(f"Day {current_day}: Transferring {amount:.2f} kb of {crude_type} from tank {tank_id} to inventory")
-                        
-                        # Update inventory
-                        inventory.add(crude_type, amount)
-                
-                # Clear the tank after transferring to inventory
-                tank.composition.clear()
-                tank.level = 0.0
-                tank.crude = None
+            # Store updated active deliveries list for next iteration
+            self.active_deliveries = active_deliveries
+            self.delayed_deliveries = delayed_deliveries
             
-            # Log tank levels after deliveries and transfers
+            # Log tank levels after deliveries
+            tanks_dict = {tank.id: tank for tank in self.tanks}
             logger.info(f"Day {current_day}: Tank levels after deliveries:")
             for tank_id, tank in tanks_dict.items():
                 crude_info = f"({tank.crude})" if tank.crude else "(empty)"
                 logger.info(f"  - Tank {tank_id} {crude_info}: {tank.level:.2f}/{tank.capacity:.2f} kb")
             
-            # Get the processing strategy for today AFTER deliveries are processed
-            logger.info(f"Day {current_day}: Selecting processing strategy...")
-            strategy, processing_rate, blend_idx = choose_strategy(
-                day=current_day,
-                inventory=inventory,
-                upcoming_deliveries=upcoming,
-                blend_recipes=self.blends,
-                params=self.params
-            )
-            
-            # Try to follow the chosen strategy
-            record["Strategy"] = strategy
-            record["Blend_Index"] = blend_idx
-            
-            # If no feasible strategy, record zero processing and continue
-            if strategy == "none" or blend_idx is None:
-                logger.info(f"Day {current_day}: No feasible processing strategy found, skipping day")
-                records.append(record)
-                continue
-                
-            # Get the blend recipe
-            blend = self.blends[blend_idx]
-            logger.info(f"Day {current_day}: Selected strategy '{strategy}' with blend recipe {blend_idx} at rate {processing_rate:.2f} kb")
-            logger.info(f"Day {current_day}: Blend recipe ratios: {blend.ratios}")
-            
-            # Record the planned processing rate
-            record[processed_key] = processing_rate
-            
-            # Process each crude according to blend ratio
-            try:
-                # First check if we have enough inventory for each crude
-                enough_inventory = True
-                limited_crude = None
-                available_fraction = 1.0
-                
-                # Check each crude required by the blend
-                for crude, ratio in blend.ratios.items():
-                    qty = processing_rate * ratio
-                    logger.info(f"Day {current_day}: Checking availability of {crude}: Need {qty:.2f} kb (ratio {ratio:.2f})")
-                    if not inventory.available(crude, qty):
-                        enough_inventory = False
-                        available = inventory.get(crude)
-                        logger.warning(f"Day {current_day}: Not enough {crude}. Have {available:.2f} kb, need {qty:.2f} kb")
-                        # Calculate what fraction of the desired rate we can actually process
-                        if ratio > 0:
-                            fraction = available / (processing_rate * ratio)
-                            if fraction < available_fraction:
-                                available_fraction = fraction
-                                limited_crude = crude
-                        
-                # If we don't have enough inventory, adjust the processing rate
-                if not enough_inventory:
-                    original_rate = processing_rate
-                    # Adjust processing rate to use what's available
-                    processing_rate = processing_rate * available_fraction
-                    logger.warning(f"Day {current_day}: Not enough {limited_crude}. Adjusting processing from {original_rate:.2f} to {processing_rate:.2f}")
-                    # Update the record with adjusted rate
-                    record[processed_key] = processing_rate
-                    
-                # Now process each crude with adjusted rate
-                logger.info(f"Day {current_day}: Processing at rate {processing_rate:.2f} kb")
-                for crude, ratio in blend.ratios.items():
-                    qty = processing_rate * ratio
-                    if qty > 0:
-                        # Try to remove the crude, but handle potential errors
-                        try:
-                            if inventory.available(crude, qty):
-                                logger.info(f"Day {current_day}: Using {qty:.2f} kb of {crude}")
-                                inventory.remove(crude, qty)
-                                # Record usage
-                                record["Crude_Usage"][crude] = qty
-                            else:
-                                # Use what's available
-                                available = inventory.get(crude)
-                                if available > 0:
-                                    inventory.remove(crude, available)
-                                    record["Crude_Usage"][crude] = available
-                                    logger.warning(f"Day {current_day}: Used remaining {available:.2f} of {crude}")
-                                else:
-                                    logger.warning(f"Day {current_day}: No {crude} available")
-                        except ValueError as e:
-                            # This shouldn't happen since we checked availability, but just in case
-                            logger.error(f"Day {current_day}: Error processing {crude}: {str(e)}")
-                            # Set processing to zero for this crude
-                            record["Crude_Usage"][crude] = 0
-                    else:
-                        logger.info(f"Day {current_day}: {crude} not used (ratio: {ratio:.2f})")
-                    
-                # Record remaining inventory
-                logger.info(f"Day {current_day}: Updated inventory levels after processing:")
-                for crude in inventory.get_all_crudes():
-                    remaining = inventory.get(crude)
-                    record["Remaining"][crude] = remaining
-                    logger.info(f"  - {crude}: {remaining:.2f} kb")
-                    
-            except Exception as e:
-                logger.error(f"Error on day {current_day}: {str(e)}", exc_info=True)
-                # Continue with the next day instead of failing
-                record[processed_key] = 0.0
-                record["Strategy"] = "error"
-                record["Error"] = str(e)
-            
-            # Record tank allocation in daily record
+            # Record remaining inventory and tank allocation in daily record
             record["Tank_Levels"] = {
                 tank_id: {
                     "crude": tank.crude,
@@ -522,6 +502,13 @@ class Scheduler:
                 }
                 for tank_id, tank in tanks_dict.items()
             }
+            
+            # Record remaining inventory
+            logger.info(f"Day {current_day}: Updated inventory levels after all operations:")
+            for crude in inventory.get_all_crudes():
+                remaining = inventory.get(crude)
+                record["Remaining"][crude] = remaining
+                logger.info(f"  - {crude}: {remaining:.2f} kb")
             
             # Save the record for today
             records.append(record)
