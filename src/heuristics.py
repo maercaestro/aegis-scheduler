@@ -1,43 +1,146 @@
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any
 
 
 def choose_strategy(
-    max_per_day: List[float],
-    smoothing_factor: float,
-    low_inventory_threshold: float = 10.0
-) -> Tuple[float, float, str]:
+    day: int,
+    inventory: Any,
+    upcoming_deliveries: List[Any],
+    blend_recipes: List[Any],
+    params: Dict[str, Any]
+) -> Tuple[str, float, int]:
     """
-    Compare a greedy vs. smooth processing strategy.
-
-    - greedy_total = sum(max_per_day)
-    - smooth_rate = min(max_per_day)
-      smooth_total = smooth_rate * len(max_per_day)
-
-    If smooth_total >= greedy_total * smoothing_factor, choose smooth.
-    Otherwise choose greedy (processing max_per_day[0] today).
+    Choose processing strategy for the current day based on inventory
+    and upcoming deliveries.
     
-    If the first day's max is very low (below low_inventory_threshold), 
-    it indicates we're running low on inventory for this blend.
-
+    Args:
+        day: Current day in the planning horizon
+        inventory: Current inventory state
+        upcoming_deliveries: List of upcoming deliveries (Delivery objects)
+        blend_recipes: Available blend recipes
+        params: Configuration parameters
+        
     Returns:
-      (daily_rate, total_processing, strategy_name)
+        Tuple of (strategy, processing_rate, blend_index)
     """
-    if not max_per_day:
-        return 0.0, 0.0, "none"
+    # Default rate from configuration or use 50.0 if not specified
+    default_rate = params.get("default_processing_rate", 50.0)
+    min_rate = params.get("min_daily", 15.0)
+    lookahead = params.get("lookahead", 7)
+    critical_days = params.get("critical", 7)
     
-    # Check if the first day's max is below threshold - indicates low inventory
-    if max_per_day[0] < low_inventory_threshold:
-        # Return a very low score to discourage using this blend
-        return max_per_day[0], max_per_day[0], "low_inventory"
+    # First find which blend recipes are feasible with current inventory
+    feasible_blends = []
+    for idx, blend in enumerate(blend_recipes):
+        # For each crude in this blend, check if we have enough inventory
+        can_process = True
+        max_possible = float('inf')
+        
+        for crude, ratio in blend.ratios.items():
+            if ratio <= 0:
+                continue
+                
+            # Check how much we could process based on this crude
+            available = inventory.get(crude)
+            if available <= 0:
+                can_process = False
+                break
+                
+            # Calculate how much we could process with this crude
+            possible_with_crude = available / ratio
+            max_possible = min(max_possible, possible_with_crude)
+        
+        # If we can process and have a reasonable amount, add to feasible blends
+        if can_process and max_possible >= min_rate:
+            # Get the effective max processing rate (min of blend capacity and inventory)
+            effective_max = min(max_possible, blend.max_capacity)
+            feasible_blends.append((idx, blend, effective_max))
     
-    greedy_total = sum(max_per_day)
-    smooth_rate = min(max_per_day)
-    smooth_total = smooth_rate * len(max_per_day)
+    # If no feasible blends, return "none" with zero processing
+    if not feasible_blends:
+        return "none", 0.0, None
     
-    if smooth_total >= greedy_total * smoothing_factor and smooth_rate > 1e-6:
-        return smooth_rate, smooth_total, "smooth"
-    # fallback to greedy
-    return max_per_day[0], greedy_total, "greedy"
+    # Calculate projected inventory including upcoming deliveries
+    # This helps us prioritize blends that use crude types that will be replenished
+    projected_inventory = {}
+    for future_day in range(day, day + lookahead + 1):
+        projected_inventory[future_day] = {}
+        
+        # Start with current day's inventory
+        if future_day == day:
+            for crude in inventory.get_all_crudes():
+                projected_inventory[day][crude] = inventory.get(crude)
+        else:
+            # Copy from previous day
+            for crude, amount in projected_inventory[future_day - 1].items():
+                projected_inventory[future_day][crude] = amount
+        
+        # Add upcoming deliveries for this day - using Delivery object attributes directly
+        for delivery in upcoming_deliveries:
+            # Access attributes directly instead of using .get()
+            delivery_day = delivery.day
+            if delivery_day == future_day:
+                crude = delivery.crude
+                volume = delivery.volume
+                if crude and volume > 0:
+                    projected_inventory[future_day][crude] = projected_inventory[future_day].get(crude, 0.0) + volume
+    
+    # Score each blend based on inventory availability and upcoming deliveries
+    best_score = -float('inf')
+    best_blend_idx = -1
+    best_rate = 0.0
+    
+    for idx, blend, max_rate in feasible_blends:
+        # Start with a base score - the effective processing rate
+        score = max_rate
+        
+        # Adjust score based on rationing factor (how long inventory will last)
+        rationing = calculate_rationing_factor(
+            blend.ratios, day, projected_inventory, critical_days)
+            
+        # If we have limited inventory for this blend, reduce the score
+        score *= rationing
+        
+        # Adjust for final days of the planning horizon
+        days_remaining = params.get("planning_horizon", 31) - day + 1
+        if days_remaining <= params.get("final_days", 10):
+            # In final days, prioritize blends with highest processing rates
+            # to maximize throughput
+            score *= 1.2
+        
+        # Keep track of the highest scoring blend
+        if score > best_score:
+            best_score = score
+            best_blend_idx = idx
+            
+            # Determine processing rate based on rationing factor
+            best_rate = max_rate * rationing
+            
+            # Enforce minimum processing rate from parameters
+            if best_rate < min_rate:
+                best_rate = 0.0  # If we can't meet minimum rate, don't process
+    
+    # If we found a valid blend with non-zero rate
+    if best_blend_idx >= 0 and best_rate > 0:
+        # Final adjustment for the end of the planning horizon
+        days_remaining = params.get("planning_horizon", 31) - day + 1
+        final_days_threshold = params.get("final_days", 10)
+        absolute_min = params.get("absolute_min", 15.0)
+        
+        best_rate = enforce_final_days(
+            best_rate, days_remaining, final_days_threshold, absolute_min)
+            
+        strategy = "standard"
+        
+        # Add some strategy variations based on conditions
+        if rationing < 0.9:
+            strategy = "rationed"
+        elif days_remaining <= params.get("final_days", 10):
+            strategy = "final_days"
+            
+        return strategy, best_rate, best_blend_idx
+    
+    # Fallback if no valid blend was found
+    return "none", 0.0, None
 
 
 def calculate_rationing_factor(

@@ -2,7 +2,7 @@ import pytest
 import os
 import json
 import tempfile
-from data_loader import DataLoader, ConfigValidationError
+from src.data_loader import DataLoader, ConfigValidationError
 
 
 class TestDataLoader:

@@ -1,10 +1,10 @@
 import pytest
 import os
 import tempfile
-from scheduler import Scheduler
-from models.inventory import CrudeInventory
-from models.tank import Tank
-from models.blend import BlendRecipe
+from src.scheduler import Scheduler
+from src.models.inventory import CrudeInventory
+from src.models.tank import Tank
+from src.models.blend import BlendRecipe
 import pytest
 
 

@@ -75,3 +75,12 @@ class CrudeInventory:
 
         # Replace stock with tank_totals, removing zero-volume entries
         self.stock = {c: v for c, v in tank_totals.items() if v > 1e-6}
+
+    def to_dict(self) -> Dict[str, float]:
+        """
+        Return the inventory as a dictionary.
+        
+        Returns:
+            Dictionary mapping crude names to volumes
+        """
+        return self.stock.copy()

@@ -97,5 +97,19 @@
     "D": 11.19,
     "E": 9.98,
     "F": 9.97
-  }
+  },
+  
+  "deliveries": [
+    {"day": 10, "crude": "Base", "volume": 400},
+    {"day": 17, "crude": "Base", "volume": 360},
+    {"day": 10, "crude": "A", "volume": 150},
+    {"day": 8, "crude": "B", "volume": 150},
+    {"day": 17, "crude": "C", "volume": 200},
+    {"day": 23, "crude": "D", "volume": 150},
+    {"day": 5, "crude": "E", "volume": 250},
+    {"day": 10, "crude": "E", "volume": 550},
+    {"day": 23, "crude": "E", "volume": 100},
+    {"day": 5, "crude": "F", "volume": 320},
+    {"day": 19, "crude": "F", "volume": 280}
+  ]
 }

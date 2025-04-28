@@ -16,7 +16,6 @@ from src.simulator import simulate_blend, check_tank_inventory, find_max_feasibl
 from src.heuristics import choose_strategy, calculate_rationing_factor, enforce_final_days
 from src.reporter import to_dataframe, save_reports
 from src.models.vessel_optimizer import VesselOptimizer
-from src.optimizer import EndPeriodOptimizer
 
 # Configure logging
 logging.basicConfig(
@@ -202,393 +201,347 @@ class Scheduler:
     
     def run_daily_scheduling(self) -> List[Dict[str, Any]]:
         """
-        Run the main scheduling loop for all days in planning horizon.
+        Run the daily scheduling algorithm.
         
         Returns:
             List of daily schedule records
         """
+        # Initialize parameters
         planning_horizon = self.params.get("planning_horizon", 40)
-        lookahead = self.params.get("lookahead", 7)
-        smoothing = self.params.get("smoothing", 0.85)
-        critical = self.params.get("critical", 8)
-        final_days = self.params.get("final_days", 10)
-        absolute_min = self.params.get("absolute_min", 15.0)
-        min_daily = self.params.get("min_daily", 50.0)
-        increment = self.params.get("increment", 5.0)
-        daily_capacity = self.params.get("daily_capacity", 100.0)
+        processed_key = "Processed"
         
-        self.schedule_records = []
-        self.delayed_deliveries = {}  # Store delayed deliveries by day
+        # Create a copy of the initial inventory
+        inventory = copy.deepcopy(self.inventory)
         
-        logger.info(f"Starting daily scheduling with planning horizon: {planning_horizon} days")
-        logger.info(f"Initial inventory: {self.inventory.stock}")
+        # Initialize daily records
+        records = []
         
-        for day in range(1, planning_horizon + 1):
-            logger.info(f"\n--- Day {day} ---")
-            logger.info(f"Current inventory: {self.inventory.stock}")
+        logger.info("===== Starting daily scheduling process =====")
+        logger.info(f"Planning horizon: {planning_horizon} days")
+        logger.info(f"Initial inventory: {inventory.to_dict()}")
+        
+        # For each day in the planning period
+        for current_day in range(1, planning_horizon + 1):
+            logger.info(f"==== Processing Day {current_day} ====")
             
-            # Create record for this day
+            # Initialize today's record
             record = {
-                "Day": day,
+                "Day": current_day,
+                "Strategy": None,
                 "Blend_Index": None,
-                "Strategy": "none",
-                "Processed": 0.0,
-                "Tank_Levels": {},
-                "Deliveries": [],
-                "Delayed_Deliveries": [],
-                "Crude_Usage": {}  # Track usage of each crude type
+                processed_key: 0.0,
+                "Crude_Usage": {},
+                "Remaining": {}
             }
             
-            # Log and record tank levels
-            logger.info("Tank levels:")
-            for tank in self.tanks:
-                logger.info(f"  Tank {tank.id}: {tank.level:.2f} kb of {tank.crude if tank.crude else 'Empty'}")
-                if tank.composition:
-                    for crude, vol in tank.composition.items():
-                        logger.info(f"    - {crude}: {vol:.2f} kb")
-                
-                # Record tank level in daily record
-                record["Tank_Levels"][tank.id] = {
-                    "level": tank.level,
-                    "crude": tank.crude,
-                    "composition": tank.composition.copy() if tank.composition else {}
-                }
-            
-            # 1. Check for delayed deliveries for today
-            delayed_today = self.delayed_deliveries.get(day, [])
-            if delayed_today:
-                logger.info(f"Processing {len(delayed_today)} delayed deliveries for day {day}:")
-                for d in delayed_today:
-                    logger.info(f"  Delayed delivery: {d.volume:.2f} kb of {d.crude}")
-                    # Try to allocate to tanks
-                    alloc, rem = allocate_delivery(self.tanks, d)
-                    logger.info(f"  Allocated {d.volume - rem:.2f} kb, Remainder: {rem:.2f} kb")
-                    logger.info(f"  Allocation: {alloc}")
-                    
-                    # Record this delivery in the daily record
-                    delivery_record = {
-                        "crude": d.crude,
-                        "volume": d.volume,
-                        "allocated": d.volume - rem,
-                        "remainder": rem,
-                        "delayed": True,
-                        "original_day": d.original_day if d.original_day is not None else d.day
-                    }
-                    record["Deliveries"].append(delivery_record)
-                    
-                    # If there's still remainder, delay it further
-                    if rem > 0:
-                        delay_delivery = Delivery(
-                            day=day + 1,
-                            crude=d.crude,
-                            volume=rem,
-                            original_day=d.original_day if d.original_day is not None else d.day
-                        )
-                        if day + 1 not in self.delayed_deliveries:
-                            self.delayed_deliveries[day + 1] = []
-                        self.delayed_deliveries[day + 1].append(delay_delivery)
-                        
-                        # Record the delay
-                        delay_record = {
-                            "crude": d.crude,
-                            "volume": rem,
-                            "original_day": d.original_day if d.original_day is not None else d.day,
-                            "new_day": day + 1
-                        }
-                        record["Delayed_Deliveries"].append(delay_record)
-                
-                # Update inventory from tanks
-                self.inventory.sync_with_tanks({t.id: t for t in self.tanks})
-            
-            # 2. Handle deliveries arriving today
-            todays = self.future_deliveries.get(day, [])
-            if todays:
-                logger.info(f"Deliveries arriving on day {day}:")
-                for d in todays:
-                    logger.info(f"  {d.volume:.2f} kb of {d.crude}")
-                    # Allocate to tanks
-                    alloc, rem = allocate_delivery(self.tanks, d)
-                    logger.info(f"  Allocated {d.volume - rem:.2f} kb, Remainder: {rem:.2f} kb")
-                    logger.info(f"  Allocation: {alloc}")
-                    
-                    # Record this delivery in the daily record
-                    delivery_record = {
-                        "crude": d.crude,
-                        "volume": d.volume,
-                        "allocated": d.volume - rem,
-                        "remainder": rem,
-                        "delayed": False
-                    }
-                    record["Deliveries"].append(delivery_record)
-                    
-                    # If there's remainder, schedule for tomorrow
-                    if rem > 0:
-                        delay_delivery = Delivery(
-                            day=day + 1,
-                            crude=d.crude,
-                            volume=rem,
-                            original_day=d.day
-                        )
-                        if day + 1 not in self.delayed_deliveries:
-                            self.delayed_deliveries[day + 1] = []
-                        self.delayed_deliveries[day + 1].append(delay_delivery)
-                        
-                        # Record the delay
-                        delay_record = {
-                            "crude": d.crude,
-                            "volume": rem,
-                            "original_day": d.day,
-                            "new_day": day + 1
-                        }
-                        record["Delayed_Deliveries"].append(delay_record)
-                    
-                    # Update inventory from tanks
-                    self.inventory.sync_with_tanks({t.id: t for t in self.tanks})
-                logger.info(f"Updated inventory after deliveries: {self.inventory.stock}")
-    
-            # Rest of the scheduling logic
-            window = min(lookahead, planning_horizon - day + 1)
-            subset = {d: self.future_deliveries.get(d, []) for d in range(day, day + window)}
-            logger.info(f"Lookahead window: {window} days")
-            
-            # Log future deliveries in window
-            future_del_count = sum(len(deliv) for deliv in subset.values())
-            logger.info(f"Future deliveries in window: {future_del_count}")
-            for d, delivs in subset.items():
-                for deliv in delivs:
-                    logger.info(f"  Day {d}: {deliv.volume:.2f} kb of {deliv.crude}")
-    
-            # 3. Evaluate blends
-            candidates = []  # (blend_idx, blend, rate, total, strat)
-            # Project inventory for rationing
-            inv_proj = {d: self.inventory.stock.copy() for d in range(day, planning_horizon + 1)}  # simple proj
-            logger.info(f"Evaluating {len(self.blends)} blend recipes")
-    
-            for idx, blend in enumerate(self.blends):
-                logger.info(f"  Blend {idx}: {blend.ratios}")
-                max_per_day = simulate_blend(blend, self.inventory, self.tanks, subset, window, increment)
-                logger.info(f"  Max per day: {[f'{m:.2f}' for m in max_per_day]}")
-                rate, total, strat = choose_strategy(max_per_day, smoothing)
-                logger.info(f"  Strategy: {strat}, Rate: {rate:.2f}, Total: {total:.2f}")
-                
-                # Apply rationing
-                f = calculate_rationing_factor(blend.ratios, day, inv_proj, critical)
-                logger.info(f"  Rationing factor: {f:.4f}")
-                rate *= f
-                total *= f
-                
-                # Final days enforcement
-                original_rate = rate
-                rate = enforce_final_days(rate, planning_horizon - day + 1, final_days, absolute_min)
-                if rate != original_rate:
-                    logger.info(f"  Final days enforcement adjusted rate: {rate:.2f}")
-                
-                candidates.append((idx, blend, rate, total, strat))
-    
-            # 4. Select best candidate
-            # Prefer highest total, tie-breaker on rate
-            if not candidates:
-                logger.info("No viable blend candidates found")
-                best = (None, None, 0.0, 0.0, "none")
+            # Check upcoming deliveries
+            upcoming = self._get_deliveries_in_window(current_day, 7)
+            if upcoming:
+                logger.info(f"Day {current_day}: Upcoming deliveries in next 7 days: {len(upcoming)}")
+                for delivery in upcoming:
+                    logger.info(f"  - Day {delivery.day}: {delivery.crude} = {delivery.volume:.2f} kb")
             else:
-                best = max(candidates, key=lambda x: x[3])
-                logger.info(f"Selected best candidate: Blend {best[0]}, Rate: {best[2]:.2f}, Total: {best[3]:.2f}")
+                logger.info(f"Day {current_day}: No upcoming deliveries in next 7 days")
             
-            idx, blend, rate, total, strat = best
-    
-            # 5. Execute processing and track crude usage
-            processed = rate
-            if processed > 1e-6:
-                logger.info(f"Processing {processed:.2f} kb")
-                # Withdraw from inventory & tanks
+            # Log current inventory state
+            logger.info(f"Day {current_day}: Current inventory levels:")
+            for crude in inventory.get_all_crudes():
+                logger.info(f"  - {crude}: {inventory.get(crude):.2f} kb")
+            
+            # Get the processing strategy for today
+            logger.info(f"Day {current_day}: Selecting processing strategy...")
+            strategy, processing_rate, blend_idx = choose_strategy(
+                day=current_day,
+                inventory=inventory,
+                upcoming_deliveries=upcoming,
+                blend_recipes=self.blends,
+                params=self.params
+            )
+            
+            # Try to follow the chosen strategy
+            record["Strategy"] = strategy
+            record["Blend_Index"] = blend_idx
+            
+            # If no feasible strategy, record zero processing and continue
+            if strategy == "none" or blend_idx is None:
+                logger.info(f"Day {current_day}: No feasible processing strategy found, skipping day")
+                records.append(record)
+                continue
+                
+            # Get the blend recipe
+            blend = self.blends[blend_idx]
+            logger.info(f"Day {current_day}: Selected strategy '{strategy}' with blend recipe {blend_idx} at rate {processing_rate:.2f} kb")
+            logger.info(f"Day {current_day}: Blend recipe ratios: {blend.ratios}")
+            
+            # Record the planned processing rate
+            record[processed_key] = processing_rate
+            
+            # Process each crude according to blend ratio
+            try:
+                # First check if we have enough inventory for each crude
+                enough_inventory = True
+                limited_crude = None
+                available_fraction = 1.0
+                
+                # Check each crude required by the blend
                 for crude, ratio in blend.ratios.items():
-                    qty = processed * ratio
-                    logger.info(f"  Need to withdraw {qty:.4f} kb of {crude} (available: {self.inventory.get(crude):.4f} kb)")
-                    self.inventory.remove(crude, qty)
-                    logger.info(f"  Inventory of {crude} after removal: {self.inventory.get(crude):.4f} kb")
+                    qty = processing_rate * ratio
+                    logger.info(f"Day {current_day}: Checking availability of {crude}: Need {qty:.2f} kb (ratio {ratio:.2f})")
+                    if not inventory.available(crude, qty):
+                        enough_inventory = False
+                        available = inventory.get(crude)
+                        logger.warning(f"Day {current_day}: Not enough {crude}. Have {available:.2f} kb, need {qty:.2f} kb")
+                        # Calculate what fraction of the desired rate we can actually process
+                        if ratio > 0:
+                            fraction = available / (processing_rate * ratio)
+                            if fraction < available_fraction:
+                                available_fraction = fraction
+                                limited_crude = crude
+                        
+                # If we don't have enough inventory, adjust the processing rate
+                if not enough_inventory:
+                    original_rate = processing_rate
+                    # Adjust processing rate to use what's available
+                    processing_rate = processing_rate * available_fraction
+                    logger.warning(f"Day {current_day}: Not enough {limited_crude}. Adjusting processing from {original_rate:.2f} to {processing_rate:.2f}")
+                    # Update the record with adjusted rate
+                    record[processed_key] = processing_rate
                     
-                    # Track crude usage in the daily record
-                    record["Crude_Usage"][crude] = qty
+                # Now process each crude with adjusted rate
+                logger.info(f"Day {current_day}: Processing at rate {processing_rate:.2f} kb")
+                for crude, ratio in blend.ratios.items():
+                    qty = processing_rate * ratio
+                    if qty > 0:
+                        # Try to remove the crude, but handle potential errors
+                        try:
+                            if inventory.available(crude, qty):
+                                logger.info(f"Day {current_day}: Using {qty:.2f} kb of {crude}")
+                                inventory.remove(crude, qty)
+                                # Record usage
+                                record["Crude_Usage"][crude] = qty
+                            else:
+                                # Use what's available
+                                available = inventory.get(crude)
+                                if available > 0:
+                                    inventory.remove(crude, available)
+                                    record["Crude_Usage"][crude] = available
+                                    logger.warning(f"Day {current_day}: Used remaining {available:.2f} of {crude}")
+                                else:
+                                    logger.warning(f"Day {current_day}: No {crude} available")
+                        except ValueError as e:
+                            # This shouldn't happen since we checked availability, but just in case
+                            logger.error(f"Day {current_day}: Error processing {crude}: {str(e)}")
+                            # Set processing to zero for this crude
+                            record["Crude_Usage"][crude] = 0
+                    else:
+                        logger.info(f"Day {current_day}: {crude} not used (ratio: {ratio:.2f})")
                     
-                    remaining = qty
-                    logger.info(f"  Withdrawing {qty:.4f} kb of {crude} from tanks")
-                    for tank in self.tanks:
-                        avail = tank.composition.get(crude, 0.0)
-                        take = min(avail, remaining)
-                        if take > 1e-6:
-                            logger.info(f"    From tank {tank.id}: {take:.4f} kb (had {avail:.4f} kb)")
-                            try:
-                                tank.withdraw(crude, take)
-                                remaining -= take
-                                if remaining <= 1e-6:
-                                    break
-                            except Exception as e:
-                                logger.error(f"    Error withdrawing from tank {tank.id}: {str(e)}")
-                                logger.error(f"    Tank state: level={tank.level}, crude={tank.crude}, composition={tank.composition}")
-                                raise
+                # Record remaining inventory
+                logger.info(f"Day {current_day}: Updated inventory levels after processing:")
+                for crude in inventory.get_all_crudes():
+                    remaining = inventory.get(crude)
+                    record["Remaining"][crude] = remaining
+                    logger.info(f"  - {crude}: {remaining:.2f} kb")
                     
-                    if remaining > 1e-6:
-                        logger.warning(f"  Could not withdraw {remaining:.4f} kb of {crude} from tanks")
-            else:
-                logger.info("No processing today (rate <= 0)")
+            except Exception as e:
+                logger.error(f"Error on day {current_day}: {str(e)}", exc_info=True)
+                # Continue with the next day instead of failing
+                record[processed_key] = 0.0
+                record["Strategy"] = "error"
+                record["Error"] = str(e)
             
-            # 6. Record day
-            record["Blend_Index"] = idx
-            record["Strategy"] = strat
-            record["Processed"] = processed
+            # Check for daily deliveries and continue processing active deliveries
+            active_deliveries = getattr(self, 'active_deliveries', [])
+            delayed_deliveries = getattr(self, 'delayed_deliveries', {})
+            day_deliveries = self.future_deliveries.get(current_day, [])
             
-            self.schedule_records.append(record)
-            logger.info(f"Day {day} complete. Processed: {processed:.2f} kb")
-    
-            # Early exit
-            if all(t.is_empty() for t in self.tanks):
-                logger.info("All tanks empty - ending scheduling early")
-                break
+            # Track tank objects for loading operations
+            tanks_dict = {tank.id: tank for tank in self.tanks}
+            
+            # First check if we have capacity for today's deliveries
+            total_tank_space_available = 0
+            for tank in tanks_dict.values():
+                if tank.available_space() > 0:
+                    total_tank_space_available += tank.available_space()
+                    
+            # Calculate total volume to be delivered today
+            day_delivery_volume = sum(delivery.volume for delivery in day_deliveries)
+            
+            # Handle active deliveries that are currently being unloaded
+            if active_deliveries:
+                logger.info(f"Day {current_day}: Continuing to process {len(active_deliveries)} active deliveries")
+                still_active = []
                 
-        logger.info("Daily scheduling complete")
-        return self.schedule_records
+                for delivery in active_deliveries:
+                    # Try to unload more from this delivery
+                    transferred = delivery.continue_loading(tanks_dict)
+                    
+                    if transferred > 0:
+                        logger.info(f"Day {current_day}: Unloaded {transferred:.2f} kb of {delivery.crude} from ongoing delivery")
+                        # Add to inventory after successful transfer
+                        inventory.add(delivery.crude, transferred)
+                    
+                    # Check if delivery is still active
+                    if delivery.is_loading:
+                        still_active.append(delivery)
+                        logger.info(f"Day {current_day}: Still unloading delivery of {delivery.crude}, "
+                                   f"{delivery.unloaded_volume:.2f} kb remaining, {delivery.loading_days_left} days left")
+                    else:
+                        if delivery.unloaded_volume > 0:
+                            logger.warning(f"Day {current_day}: Delivery of {delivery.crude} completed but {delivery.unloaded_volume:.2f} kb "
+                                          f"could not be unloaded due to lack of tank space")
+                        else:
+                            logger.info(f"Day {current_day}: Completed unloading delivery of {delivery.crude}")
+                
+                # Update active deliveries
+                active_deliveries = still_active
+            
+            # Check if any delayed deliveries should be processed today
+            if current_day in delayed_deliveries:
+                rescheduled_deliveries = delayed_deliveries.pop(current_day)
+                logger.info(f"Day {current_day}: Processing {len(rescheduled_deliveries)} rescheduled deliveries that were delayed")
+                day_deliveries.extend(rescheduled_deliveries)
+            
+            # Process new deliveries for today
+            if day_deliveries:
+                logger.info(f"Day {current_day}: Processing {len(day_deliveries)} deliveries:")
+                
+                # Calculate if we need to delay any deliveries
+                total_delivery_volume = sum(delivery.volume for delivery in day_deliveries)
+                if total_delivery_volume > total_tank_space_available * 1.5:  # Allow some flexibility with 2-day loading
+                    logger.warning(f"Day {current_day}: Not enough tank space for all deliveries. "
+                                  f"Need space for {total_delivery_volume:.2f} kb, only have {total_tank_space_available:.2f} kb available.")
+                    
+                    # Sort deliveries by volume (largest first) to prioritize larger deliveries
+                    day_deliveries.sort(key=lambda d: d.volume, reverse=True)
+                    
+                    # Process deliveries until we hit capacity constraints
+                    processed_deliveries = []
+                    delayed_deliveries_today = []
+                    
+                    accumulated_volume = 0
+                    for delivery in day_deliveries:
+                        # If adding this delivery would exceed our capacity threshold, delay it
+                        if accumulated_volume + delivery.volume > total_tank_space_available * 1.5:
+                            # Delay this delivery by 3 days
+                            delay_days = 3
+                            original_day = delivery.day
+                            delivery.delay(delay_days)
+                            
+                            # Add to delayed deliveries dictionary
+                            if delivery.day not in delayed_deliveries:
+                                delayed_deliveries[delivery.day] = []
+                            delayed_deliveries[delivery.day].append(delivery)
+                            
+                            logger.warning(f"Day {current_day}: Delaying delivery of {delivery.volume:.2f} kb of {delivery.crude} "
+                                         f"by {delay_days} days (from day {original_day} to day {delivery.day})")
+                            
+                            # Add to tracking list
+                            delayed_deliveries_today.append(delivery)
+                        else:
+                            accumulated_volume += delivery.volume
+                            processed_deliveries.append(delivery)
+                    
+                    # Update day_deliveries to only include ones we're processing today
+                    day_deliveries = processed_deliveries
+                    
+                    # Add record of delayed deliveries to today's daily record
+                    if delayed_deliveries_today:
+                        record["Delayed_Deliveries"] = [
+                            {
+                                "crude": d.crude,
+                                "volume": d.volume,
+                                "original_day": d.original_day,
+                                "delayed_to": d.day,
+                                "delay_days": d.delay_days
+                            }
+                            for d in delayed_deliveries_today
+                        ]
+                
+                # Process the deliveries for today
+                for delivery in day_deliveries:
+                    logger.info(f"Day {current_day}: Starting to receive {delivery.volume:.2f} kb of {delivery.crude}")
+                    
+                    # Start the loading process for this delivery
+                    delivery.start_loading(loading_days=2)  # 2-day loading process
+                    
+                    # Try initial unloading (day 1 of 2)
+                    transferred = delivery.continue_loading(tanks_dict)
+                    
+                    if transferred > 0:
+                        logger.info(f"Day {current_day}: Unloaded {transferred:.2f} kb of {delivery.crude} on first day")
+                        # Add the transferred amount to inventory
+                        inventory.add(delivery.crude, transferred)
+                    
+                    # Check if loading is still in progress
+                    if delivery.is_loading:
+                        # Add to active deliveries for next day
+                        active_deliveries.append(delivery)
+                        logger.info(f"Day {current_day}: Will continue unloading {delivery.unloaded_volume:.2f} kb "
+                                   f"of {delivery.crude} on day {current_day + 1}")
+            
+            # Store updated active deliveries list for next iteration
+            self.active_deliveries = active_deliveries
+            self.delayed_deliveries = delayed_deliveries
+            
+            # Log tank levels after deliveries
+            tanks_dict = {tank.id: tank for tank in self.tanks}
+            logger.info(f"Day {current_day}: Tank levels after deliveries:")
+            for tank_id, tank in tanks_dict.items():
+                crude_info = f"({tank.crude})" if tank.crude else "(empty)"
+                logger.info(f"  - Tank {tank_id} {crude_info}: {tank.level:.2f}/{tank.capacity:.2f} kb")
+            
+            # Record remaining inventory and tank allocation in daily record
+            record["Tank_Levels"] = {
+                tank_id: {
+                    "crude": tank.crude,
+                    "level": tank.level,
+                    "capacity": tank.capacity,
+                    "available_space": tank.available_space(),
+                    "composition": tank.composition
+                }
+                for tank_id, tank in tanks_dict.items()
+            }
+            
+            # Record remaining inventory
+            logger.info(f"Day {current_day}: Updated inventory levels after all operations:")
+            for crude in inventory.get_all_crudes():
+                remaining = inventory.get(crude)
+                record["Remaining"][crude] = remaining
+                logger.info(f"  - {crude}: {remaining:.2f} kb")
+            
+            # Save the record for today
+            records.append(record)
+            logger.info(f"Day {current_day}: Processing complete")
+        
+        logger.info("===== Completed daily scheduling process =====")
+        logger.info(f"Total days scheduled: {len(records)}")
+        logger.info(f"Total volume processed: {sum(r.get(processed_key, 0.0) for r in records):.2f} kb")
+        
+        # Store the records for later use
+        self.schedule_records = records
+        
+        return records
     
-    def save_results(self, output_dir: str = None) -> Dict[str, str]:
+    def _get_deliveries_in_window(self, start_day: int, window: int) -> List[Delivery]:
         """
-        Save scheduling results to output files.
+        Get all deliveries within a certain window starting from start_day.
         
         Args:
-            output_dir: Directory to save output files
+            start_day: The day to start looking from
+            window: The number of days to look ahead
             
         Returns:
-            Dictionary with file paths
+            List of deliveries within the window
         """
-        if output_dir:
-            self.output_dir = output_dir
-        
-        # Ensure output directory exists
-        Path(self.output_dir).mkdir(parents=True, exist_ok=True)
-        
-        # Convert records to DataFrame with simplified structure for daily_schedule.csv
-        simplified_records = []
-        for record in self.schedule_records:
-            simplified = {
-                "Day": record["Day"],
-                "Blend_Index": record["Blend_Index"],
-                "Strategy": record["Strategy"],
-                "Processed": record["Processed"]
-            }
-            simplified_records.append(simplified)
-        
-        df = to_dataframe(simplified_records)
-        
-        # Save simplified CSV and JSON for backward compatibility
-        csv_path = os.path.join(self.output_dir, "daily_schedule.csv")
-        json_path = os.path.join(self.output_dir, "daily_schedule.json")
-        save_reports(df, csv_path, json_path)
-        
-        # Save detailed schedule with tank levels and deliveries
-        detailed_json_path = os.path.join(self.output_dir, "detailed_schedule.json")
-        with open(detailed_json_path, 'w') as f:
-            # Process records to make them JSON serializable
-            serializable_records = []
-            for record in self.schedule_records:
-                serializable_record = copy.deepcopy(record)
-                # Remove any non-serializable objects or convert them
-                serializable_records.append(serializable_record)
-            
-            json.dump(serializable_records, f, indent=2)
-        
-        # Save detailed schedule as CSV
-        detailed_csv_path = os.path.join(self.output_dir, "detailed_schedule.csv")
-        self._save_detailed_schedule_csv(detailed_csv_path)
-        
-        # Return file paths
-        file_paths = {
-            "daily_schedule_csv": csv_path,
-            "daily_schedule_json": json_path,
-            "detailed_schedule_json": detailed_json_path,
-            "detailed_schedule_csv": detailed_csv_path
-        }
-        
-        return file_paths
-    
-    def _save_detailed_schedule_csv(self, csv_path: str) -> None:
-        """
-        Save the detailed schedule as a CSV file.
-        
-        Args:
-            csv_path: Path to save the CSV file
-        """
-        # Collect all possible crude types and tank IDs
-        all_crude_types = set()
-        all_tank_ids = set()
-        
-        for record in self.schedule_records:
-            all_tank_ids.update(record["Tank_Levels"].keys())
-            all_crude_types.update(record["Crude_Usage"].keys())
-            
-            # Also check for crude types in tank compositions
-            for tank_data in record["Tank_Levels"].values():
-                if "composition" in tank_data:
-                    all_crude_types.update(tank_data["composition"].keys())
-        
-        # Sort for consistent columns
-        all_crude_types = sorted(all_crude_types)
-        all_tank_ids = sorted(all_tank_ids)
-        
-        # Create CSV header
-        header = ["Day", "Blend_Index", "Strategy", "Processed"]
-        
-        # Add columns for tank levels
-        for tank_id in all_tank_ids:
-            header.append(f"Tank_{tank_id}_Level")
-            header.append(f"Tank_{tank_id}_Crude")
-            
-        # Add columns for crude usage
-        for crude in all_crude_types:
-            header.append(f"Used_{crude}")
-            
-        # Add columns for deliveries
-        header.extend(["Delivery_Count", "Delayed_Count"])
-            
-        # Write CSV file
-        with open(csv_path, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            
-            # Write header
-            writer.writerow(header)
-            
-            # Write data rows
-            for record in self.schedule_records:
-                row = [
-                    record["Day"],
-                    record["Blend_Index"] if record["Blend_Index"] is not None else "",
-                    record["Strategy"],
-                    record["Processed"]
-                ]
-                
-                # Add tank levels
-                for tank_id in all_tank_ids:
-                    if tank_id in record["Tank_Levels"]:
-                        tank_data = record["Tank_Levels"][tank_id]
-                        row.append(tank_data["level"])
-                        row.append(tank_data["crude"] if tank_data["crude"] else "")
-                    else:
-                        row.append("")
-                        row.append("")
-                
-                # Add crude usage
-                for crude in all_crude_types:
-                    row.append(record["Crude_Usage"].get(crude, ""))
-                
-                # Add delivery counts
-                row.append(len(record["Deliveries"]))
-                row.append(len(record["Delayed_Deliveries"]))
-                
-                writer.writerow(row)
-                
-        logger.info(f"Detailed schedule saved to {csv_path}")
+        deliveries_in_window = []
+        for day in range(start_day, min(start_day + window, 365)):  # Assuming 365 days in a year
+            deliveries_in_window.extend(self.future_deliveries.get(day, []))
+        return deliveries_in_window
     
     def run(self, 
         optimize_vessels: bool = True, 
         multiple_vessel_solutions: bool = False,
-        optimize_end_period: bool = False,  # Changed default to False
         output_dir: str = "results"
     ) -> Dict[str, Any]:
         """
@@ -597,7 +550,6 @@ class Scheduler:
         Args:
             optimize_vessels: Whether to run vessel optimization
             multiple_vessel_solutions: Whether to generate multiple vessel solutions
-            optimize_end_period: Whether to optimize end-period utilization
             output_dir: Directory to save output files
             
         Returns:
@@ -623,10 +575,6 @@ class Scheduler:
             # Step 2: Run the main scheduling algorithm
             result = self._run_scheduling_algorithm()
             
-            # Step 3: End-period optimization if enabled
-            if optimize_end_period:
-                result = self._optimize_end_period(result)
-            
             # Save results
             files = self.save_results(output_dir)
             
@@ -637,7 +585,7 @@ class Scheduler:
                 "files": files,
                 "days_scheduled": len(result),
                 "total_processed": sum(r.get("Processed", 0.0) for r in result),
-                "optimizations": "end-period" if optimize_end_period else "none"
+                "optimizations": "none"
             }
             
             if vessel_result:
@@ -652,132 +600,6 @@ class Scheduler:
                 "message": str(e)
             }
 
-    def optimize_schedule(self, input_schedule_path: str = None, output_dir: str = None) -> Dict[str, Any]:
-        """
-        Optimize an existing schedule.
-        
-        Args:
-            input_schedule_path: Path to the input schedule JSON file (if None, uses the current schedule_records)
-            output_dir: Directory to save optimized results
-            
-        Returns:
-            Dictionary with optimization results
-        """
-        try:
-            # Set output directory
-            if output_dir:
-                self.output_dir = output_dir
-            
-            # Load the schedule if provided
-            if input_schedule_path:
-                logger.info(f"Loading schedule from {input_schedule_path}")
-                with open(input_schedule_path, 'r') as f:
-                    self.schedule_records = json.load(f)
-            
-            # Ensure we have a schedule to optimize
-            if not self.schedule_records:
-                message = "No schedule records available for optimization"
-                logger.error(message)
-                return {
-                    "status": "error",
-                    "message": message
-                }
-                
-            # Load data if needed
-            if not self.tanks or self.inventory is None:
-                logger.info("Loading data before optimizing")
-                self.load_data()
-                
-            # Define optimizer parameters
-            optimizer_params = self.params.get("optimizer_params", {})
-            
-            # Add crude name mappings
-            optimizer_params["crude_mappings"] = {
-                "E2": "E",
-                "F2": "F"
-            }
-            
-            # Create optimizer
-            optimizer = EndPeriodOptimizer(params=optimizer_params)
-            
-            # Run optimization
-            logger.info("Running schedule optimization")
-            original_records = copy.deepcopy(self.schedule_records)
-            self.schedule_records = optimizer.optimize_schedule(
-                schedule=self.schedule_records,
-                blends=self.blends,
-                initial_inventory=self.inventory,
-                tanks=self.tanks,
-                planning_horizon=self.params.get("planning_horizon", 40)
-            )
-            
-            # Calculate improvement metrics
-            original_processed = sum(r.get("Processed", 0.0) for r in original_records)
-            optimized_processed = sum(r.get("Processed", 0.0) for r in self.schedule_records)
-            
-            # Count zero processing days before and after
-            original_zero_days = sum(1 for r in original_records if r.get("Processed", 0.0) <= 0.001)
-            optimized_zero_days = sum(1 for r in self.schedule_records if r.get("Processed", 0.0) <= 0.001)
-            
-            # Save optimized results
-            files = self.save_results(self.output_dir)
-            
-            # Return results
-            return {
-                "status": "success",
-                "original_processed": original_processed,
-                "optimized_processed": optimized_processed,
-                "improvement": optimized_processed - original_processed,
-                "improvement_percentage": ((optimized_processed / original_processed) - 1) * 100 if original_processed > 0 else 0,
-                "original_zero_days": original_zero_days,
-                "optimized_zero_days": optimized_zero_days,
-                "files": files,
-                "days_scheduled": len(self.schedule_records),
-                "message": "Schedule optimization completed successfully"
-            }
-            
-        except Exception as e:
-            logger.error(f"Error during schedule optimization: {str(e)}", exc_info=True)
-            return {
-                "status": "error",
-                "message": str(e)
-            }
-
-    def _optimize_end_period(self, schedule_records: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """
-        Optimize end-period scheduling to ensure consistent high throughput.
-        
-        Args:
-            schedule_records: Daily schedule records
-            
-        Returns:
-            Optimized schedule records
-        """
-        if not schedule_records:
-            return schedule_records
-            
-        # Define optimizer parameters
-        optimizer_params = self.params.get("optimizer_params", {})
-        
-        # Add crude name mappings
-        optimizer_params["crude_mappings"] = {
-            "E2": "E",
-            "F2": "F"
-        }
-        
-        # Create optimizer
-        optimizer = EndPeriodOptimizer(params=optimizer_params)
-        
-        # Run optimization
-        optimized_records = optimizer.optimize_schedule(
-            schedule=schedule_records,
-            blends=self.blends,
-            initial_inventory=self.inventory,
-            tanks=self.tanks,
-            planning_horizon=self.params.get("planning_horizon", 40)
-        )
-        
-        return optimized_records
     
     def _run_vessel_optimization(self, multiple_solutions: bool = False, output_dir: str = "results") -> Dict[str, Any]:
         """
@@ -807,13 +629,66 @@ class Scheduler:
         """
         # Run daily scheduling
         return self.run_daily_scheduling()
+    
+    def save_results(self, output_dir: str = "results") -> Dict[str, str]:
+        """
+        Save scheduling results to files.
+        
+        Args:
+            output_dir: Directory to save results
+            
+        Returns:
+            Dictionary mapping file names to file paths
+        """
+        logger.info(f"Saving results to {output_dir}")
+        os.makedirs(output_dir, exist_ok=True)
+        
+        files = {}
+        
+        # Save schedule to JSON
+        schedule_path = os.path.join(output_dir, "daily_schedule.json")
+        with open(schedule_path, 'w') as f:
+            json.dump(self.schedule_records, f, indent=2)
+        files["Schedule JSON"] = schedule_path
+        
+        # Save schedule to CSV
+        csv_path = os.path.join(output_dir, "daily_schedule.csv")
+        with open(csv_path, 'w', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=self.schedule_records[0].keys() if self.schedule_records else [])
+            writer.writeheader()
+            writer.writerows(self.schedule_records)
+        files["Schedule CSV"] = csv_path
+        
+        # Save final inventory
+        if hasattr(self, 'inventory') and self.inventory is not None:
+            inventory_path = os.path.join(output_dir, "final_inventory.json")
+            with open(inventory_path, 'w') as f:
+                json.dump(self.inventory.to_dict(), f, indent=2)
+            files["Final Inventory"] = inventory_path
+        
+        # Generate additional reports using reporter.py functions if available
+        try:
+            from src.reporter import save_reports
+            additional_files = save_reports(
+                self.schedule_records,  # Pass as positional argument instead of keyword
+                output_dir=output_dir,
+                inventory=self.inventory if hasattr(self, 'inventory') else None,
+                blends=self.blends if hasattr(self, 'blends') else None,
+            )
+            files.update(additional_files)
+        except ImportError:
+            logger.warning("Reporter module not available, skipping additional reports")
+        except Exception as e:
+            logger.error(f"Error generating reports: {str(e)}")
+        
+        logger.info(f"Saved {len(files)} result files")
+        return files
 
 def schedule_plant_operation(
     config_path: str,
     output_dir: str = "results",
     optimize_vessels: bool = True,
-    multiple_vessel_solutions: bool = False,
-    optimize_end_period: bool = False  # Changed default to False
+    multiple_vessel_solutions: bool = False
 ) -> Dict[str, Any]:
     """
     Main entry point for scheduling plant operation.
@@ -823,7 +698,6 @@ def schedule_plant_operation(
         output_dir: Directory to save output files
         optimize_vessels: Whether to run vessel optimization
         multiple_vessel_solutions: Whether to generate multiple vessel solutions
-        optimize_end_period: Whether to optimize end-period utilization
         
     Returns:
         Dictionary with results summary
@@ -835,7 +709,6 @@ def schedule_plant_operation(
         result = scheduler.run(
             optimize_vessels=optimize_vessels,
             multiple_vessel_solutions=multiple_vessel_solutions,
-            optimize_end_period=optimize_end_period,
             output_dir=output_dir
         )
         logger.info(f"Scheduling completed with status: {result['status']}")

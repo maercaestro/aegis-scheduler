@@ -52,12 +52,7 @@ def main():
         dest="optimize_vessels",
         help="Skip vessel optimization"
     )
-    parser.add_argument(
-        "--optimize-end-period", 
-        action="store_true",
-        default=False,  # Changed default to False
-        help="Run end-period optimization (note: use run_optimization.py instead for separate optimization)"
-    )
+
     
     args = parser.parse_args()
     
@@ -68,14 +63,12 @@ def main():
     logger.info(f"Running scheduler with config: {args.config}")
     logger.info(f"Output directory: {args.output_dir}")
     logger.info(f"Vessel optimization: {args.optimize_vessels}")
-    logger.info(f"End-period optimization: {args.optimize_end_period}")
     
     result = schedule_plant_operation(
         config_path=args.config,
         output_dir=args.output_dir,
         optimize_vessels=args.optimize_vessels,
-        multiple_vessel_solutions=args.multiple_vessel_solutions,
-        optimize_end_period=args.optimize_end_period
+        multiple_vessel_solutions=args.multiple_vessel_solutions
     )
     
     # Output results
@@ -83,10 +76,7 @@ def main():
         print("\n========================= SCHEDULING RESULTS =========================")
         print(f"Total days scheduled:      {result['days_scheduled']}")
         print(f"Total volume processed:    {result['total_processed']:.2f} kb")
-        if args.optimize_end_period:
-            print(f"Optimizations applied:     {result['optimizations']}")
-        else:
-            print(f"Optimizations applied:     none (use run_optimization.py if needed)")
+        print(f"Optimizations applied:     none")
         
         print("\nResults saved to:")
         for file_name, file_path in result.get("files", {}).items():

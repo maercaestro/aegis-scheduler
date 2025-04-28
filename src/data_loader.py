@@ -1,5 +1,6 @@
 import json
 import os
+import logging
 from typing import Dict, List, Any, Tuple, Optional
 from pathlib import Path
 import pandas as pd
@@ -15,6 +16,8 @@ class ConfigValidationError(Exception):
     """Exception raised for errors in the configuration file."""
     pass
 
+# Configure logger
+logger = logging.getLogger(__name__)
 
 class DataLoader:
     """
@@ -94,6 +97,7 @@ class DataLoader:
     def get_tanks(self) -> List[Tank]:
         """
         Get initialized tank objects from the configuration.
+        Respects tank capacity limits and converts excess to deliveries for days 1 and 2.
         
         Returns:
             List of Tank objects
@@ -101,16 +105,51 @@ class DataLoader:
         initial_tanks = []
         tanks_cfg = self.config.get("tanks", {})
         init_alloc = self.config.get("initial_tank_allocation", {})
+        excess_deliveries = []
         
         for tid, cfg in tanks_cfg.items():
             alloc = init_alloc.get(tid, {"crude": None, "level": 0.0})
+            crude = alloc.get("crude")
+            requested_level = float(alloc.get("level", 0.0))
+            capacity = float(cfg.get("capacity", 0.0))
+            
+            # Check if the allocation exceeds tank capacity
+            if crude and requested_level > capacity:
+                excess = requested_level - capacity
+                level = capacity  # Set to maximum capacity
+                
+                # Split excess into two deliveries (day 1 and day 2)
+                day1_volume = excess / 2
+                day2_volume = excess - day1_volume
+                
+                # Add excess as deliveries for days 1 and 2
+                if day1_volume > 0:
+                    excess_deliveries.append({"day": 1, "crude": crude, "volume": day1_volume})
+                if day2_volume > 0:
+                    excess_deliveries.append({"day": 2, "crude": crude, "volume": day2_volume})
+                
+                logger.warning(
+                    f"Tank {tid} allocation exceeds capacity: requested {requested_level} kb of {crude}, "
+                    f"but capacity is {capacity} kb. Excess {excess} kb split into deliveries for days 1-2."
+                )
+            else:
+                # No excess, use requested level
+                level = requested_level
+            
+            # Create the tank with the adjusted level
             tank = Tank(
                 tank_id=tid,
-                capacity=float(cfg.get("capacity", 0.0)),
-                crude=alloc.get("crude"),
-                level=float(alloc.get("level", 0.0)),
+                capacity=capacity,
+                crude=crude,
+                level=level if level > 0 else 0.0,
             )
             initial_tanks.append(tank)
+        
+        # Add excess deliveries to the configuration
+        if excess_deliveries:
+            current_deliveries = self.config.get("deliveries", [])
+            self.config["deliveries"] = current_deliveries + excess_deliveries
+            logger.info(f"Added {len(excess_deliveries)} excess deliveries for days 1-2")
         
         return initial_tanks
     

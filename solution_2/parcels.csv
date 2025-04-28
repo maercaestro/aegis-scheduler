@@ -1,0 +1,12 @@
+parcel_id,voyage_id,volume,loading_window_start,loading_window_end,slack_early,slack_late,origin,crude
+P_Base_2,0,360,17,19,0.0,0.0,PM,Base
+P_C,0,200,17,19,0.0,0.0,PM,C
+P_E1,3,250,5,7,0.0,0.0,Sabah,E1
+P_F1,3,320,5,7,0.0,0.0,Sarawak,F1
+P_D,5,150,23,24,0.0,0.0,Sabah,D
+P_E3,5,100,23,24,0.0,0.0,Sabah,E3
+P_F2,5,280,19,22,0.0,1.0,Sarawak,F2
+P_Base_1,9,400,1,3,0.0,0.0,PM,Base
+P_A,9,150,1,3,0.0,0.0,PM,A
+P_B,10,150,8,10,0.0,0.0,PM,B
+P_E2,10,550,10,11,0.0,0.0,Sabah,E2

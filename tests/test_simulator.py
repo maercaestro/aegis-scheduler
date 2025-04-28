@@ -1,9 +1,9 @@
 import pytest
-from models.tank import Tank
-from models.blend import BlendRecipe
-from models.inventory import CrudeInventory
-from models.delivery import Delivery
-from simulator import check_tank_inventory, find_max_feasible_amount, simulate_blend
+from src.models.tank import Tank
+from src.models.blend import BlendRecipe
+from src.models.inventory import CrudeInventory
+from src.models.delivery import Delivery
+from src.simulator import check_tank_inventory, find_max_feasible_amount, simulate_blend
 
 
 class TestSimulator:

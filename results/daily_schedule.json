@@ -1,188 +1,748 @@
 [
   {
-    "Day":1,
-    "Blend_Index":2,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 1,
+    "Strategy": "standard",
+    "Blend_Index": 3,
+    "Processed": 96.0,
+    "Crude_Usage": {
+      "B": 57.599999999999994,
+      "D": 38.400000000000006
+    },
+    "Remaining": {
+      "Base": 250.0,
+      "B": 92.4,
+      "C": 150.0,
+      "D": 61.599999999999994,
+      "F": 250.0
+    },
+    "Tank_Levels": {
+      "T1": {
+        "crude": "Base",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "Base": 250.0
+        }
+      },
+      "T2": {
+        "crude": "B",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "B": 150.0
+        }
+      },
+      "T3": {
+        "crude": "C",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "C": 150.0
+        }
+      },
+      "T4": {
+        "crude": "D",
+        "level": 100.0,
+        "capacity": 250.0,
+        "available_space": 150.0,
+        "composition": {
+          "D": 100.0
+        }
+      },
+      "T5": {
+        "crude": "F",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "F": 250.0
+        }
+      }
+    }
   },
   {
-    "Day":2,
-    "Blend_Index":2,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 2,
+    "Strategy": "standard",
+    "Blend_Index": 3,
+    "Processed": 96.0,
+    "Crude_Usage": {
+      "B": 57.599999999999994,
+      "D": 38.400000000000006
+    },
+    "Remaining": {
+      "Base": 250.0,
+      "B": 34.80000000000001,
+      "C": 150.0,
+      "D": 23.19999999999999,
+      "F": 250.0
+    },
+    "Tank_Levels": {
+      "T1": {
+        "crude": "Base",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "Base": 250.0
+        }
+      },
+      "T2": {
+        "crude": "B",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "B": 150.0
+        }
+      },
+      "T3": {
+        "crude": "C",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "C": 150.0
+        }
+      },
+      "T4": {
+        "crude": "D",
+        "level": 100.0,
+        "capacity": 250.0,
+        "available_space": 150.0,
+        "composition": {
+          "D": 100.0
+        }
+      },
+      "T5": {
+        "crude": "F",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "F": 250.0
+        }
+      }
+    }
   },
   {
-    "Day":3,
-    "Blend_Index":6,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 3,
+    "Strategy": "standard",
+    "Blend_Index": 2,
+    "Processed": 95.0,
+    "Crude_Usage": {
+      "B": 25.650000000000002,
+      "Base": 69.35
+    },
+    "Remaining": {
+      "Base": 180.65,
+      "B": 9.15000000000001,
+      "C": 150.0,
+      "D": 23.19999999999999,
+      "F": 250.0
+    },
+    "Tank_Levels": {
+      "T1": {
+        "crude": "Base",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "Base": 250.0
+        }
+      },
+      "T2": {
+        "crude": "B",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "B": 150.0
+        }
+      },
+      "T3": {
+        "crude": "C",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "C": 150.0
+        }
+      },
+      "T4": {
+        "crude": "D",
+        "level": 100.0,
+        "capacity": 250.0,
+        "available_space": 150.0,
+        "composition": {
+          "D": 100.0
+        }
+      },
+      "T5": {
+        "crude": "F",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "F": 250.0
+        }
+      }
+    }
   },
   {
-    "Day":4,
-    "Blend_Index":2,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 4,
+    "Strategy": "standard",
+    "Blend_Index": 4,
+    "Processed": 95.0,
+    "Crude_Usage": {
+      "C": 25.650000000000002,
+      "Base": 69.35
+    },
+    "Remaining": {
+      "Base": 111.30000000000001,
+      "B": 9.15000000000001,
+      "C": 124.35,
+      "D": 23.19999999999999,
+      "F": 250.0
+    },
+    "Tank_Levels": {
+      "T1": {
+        "crude": "Base",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "Base": 250.0
+        }
+      },
+      "T2": {
+        "crude": "B",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "B": 150.0
+        }
+      },
+      "T3": {
+        "crude": "C",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "C": 150.0
+        }
+      },
+      "T4": {
+        "crude": "D",
+        "level": 100.0,
+        "capacity": 250.0,
+        "available_space": 150.0,
+        "composition": {
+          "D": 100.0
+        }
+      },
+      "T5": {
+        "crude": "F",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "F": 250.0
+        }
+      }
+    }
   },
   {
-    "Day":5,
-    "Blend_Index":6,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 5,
+    "Strategy": "standard",
+    "Blend_Index": 4,
+    "Processed": 95.0,
+    "Crude_Usage": {
+      "C": 25.650000000000002,
+      "Base": 69.35
+    },
+    "Remaining": {
+      "Base": 41.95000000000002,
+      "B": 9.15000000000001,
+      "C": 98.69999999999999,
+      "D": 23.19999999999999,
+      "F": 250.0
+    },
+    "Tank_Levels": {
+      "T1": {
+        "crude": "Base",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "Base": 250.0
+        }
+      },
+      "T2": {
+        "crude": "B",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "B": 150.0
+        }
+      },
+      "T3": {
+        "crude": "C",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "C": 150.0
+        }
+      },
+      "T4": {
+        "crude": "D",
+        "level": 100.0,
+        "capacity": 250.0,
+        "available_space": 150.0,
+        "composition": {
+          "D": 100.0
+        }
+      },
+      "T5": {
+        "crude": "F",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "F": 250.0
+        }
+      }
+    }
   },
   {
-    "Day":6,
-    "Blend_Index":2,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 6,
+    "Strategy": "standard",
+    "Blend_Index": 6,
+    "Processed": 95.0,
+    "Crude_Usage": {
+      "F": 95.0
+    },
+    "Remaining": {
+      "Base": 41.95000000000002,
+      "B": 9.15000000000001,
+      "C": 98.69999999999999,
+      "D": 23.19999999999999,
+      "F": 155.0
+    },
+    "Tank_Levels": {
+      "T1": {
+        "crude": "Base",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "Base": 250.0
+        }
+      },
+      "T2": {
+        "crude": "B",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "B": 150.0
+        }
+      },
+      "T3": {
+        "crude": "C",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "C": 150.0
+        }
+      },
+      "T4": {
+        "crude": "D",
+        "level": 100.0,
+        "capacity": 250.0,
+        "available_space": 150.0,
+        "composition": {
+          "D": 100.0
+        }
+      },
+      "T5": {
+        "crude": "F",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "F": 250.0
+        }
+      }
+    }
   },
   {
-    "Day":7,
-    "Blend_Index":6,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 7,
+    "Strategy": "standard",
+    "Blend_Index": 6,
+    "Processed": 95.0,
+    "Crude_Usage": {
+      "F": 95.0
+    },
+    "Remaining": {
+      "Base": 41.95000000000002,
+      "B": 9.15000000000001,
+      "C": 98.69999999999999,
+      "D": 23.19999999999999,
+      "F": 60.0
+    },
+    "Tank_Levels": {
+      "T1": {
+        "crude": "Base",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "Base": 250.0
+        }
+      },
+      "T2": {
+        "crude": "B",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "B": 150.0
+        }
+      },
+      "T3": {
+        "crude": "C",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "C": 150.0
+        }
+      },
+      "T4": {
+        "crude": "D",
+        "level": 100.0,
+        "capacity": 250.0,
+        "available_space": 150.0,
+        "composition": {
+          "D": 100.0
+        }
+      },
+      "T5": {
+        "crude": "F",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "F": 250.0
+        }
+      }
+    }
   },
   {
-    "Day":8,
-    "Blend_Index":4,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 8,
+    "Strategy": "standard",
+    "Blend_Index": 6,
+    "Processed": 60.0,
+    "Crude_Usage": {
+      "F": 60.0
+    },
+    "Remaining": {
+      "Base": 41.95000000000002,
+      "B": 9.15000000000001,
+      "C": 98.69999999999999,
+      "D": 23.19999999999999
+    },
+    "Tank_Levels": {
+      "T1": {
+        "crude": "Base",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "Base": 250.0
+        }
+      },
+      "T2": {
+        "crude": "B",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "B": 150.0
+        }
+      },
+      "T3": {
+        "crude": "C",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "C": 150.0
+        }
+      },
+      "T4": {
+        "crude": "D",
+        "level": 100.0,
+        "capacity": 250.0,
+        "available_space": 150.0,
+        "composition": {
+          "D": 100.0
+        }
+      },
+      "T5": {
+        "crude": "F",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "F": 250.0
+        }
+      }
+    }
   },
   {
-    "Day":9,
-    "Blend_Index":4,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 9,
+    "Strategy": "standard",
+    "Blend_Index": 4,
+    "Processed": 57.46575342465756,
+    "Crude_Usage": {
+      "C": 15.515753424657541,
+      "Base": 41.95000000000002
+    },
+    "Remaining": {
+      "B": 9.15000000000001,
+      "C": 83.18424657534244,
+      "D": 23.19999999999999
+    },
+    "Tank_Levels": {
+      "T1": {
+        "crude": "Base",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "Base": 250.0
+        }
+      },
+      "T2": {
+        "crude": "B",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "B": 150.0
+        }
+      },
+      "T3": {
+        "crude": "C",
+        "level": 150.0,
+        "capacity": 250.0,
+        "available_space": 100.0,
+        "composition": {
+          "C": 150.0
+        }
+      },
+      "T4": {
+        "crude": "D",
+        "level": 100.0,
+        "capacity": 250.0,
+        "available_space": 150.0,
+        "composition": {
+          "D": 100.0
+        }
+      },
+      "T5": {
+        "crude": "F",
+        "level": 250.0,
+        "capacity": 250.0,
+        "available_space": 0.0,
+        "composition": {
+          "F": 250.0
+        }
+      }
+    }
   },
   {
-    "Day":10,
-    "Blend_Index":4,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 10,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":11,
-    "Blend_Index":2,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 11,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":12,
-    "Blend_Index":1,
-    "Strategy":"greedy",
-    "Processed":55.0
+    "Day": 12,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":13,
-    "Blend_Index":4,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 13,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":14,
-    "Blend_Index":6,
-    "Strategy":"greedy",
-    "Processed":15.0
+    "Day": 14,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":15,
-    "Blend_Index":3,
-    "Strategy":"greedy",
-    "Processed":96.0
+    "Day": 15,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":16,
-    "Blend_Index":3,
-    "Strategy":"greedy",
-    "Processed":96.0
+    "Day": 16,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":17,
-    "Blend_Index":0,
-    "Strategy":"low_inventory",
-    "Processed":0.0
+    "Day": 17,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":18,
-    "Blend_Index":0,
-    "Strategy":"low_inventory",
-    "Processed":0.0
+    "Day": 18,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":19,
-    "Blend_Index":0,
-    "Strategy":"low_inventory",
-    "Processed":0.0
+    "Day": 19,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":20,
-    "Blend_Index":0,
-    "Strategy":"low_inventory",
-    "Processed":0.0
+    "Day": 20,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":21,
-    "Blend_Index":0,
-    "Strategy":"low_inventory",
-    "Processed":0.0
+    "Day": 21,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":22,
-    "Blend_Index":0,
-    "Strategy":"low_inventory",
-    "Processed":15.0
+    "Day": 22,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":23,
-    "Blend_Index":0,
-    "Strategy":"low_inventory",
-    "Processed":15.0
+    "Day": 23,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":24,
-    "Blend_Index":4,
-    "Strategy":"greedy",
-    "Processed":95.0
+    "Day": 24,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":25,
-    "Blend_Index":4,
-    "Strategy":"greedy",
-    "Processed":83.125
+    "Day": 25,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":26,
-    "Blend_Index":4,
-    "Strategy":"greedy",
-    "Processed":71.25
+    "Day": 26,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":27,
-    "Blend_Index":4,
-    "Strategy":"greedy",
-    "Processed":59.375
+    "Day": 27,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":28,
-    "Blend_Index":6,
-    "Strategy":"smooth",
-    "Processed":47.5
+    "Day": 28,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":29,
-    "Blend_Index":6,
-    "Strategy":"smooth",
-    "Processed":47.5
+    "Day": 29,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":30,
-    "Blend_Index":4,
-    "Strategy":"smooth",
-    "Processed":47.5
+    "Day": 30,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   },
   {
-    "Day":31,
-    "Blend_Index":4,
-    "Strategy":"smooth",
-    "Processed":47.5
+    "Day": 31,
+    "Strategy": "none",
+    "Blend_Index": null,
+    "Processed": 0.0,
+    "Crude_Usage": {},
+    "Remaining": {}
   }
 ]
