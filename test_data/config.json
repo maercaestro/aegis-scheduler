@@ -1,0 +1,49 @@
+{
+    "INVENTORY_MAX_VOLUME": 1180000,
+    "MaxTransitions": 11,
+    "schedule_year": 2024,
+    "schedule_month": "October",
+    "DAYS": {
+        "start": 1,
+        "end": 40
+    },
+    "Range": [
+        {
+            "capacity": 70000,
+            "start_date": 18,
+            "end_date": 27
+        }
+    ],
+    "default_capacity": 96000,
+    "Two_crude": 700000,
+    "Three_crude": 650000,
+    "Demurrage": 40000,
+    "Vessel_max_limit": 700000,
+    "solver": [
+        {
+            "name": "scip",
+            "use": true,
+            "time_limit": 3600,
+            "options": {
+                "limits/time": 3600,
+                "display/verblevel": 4
+            }
+        },
+        {
+            "name": "highs",
+            "use": false,
+            "time_limit": 3600,
+            "options": {
+                "threads": 4,
+                "presolve": "on",
+                "mip_rel_gap": 0.01
+            }
+        },
+        {
+            "name": "glpk",
+            "use": false,
+            "time_limit": 3600,
+            "options": {}
+        }
+    ]
+}
