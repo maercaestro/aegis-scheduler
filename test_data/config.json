@@ -8,11 +8,7 @@
         "end": 40
     },
     "Range": [
-        {
-            "capacity": 70000,
-            "start_date": 18,
-            "end_date": 27
-        }
+
     ],
     "default_capacity": 96000,
     "Two_crude": 700000,
