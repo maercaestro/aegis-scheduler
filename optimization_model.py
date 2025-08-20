@@ -270,10 +270,12 @@ class OptimizationModel:
         
         # Pickup day limits
         def pickup_day_limit(model, vessel, *parcel):
+            invalid_days = [day for day in model.DAYS if day not in model.PDp[parcel]]
+            if not invalid_days:  # If no invalid days, skip constraint
+                return Constraint.Feasible
             return sum(
                 model.Pickup[vessel, parcel, day]
-                for day in model.DAYS
-                if day not in model.PDp[parcel]
+                for day in invalid_days
             ) == 0
         model.PickupDayLimit = Constraint(model.VESSELS, model.PARCELS, rule=pickup_day_limit)
         

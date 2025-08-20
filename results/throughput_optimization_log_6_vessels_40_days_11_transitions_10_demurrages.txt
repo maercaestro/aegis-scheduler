@@ -1,12 +1,34 @@
 Running HiGHS 1.11.0 (git hash: 364c83a): Copyright (c) 2025 HiGHS under MIT licence terms
-MIP  has 37672 rows; 8600 cols; 114341 nonzeros; 5838 integer variables (5832 binary)
+MIP  has 39926 rows; 10760 cols; 124994 nonzeros; 6318 integer variables (6312 binary)
 Coefficient ranges:
   Matrix [1e+00, 7e+05]
   Cost   [8e+04, 1e+05]
   Bound  [1e+00, 1e+00]
   RHS    [1e+00, 1e+06]
 Presolving model
-33683 rows, 6184 cols, 87583 nonzeros  0s
-15224 rows, 4935 cols, 52247 nonzeros  1s
-10194 rows, 4892 cols, 50882 nonzeros  1s
-9544 rows, 4537 cols, 51333 nonzeros  3s
+35495 rows, 7380 cols, 92978 nonzeros  0s
+15581 rows, 5352 cols, 57526 nonzeros  1s
+11320 rows, 5313 cols, 56316 nonzeros  1s
+10325 rows, 4841 cols, 53507 nonzeros  3s
+
+Solving MIP model with:
+   10325 rows
+   4841 cols (3096 binary, 4 integer, 6 implied int., 1735 continuous, 0 domain fixed)
+   53507 nonzeros
+
+Src: B => Branching; C => Central rounding; F => Feasibility pump; J => Feasibility jump;
+     H => Heuristic; L => Sub-MIP; P => Empty MIP; R => Randomized rounding; Z => ZI Round;
+     I => Shifting; S => Solve LP; T => Evaluate node; U => Unbounded; X => User solution;
+     z => Trivial zero; l => Trivial lower; u => Trivial upper; p => Trivial point
+
+        Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+Src  Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+
+         0       0         0   0.00%   47528000        -inf                 inf        0      0      0         0     3.7s
+         0       0         0   0.00%   3786918.128655  -inf                 inf        0      0      2     10174     7.0s
+         0       0         0   0.00%   3786918.128655  -inf                 inf      454     97    367     17243    12.2s
+ L       0       0         0   0.00%   3786918.128655  2056726.027397    84.12%      791     95    433     22453    20.2s
+
+Symmetry detection completed in 0.0s
+Found 1 generator(s)
+

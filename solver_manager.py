@@ -4,7 +4,6 @@ Handles solver configuration and execution.
 """
 
 from pyomo.environ import SolverFactory
-from pyomo.contrib.solver.common.util import NoFeasibleSolutionError
 from contextlib import redirect_stdout
 import sys
 import os
@@ -55,12 +54,22 @@ class SolverManager:
 
         print(f"Using solver: {solver_name}")
  
-        # Set time limit
-        solver.options["time_limit"] = self.config.get("solver_time_limit_seconds", 3600)
-        
-        # Set other options
-        for key, value in solver_cfg.get("options", {}).items():
-            solver.options[key] = value
+        # Set solver-specific options
+        if solver_name.lower() == "highs":
+            # HiGHS specific options
+            solver.options["time_limit"] = self.config.get("solver_time_limit_seconds", 3600)
+            # Set other HiGHS options
+            for key, value in solver_cfg.get("options", {}).items():
+                solver.options[key] = value
+        elif solver_name.lower() == "glpk":
+            # GLPK doesn't support time_limit option the same way
+            # Use tmlim for time limit in seconds
+            solver.options["tmlim"] = self.config.get("solver_time_limit_seconds", 3600)
+        else:
+            # Generic solver options
+            solver.options["time_limit"] = self.config.get("solver_time_limit_seconds", 3600)
+            for key, value in solver_cfg.get("options", {}).items():
+                solver.options[key] = value
 
         print(f"Solver options: {solver.options}")
         return solver
@@ -104,10 +113,6 @@ class SolverManager:
             print("Optimization completed successfully!")
             return results
             
-        except NoFeasibleSolutionError as e:
-            error_msg = "Error Occurred: There is no feasible solution for given dataset and configuration."
-            print(error_msg)
-            raise Exception(error_msg)
         except Exception as e:
             error_msg = f"Error Occurred: {str(e)}"
             print(error_msg)
