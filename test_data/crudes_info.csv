@@ -1,8 +1,8 @@
-crudes,margin,origin,opening_inventory
-Base,15.85,PM,350000
-A,18.47,PM,0
-B,15.71,PM,150000
-C,19.24,PM,150000
-D,11.19,Sabah,100000
-E,9.98,Sabah,0
-F,9.97,Sarawak,300000
+,crudes,margin,origin,opening_inventory
+0,Tapis,12.85,PM,224000
+1,Minas,11.61,PM,241000
+2,Tapis3rd,8.52,PM,0
+3,Sepat,18.26,PM,0
+4,KimC,8.12,Sabah,0
+5,Kimanis,8.83,Sabah,350000
+6,Bintulu,9.25,Sarawak,407000

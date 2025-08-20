@@ -17,22 +17,22 @@
     "Vessel_max_limit": 700000,
     "solver": [
         {
-            "name": "scip",
-            "use": true,
-            "time_limit": 3600,
-            "options": {
-                "limits/time": 3600,
-                "display/verblevel": 4
-            }
-        },
-        {
             "name": "highs",
-            "use": false,
+            "use": true,
             "time_limit": 3600,
             "options": {
                 "threads": 4,
                 "presolve": "on",
                 "mip_rel_gap": 0.01
+            }
+        },
+        {
+            "name": "scip",
+            "use": false,
+            "time_limit": 3600,
+            "options": {
+                "limits/time": 3600,
+                "display/verblevel": 4
             }
         },
         {
