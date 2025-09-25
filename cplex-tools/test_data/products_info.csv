@@ -1,0 +1,10 @@
+product,crudes,ratios,max_per_day
+F1,['Tapis'],[1.0],87000
+F2,"['Minas', 'Tapis']","[0.27, 0.73]",90000
+F3,"['Sepat', 'Tapis']","[0.27, 0.73]",95000
+F4,['Tapis3rd'],[1.0],87000
+F5,"['Minas', 'Tapis']","[0.27, 0.73]",90000
+F6,"['Sepat', 'Tapis3rd']","[0.27, 0.73]",95000
+F7,['Kimanis'],[1.0],95000
+F8,['Bintulu'],[1.0],95000
+F9,"['KimC', 'Sepat']","[0.5,0.5]",80000

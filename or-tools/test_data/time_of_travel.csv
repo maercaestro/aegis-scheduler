@@ -1,0 +1,8 @@
+from,to,time_in_days
+PM,Melaka,2
+Sabah,Melaka,4
+Sarawak,Melaka,3
+Sabah,PM,3
+Sabah,Sarawak,1
+Sarawak,Sabah,1
+Sarawak,PM,3
