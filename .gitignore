@@ -1,4 +1,4 @@
-*/aegis
-*/cplex
-*/logs
+aegis/
+cplex/
+logs/
 results/
