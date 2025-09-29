@@ -26,8 +26,11 @@ from contextlib import redirect_stdout
 from datetime import datetime
 
 import pandas as pd
-from pyomo.environ import *
-from pyomo.opt import SolverFactory, SolverStatus, TerminationCondition
+from pyomo.environ import (  # type: ignore
+    ConcreteModel, Set, RangeSet, Param, Var, Constraint, ConstraintList,
+    Expression, Objective, Binary, NonNegativeReals, Any, maximize, value,
+    SolverFactory, SolverStatus, TerminationCondition
+)
 
 # =============================================================================
 # 2. Main Optimization Function
@@ -123,21 +126,21 @@ def run_refinery_optimization(scenario_num, vessel_count, optimization_type, max
     # 5. Pyomo Model Initialization
     # =========================================================================
     print("\n--- Initializing Pyomo Optimization Model ---")
-    model = ConcreteModel()
+    model = ConcreteModel()  # type: ignore
 
     # =========================================================================
     # 6. Defining Sets
     # =========================================================================
-    model.CRUDES = Set(initialize=crudes)
-    model.LOCATIONS = Set(initialize=locations)
-    model.SOURCE_LOCATIONS = Set(initialize=source_locations)
+    model.CRUDES = Set(initialize=crudes)  # type: ignore
+    model.LOCATIONS = Set(initialize=locations)  # type: ignore
+    model.SOURCE_LOCATIONS = Set(initialize=source_locations)  # type: ignore
     config["VESSELS"] = list(range(1, vessel_count + 1))
-    model.VESSELS = Set(initialize=config["VESSELS"])
-    model.DAYS = RangeSet(config["DAYS"]["start"], config["DAYS"]["end"])
-    model.BLENDS = Set(initialize=products_info['product'].tolist())
-    model.SLOTS = RangeSet(config["DAYS"]["start"], 2 * config["DAYS"]["end"])
+    model.VESSELS = Set(initialize=config["VESSELS"])  # type: ignore
+    model.DAYS = RangeSet(config["DAYS"]["start"], config["DAYS"]["end"])  # type: ignore
+    model.BLENDS = Set(initialize=products_info['product'].tolist())  # type: ignore
+    model.SLOTS = RangeSet(config["DAYS"]["start"], 2 * config["DAYS"]["end"])  # type: ignore
     # --- NEW --- Define the set for the 5 tanks
-    model.TANKS = RangeSet(1, 5)
+    model.TANKS = RangeSet(1, 5)  # type: ignore
 
     parcel_set = set()
     for window, loc_data in crude_availability.items():

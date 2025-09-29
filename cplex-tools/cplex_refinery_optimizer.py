@@ -35,7 +35,71 @@ from contextlib import redirect_stdout
 from datetime import datetime
 
 import pandas as pd
-from pyomo.environ import *
+from pyomo.environ import (  # type: ignore
+    ConcreteModel, Set, RangeSet, Param, Var, Constraint, ConstraintList,
+    Expression, Objective, Binary, NonNegativeReals, PositiveIntegers, Any, maximize, value,
+    SolverFactory, SolverStatus, TerminationCondition
+)
+
+# =============================================================================
+# 2. Data Loading Functions
+# =============================================================================
+
+def load_all_scenario_data(scenario):
+    # Use test_data directory for local execution
+    base_path = f"../test_data/"
+    if not os.path.exists(base_path):
+        raise FileNotFoundError(f"Test data directory not found: {base_path}")
+
+    with open(os.path.join(base_path, "config.json"), "r") as f:
+        config = json.load(f)
+
+    crude_availability_df = pd.read_csv(os.path.join(base_path, "crude_availability.csv"))
+    crude_availability = {}
+    for _, row in crude_availability_df.iterrows():
+        crude_availability.setdefault(row["date_range"], {}).setdefault(row["location"], {})[row["crude"]] = {
+            "volume": int(row["volume"]),
+            "parcel_size": int(row["parcel_size"])
+        }
+
+    time_of_travel_df = pd.read_csv(os.path.join(base_path, "time_of_travel.csv"))
+    time_of_travel = {
+        (row["from"], row["to"]): int(row["time_in_days"]) + 1
+        for _, row in time_of_travel_df.iterrows()
+    }
+
+    products_info_df = pd.read_csv(os.path.join(base_path, "products_info.csv"))
+    crudes_info_df = pd.read_csv(os.path.join(base_path, "crudes_info.csv"))
+    crudes = crudes_info_df["crudes"]
+    locations = set(time_of_travel_df["from"]) | set(time_of_travel_df["to"])
+    source_location = crudes_info_df["origin"].unique().tolist()
+    crude_margins = crudes_info_df['margin'].tolist()
+    opening_inventory = crudes_info_df['opening_inventory'].tolist()
+    opening_inventory_dict = dict(zip(crudes.tolist(), opening_inventory))
+
+    return config, list(crudes), list(locations), time_of_travel, crude_availability, source_location, products_info_df, crude_margins, opening_inventory_dict
+
+
+def extract_window_to_days(crude_availability):
+    window_to_days = {}
+    for window in crude_availability:
+        parts = window.split()[0]
+        if '-' in parts:
+            start_day, end_day = map(int, parts.split('-'))
+            days = list(range(start_day, end_day + 1))
+        else:
+            days = [int(parts)]
+        window_to_days[window] = days
+    return window_to_days
+
+
+def extract_products_ratio(df):
+    return {
+        (row['product'], crude): ratio
+        for _, row in df.iterrows()
+        for crude, ratio in zip(ast.literal_eval(row['crudes']), ast.literal_eval(row['ratios']))
+    }
+
 
 # =============================================================================
 # 2. Main Optimization Function
@@ -60,59 +124,6 @@ def run_refinery_optimization(scenario_num, vessel_count, optimization_type, max
     # 3. Data Loading and Preprocessing
     # =========================================================================
     print("\n--- Loading and Preprocessing Data ---")
-
-    def load_all_scenario_data(scenario):
-        # Use test_data directory for local execution
-        base_path = f"../test_data/"
-        if not os.path.exists(base_path):
-            raise FileNotFoundError(f"Test data directory not found: {base_path}")
-
-        with open(os.path.join(base_path, "config.json"), "r") as f:
-            config = json.load(f)
-
-        crude_availability_df = pd.read_csv(os.path.join(base_path, "crude_availability.csv"))
-        crude_availability = {}
-        for _, row in crude_availability_df.iterrows():
-            crude_availability.setdefault(row["date_range"], {}).setdefault(row["location"], {})[row["crude"]] = {
-                "volume": int(row["volume"]),
-                "parcel_size": int(row["parcel_size"])
-            }
-
-        time_of_travel_df = pd.read_csv(os.path.join(base_path, "time_of_travel.csv"))
-        time_of_travel = {
-            (row["from"], row["to"]): int(row["time_in_days"]) + 1
-            for _, row in time_of_travel_df.iterrows()
-        }
-
-        products_info_df = pd.read_csv(os.path.join(base_path, "products_info.csv"))
-        crudes_info_df = pd.read_csv(os.path.join(base_path, "crudes_info.csv"))
-        crudes = crudes_info_df["crudes"]
-        locations = set(time_of_travel_df["from"]) | set(time_of_travel_df["to"])
-        source_location = crudes_info_df["origin"].unique().tolist()
-        crude_margins = crudes_info_df['margin'].tolist()
-        opening_inventory = crudes_info_df['opening_inventory'].tolist()
-        opening_inventory_dict = dict(zip(crudes.tolist(), opening_inventory))
-
-        return config, list(crudes), list(locations), time_of_travel, crude_availability, source_location, products_info_df, crude_margins, opening_inventory_dict
-
-    def extract_window_to_days(crude_availability):
-        window_to_days = {}
-        for window in crude_availability:
-            parts = window.split()[0]
-            if '-' in parts:
-                start_day, end_day = map(int, parts.split('-'))
-                days = list(range(start_day, end_day + 1))
-            else:
-                days = [int(parts)]
-            window_to_days[window] = days
-        return window_to_days
-
-    def extract_products_ratio(df):
-        return {
-            (row['product'], crude): ratio
-            for _, row in df.iterrows()
-            for crude, ratio in zip(ast.literal_eval(row['crudes']), ast.literal_eval(row['ratios']))
-        }
 
     config, crudes, locations, time_of_travel, crude_availability, source_locations, products_info, crude_margins, opening_inventory_dict = load_all_scenario_data(scenario_num)
     window_to_days = extract_window_to_days(crude_availability)
@@ -509,8 +520,8 @@ def run_refinery_optimization(scenario_num, vessel_count, optimization_type, max
             raise RuntimeError("CPLEX solver is not available. Please check your CPLEX installation and license.")
     
     # Set solver options for better performance
-    solver.options['timelimit'] = 14400  # Time limit in seconds
-    solver.options['mipgap'] = 0.05  # Relative MIP gap tolerance
+    solver.options['timelimit'] = 50000  # Time limit in seconds
+    solver.options['mipgap'] = 0.01  # Relative MIP gap tolerance
     solver.options['threads'] = 0  # Use all available threads
     
     print(f"Solver: CPLEX Direct (Python API)")
@@ -697,9 +708,9 @@ if __name__ == "__main__":
     # Update these values according to your test scenario requirements
     
     SCENARIO_ID = 1  # Not used in current implementation, but kept for future use
-    VESSEL_COUNT = 4  # Number of vessels available for scheduling
+    VESSEL_COUNT = 7  # Number of vessels available for scheduling
     OPTIMIZATION_GOAL = "throughput"  # Options: "margin" or "throughput"
-    MAX_DEMURRAGE_DAYS_LIMIT = 20  # Only used if OPTIMIZATION_GOAL is "throughput"
+    MAX_DEMURRAGE_DAYS_LIMIT = 40  # Only used if OPTIMIZATION_GOAL is "throughput"
 
     print("Starting CPLEX-based Refinery Optimization")
     print(f"Configuration: {VESSEL_COUNT} vessels, optimizing for {OPTIMIZATION_GOAL}")
