@@ -6,8 +6,6 @@ numpy>=1.21.0,<2.0.0
 
 # High-performance solvers
 highspy>=1.5.0,<2.0.0    # HiGHS solver - fast and reliable
-PySCIPOpt>=4.3.0,<5.0.0  # SCIP solver - advanced MILP capabilities
-
 # System utilities (minimal set)
 typing_extensions>=4.0.0
 
