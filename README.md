@@ -1,4 +1,235 @@
-# Aegis Scheduler - Refinery and Vessel Optimization
+# Aegis Scheduler - Vessel Routing & Crude Blending Optimization
+
+A high-performance optimization system for vessel routing and crude oil blending operations, designed for deployment on Azure cloud infrastructure.
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.8+
+- Azure account (for cloud deployment)
+- Required data files in `test_data/` directory
+
+### Local Setup
+
+1. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Run system check:**
+   ```bash
+   python setup.py --check
+   ```
+
+3. **Run optimization:**
+   ```bash
+   python main.py --vessel-count 6 --optimization-type throughput --time-limit 3600
+   ```
+
+### Azure Deployment
+
+1. **Create Azure deployment files:**
+   ```bash
+   python setup.py --create-azure-files
+   ```
+
+2. **Deploy to Azure:**
+   ```bash
+   ./deploy-azure.sh
+   ```
+
+## 📊 Features
+
+- **High-Performance Optimization**: Multi-threaded solvers with advanced MILP capabilities
+- **Modular Architecture**: Separate modules for data loading, modeling, solving, and result processing
+- **Multiple Solvers**: Support for HiGHS, GLPK, CBC, SCIP, and commercial solvers
+- **Cloud-Ready**: Optimized for Azure Container Instances with scalable compute resources
+- **Comprehensive Results**: Detailed vessel routing schedules and crude blending plans
+
+## 🏗️ Architecture
+
+```
+├── main.py                 # Main execution script
+├── data_loader.py          # Data loading and preprocessing
+├── optimization_model.py   # Pyomo model definition
+├── solver_manager.py       # Solver configuration and execution
+├── result_processor.py     # Result extraction and formatting
+├── setup.py               # Configuration and deployment utilities
+├── requirements.txt       # Python dependencies
+└── test_data/            # Input data files
+    ├── config.json
+    ├── crude_availability.csv
+    ├── crudes_info.csv
+    ├── products_info.csv
+    └── time_of_travel.csv
+```
+
+## 🎛️ Command Line Options
+
+### Basic Usage
+```bash
+python main.py [OPTIONS]
+```
+
+### Key Options
+- `--vessel-count N`: Number of vessels (default: 6)
+- `--optimization-type TYPE`: 'margin' or 'throughput' (default: throughput)
+- `--solver SOLVER`: Solver to use (default: highs)
+- `--time-limit SECONDS`: Solver time limit (default: 3600)
+- `--output-dir DIR`: Results directory (default: results/)
+- `--data-path PATH`: Data directory (default: test_data/)
+
+### Example Commands
+
+**Optimize for maximum throughput with 8 vessels:**
+```bash
+python main.py --vessel-count 8 --optimization-type throughput --time-limit 7200
+```
+
+**Optimize for maximum margin with time limit:**
+```bash
+python main.py --optimization-type margin --time-limit 1800
+```
+
+**Use specific solver:**
+```bash
+python main.py --solver scip --threads 8
+```
+
+## 📈 Performance Optimization
+
+### For Long-Running Optimizations:
+
+1. **Increase time limit:**
+   ```bash
+   python main.py --time-limit 28800  # 8 hours
+   ```
+
+2. **Use multiple threads:**
+   ```bash
+   python main.py --threads 8
+   ```
+
+3. **Azure high-performance deployment:**
+   - Deploy on Azure Container Instances with 8+ CPU cores
+   - Use Premium storage for faster I/O
+   - Consider Azure Batch for parallel scenario processing
+
+## 🌥️ Azure Deployment Guide
+
+### Method 1: Azure Container Instances (Recommended)
+
+1. **Build and deploy:**
+   ```bash
+   # Create deployment files
+   python setup.py --create-azure-files
+   
+   # Deploy to Azure
+   ./deploy-azure.sh
+   ```
+
+2. **Monitor progress:**
+   - Check Azure portal for container status
+   - View logs in Container Instances console
+   - Results are saved in container storage
+
+### Method 2: Azure Virtual Machine
+
+1. **Create VM with Docker:**
+   ```bash
+   # Create resource group
+   az group create --name aegis-rg --location eastus
+   
+   # Create VM
+   az vm create --resource-group aegis-rg --name aegis-vm --image Ubuntu2204 --size Standard_D8s_v3
+   ```
+
+2. **Setup and run:**
+   ```bash
+   # SSH to VM and install dependencies
+   sudo apt update && sudo apt install -y python3-pip docker.io
+   
+   # Clone repository and run
+   git clone <your-repo>
+   cd aegis-scheduler
+   pip3 install -r requirements.txt
+   python3 main.py --vessel-count 6 --time-limit 86400  # 24 hours
+   ```
+
+## 📊 Output Files
+
+The optimization generates several output files:
+
+- `crude_blending_*.csv`: Detailed blending schedule by day/slot
+- `vessel_routing_*.csv`: Vessel activities and routing schedule  
+- `metrics_*.json`: Summary metrics (throughput, margin, demurrage)
+- `solve_statistics.json`: Solver performance statistics
+- `*.pkl`: Saved Pyomo model (if --save-model flag used)
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+1. **No solver available:**
+   ```bash
+   python main.py --check-solvers
+   python setup.py --install-deps
+   ```
+
+2. **Out of memory:**
+   - Reduce vessel count or optimization horizon
+   - Use Azure VMs with more RAM
+   - Enable solver memory settings
+
+3. **Slow convergence:**
+   - Increase MIP gap tolerance: `--mip-gap 0.05`
+   - Try different solver: `--solver scip`
+   - Enable preprocessing: solver will do this automatically
+
+### Performance Tips
+
+- **For faster solutions**: Use `--mip-gap 0.05` for 5% optimality gap
+- **For better solutions**: Increase `--time-limit` and use `--mip-gap 0.001`
+- **For large problems**: Consider problem decomposition or scenario parallelization
+
+## 📝 Data Format
+
+### Required Files
+
+1. **config.json**: Main configuration
+2. **crude_availability.csv**: Crude availability by location and time window
+3. **crudes_info.csv**: Crude types, margins, origins, opening inventory
+4. **products_info.csv**: Product specifications and blending ratios
+5. **time_of_travel.csv**: Travel times between locations
+
+See `test_data/` directory for example formats.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see LICENSE file for details.
+
+## 🆘 Support
+
+For issues and questions:
+1. Check troubleshooting section above
+2. Run system check: `python setup.py --check`
+3. Create GitHub issue with:
+   - Command used
+   - Error messages
+   - System information
+   - Data file samples (if applicable)
+
+---
+
+**Built for high-performance optimization on Azure Cloud** ☁️⚡
 
 This is a standalone Python implementation of the refinery and vessel optimization system, converted from the original Jupyter notebook. The system optimizes crude oil vessel routing and refinery blending schedules to maximize either profit margins or throughput while minimizing demurrage costs.
 

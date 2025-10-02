@@ -1,17 +1,16 @@
-# EC2 Deployment Requirements
+# Azure Deployment Requirements - Optimized for Long-Running Optimization
 # Core optimization libraries
-pandas>=1.5.0
-pyomo>=6.6.0
-numpy>=1.21.0
-tqdm>=4.64.0
+pandas>=1.5.0,<3.0.0
+pyomo>=6.6.0,<7.0.0
+numpy>=1.21.0,<2.0.0
 
-# Solver support (GLPK will be installed separately)
-PySCIPOpt>=4.3.0
-highspy>=1.5.0
+# High-performance solvers
+highspy>=1.5.0,<2.0.0    # HiGHS solver - fast and reliable
+PySCIPOpt>=4.3.0,<5.0.0  # SCIP solver - advanced MILP capabilities
 
-# System utilities
+# System utilities (minimal set)
 typing_extensions>=4.0.0
 
-# For EC2 deployment (optional)
-boto3>=1.26.0      # AWS SDK for S3 integration
-requests>=2.28.0   # For API integrations
+# Optional: For cloud storage integration (uncomment if needed)
+# azure-storage-blob>=12.14.0  # Azure Blob Storage
+# azure-identity>=1.12.0       # Azure authentication
