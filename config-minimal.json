@@ -1,0 +1,15 @@
+{
+    "scenario": 1,
+    "vessel_count": 3,
+    "optimization_type": "throughput",
+    "max_demurrage_limit": 10,
+    "solver": "highs",
+    "time_limit": 7200,
+    "mip_gap": 0.01,
+    "threads": 2,
+    "data_path": "test_data/",
+    "output_dir": "results/",
+    "service_mode": true,
+    "service_name": "aegis-minimal",
+    "quiet": false
+}
